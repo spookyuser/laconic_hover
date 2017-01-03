@@ -19,6 +19,8 @@
 
 })();
 
+
+
 function attachToLinks() {
     // http://userscripts-mirror.org/scripts/source/482142.user.js
     // Attach to all
@@ -31,7 +33,11 @@ function attachToLinks() {
     // });
 
     for (var link of links) {
-        console.log(link.href);
+        var url = link.href;
+        if (url.includes('pmwiki.php') && !url.includes('=')) {
+            console.log(url);
+            url.onmouseover = grabLaconicText(url, handleLaconic);
+        }
     }
 }
 
@@ -45,9 +51,9 @@ function hoverInit() {
     }, jQuery.noop);
 }
 
-function grabLaconicText(element, callback) {
+function grabLaconicText(link, callback) {
     //Replace Main URL with Laconic URL
-    var laconicUrl = element.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+    var laconicUrl = link.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
     var laconicContent;
     $.ajax({
         context: this,
@@ -58,13 +64,13 @@ function grabLaconicText(element, callback) {
             if (laconicContent.indexOf("Inexact title") >= 0) {
                 laconicContent = "No Laconic Page";
                 //intiate callback
-                callback(laconicContent, element);
+                callback(laconicContent, link);
             }
             //Remove 'Go to MAIN thing'
             laconicContent = laconicContent.replace(/\n\n.*/g, '');
             console.log("Laconic Cont", [laconicContent]);
             //intiate callback
-            callback(laconicContent, element);
+            callback(laconicContent, link);
         },
         dataType: 'html'
     });
