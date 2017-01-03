@@ -23,12 +23,16 @@ function attachToLinks() {
     // http://userscripts-mirror.org/scripts/source/482142.user.js
     // Attach to all
     // links that go somewhere inside pmwiki.php
-    var links = document.getElementsByClassName('twikilink');
-    links.forEach(function(element) {
-    console.log(element);
-        var url = element.href;
-        url.onmouseover = grabLaconicText(element, handleLaconic);
-    });
+    var links = document.getElementsByTagName('a');
+    // links.forEach(function(element) {
+    //     console.log(element);
+    //     var url = element.href;
+    //     url.onmouseover = grabLaconicText(element, handleLaconic);
+    // });
+
+    for (var link of links) {
+        console.log(link.href);
+    }
 }
 
 function hoverInit() {
