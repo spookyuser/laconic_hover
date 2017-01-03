@@ -14,18 +14,34 @@
     'use strict';
     'debugger';
     console.log("Launching Tamper Script");
-    $( ".twikilink" ).hoverIntent(function()  {
-        var element = $( this ),
-            isLink = element.is("a");
-        if ( isLink ) {
-            grabLaconicText(element, handleLaconic);
-
-        }
-    },jQuery.noop);
+    // hoverInilt();
+    attachToLinks();
 
 })();
 
-function grabLaconicText(element, callback){
+function attachToLinks() {
+    // http://userscripts-mirror.org/scripts/source/482142.user.js
+    // Attach to all
+    // links that go somewhere inside pmwiki.php
+    var links = document.getElementsByClassName('twikilink');
+    links.forEach(function(element) {
+    console.log(element);
+        var url = element.href;
+        url.onmouseover = grabLaconicText(element, handleLaconic);
+    });
+}
+
+function hoverInit() {
+    $(".twikilink").hoverIntent(function() {
+        var element = $(this),
+            isLink = element.is("a");
+        if (isLink) {
+            grabLaconicText(element, handleLaconic);
+        }
+    }, jQuery.noop);
+}
+
+function grabLaconicText(element, callback) {
     //Replace Main URL with Laconic URL
     var laconicUrl = element.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
     var laconicContent;
@@ -33,15 +49,15 @@ function grabLaconicText(element, callback){
         context: this,
         url: laconicUrl,
         data: {},
-        success: function( data ) {
+        success: function(data) {
             laconicContent = $(data).find(".page-content").first().text().trim();
-            if(laconicContent.indexOf("Inexact title") >= 0){
+            if (laconicContent.indexOf("Inexact title") >= 0) {
                 laconicContent = "No Laconic Page";
                 //intiate callback
                 callback(laconicContent, element);
             }
             //Remove 'Go to MAIN thing'
-            laconicContent = laconicContent.replace(/\n\n.*/g,'');
+            laconicContent = laconicContent.replace(/\n\n.*/g, '');
             console.log("Laconic Cont", [laconicContent]);
             //intiate callback
             callback(laconicContent, element);
@@ -50,7 +66,6 @@ function grabLaconicText(element, callback){
     });
 }
 
-function handleLaconic(laconic, element){
+function handleLaconic(laconic, element) {
     element.attr('title', laconic).change();
-    element.trigger('mouseenter');
 }
