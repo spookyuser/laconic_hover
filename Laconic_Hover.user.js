@@ -1,0 +1,56 @@
+// ==UserScript==
+// @name         Laconic Hover
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        http://tvtropes.org/*
+// @grant        none
+// @require      https://code.jquery.com/jquery.min.js
+// @require      https://raw.githubusercontent.com/briancherne/jquery-hoverIntent/master/jquery.hoverIntent.js
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    'debugger';
+    console.log("Launching Tamper Script");
+    $( ".twikilink" ).hoverIntent(function()  {
+        var element = $( this ),
+            isLink = element.is("a");
+        if ( isLink ) {
+            grabLaconicText(element, handleLaconic);
+
+        }
+    },jQuery.noop);
+
+})();
+
+function grabLaconicText(element, callback){
+    //Replace Main URL with Laconic URL
+    var laconicUrl = element.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+    var laconicContent;
+    $.ajax({
+        context: this,
+        url: laconicUrl,
+        data: {},
+        success: function( data ) {
+            laconicContent = $(data).find(".page-content").first().text().trim();
+            if(laconicContent.indexOf("Inexact title") >= 0){
+                laconicContent = "No Laconic Page";
+                //intiate callback
+                callback(laconicContent, element);
+            }
+            //Remove 'Go to MAIN thing'
+            laconicContent = laconicContent.replace(/\n\n.*/g,'');
+            console.log("Laconic Cont", [laconicContent]);
+            //intiate callback
+            callback(laconicContent, element);
+        },
+        dataType: 'html'
+    });
+}
+
+function handleLaconic(laconic, element){
+    element.attr('title', laconic).change();
+    element.trigger('mouseenter');
+}
