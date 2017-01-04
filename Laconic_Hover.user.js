@@ -9,6 +9,7 @@
 // @require      https://code.jquery.com/jquery.min.js
 // @require      https://raw.githubusercontent.com/briancherne/jquery-hoverIntent/master/jquery.hoverIntent.js
 // ==/UserScript==
+/*jshint esversion: 6 */
 
 (function() {
     'use strict';
@@ -39,7 +40,7 @@ function attachToLinks() {
             url.onmouseover = function() {
               // body...
               grabLaconicText(url, handleLaconic);
-            }; 
+            };
         }
     }
 }
