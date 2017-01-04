@@ -1,0 +1,18 @@
+{
+
+    "manifest_version": 2,
+    "name": "Laconic Hover",
+    "version": "0.1",
+
+    "description": "Displays the Laconic text of a trope on hover",
+
+    "icons": {
+        "48": "icons/border-48.png"
+    },
+
+    "content_scripts": [{
+        "matches": ["*://tvtropes.org/*"],
+        "js": ["../Laconic_Hover.user.js"]
+    }]
+
+}
