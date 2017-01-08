@@ -77,6 +77,6 @@ function grabLaconicText(linkElement, callback) {
 }
 
 function handleLaconic(laconicContent, linkElement) {
-    linkElement.title = laconicContent;
-    $(linkElement).trigger('mouseover');
+    // linkElement.title = laconicContent;
+    $(linkElement).attr('title', laconicContent).tooltip('fixTitle').tooltip('show');
 }

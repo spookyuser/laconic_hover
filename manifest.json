@@ -4,7 +4,7 @@
   "content_scripts": [
     {
       "matches": ["*://tvtropes.org/*"],
-      "js": ["jquery.min.js", "jquery.hoverIntent.minified.js", "Laconic_Hover.user.js" ]
+      "js": ["jquery.min.js", "jquery.hoverIntent.minified.js", "bootstrap.min.js", "Laconic_Hover.user.js" ]
     }
   ],
   "permissions": ["tabs", "*://tvtropes.org/*"],
