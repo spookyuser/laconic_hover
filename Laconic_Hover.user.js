@@ -29,15 +29,16 @@ function attachToLinks() {
     for (var linkElement of links) {
         var url = linkElement.href;
         if (url.includes('pmwiki.php') && !url.includes('=')) {
-          // http://userscripts-mirror.org/scripts/source/482142.user.js
-          // From ^ here as well
+            // http://userscripts-mirror.org/scripts/source/482142.user.js
+            // From ^ here as well
+            linkElement.title = '';
             linkElement.onmouseover = testGrab;
         }
     }
 }
 
 function testGrab(mouseEvent) {
-    console.log(mouseEvent.target.href);
+    grabLaconicText(mouseEvent.target, handleLaconic);
 }
 
 function hoverInit() {
@@ -52,7 +53,7 @@ function hoverInit() {
 
 function grabLaconicText(linkElement, callback) {
     //Replace Main URL with Laconic URL
-    var laconicUrl = linkElement.attr("href").replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+    var laconicUrl = linkElement.href.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
     var laconicContent;
     $.ajax({
         context: this,
@@ -76,5 +77,6 @@ function grabLaconicText(linkElement, callback) {
 }
 
 function handleLaconic(laconicContent, linkElement) {
-    linkElement.attr('title', laconicContent).change();
+    linkElement.title = laconicContent;
+    $(linkElement).trigger('mouseover');
 }
