@@ -39,10 +39,10 @@ function attachToLinks() {
         var url = link.href;
         if (url.includes('pmwiki.php') && !url.includes('=')) {
             console.log(url);
-            url.onmouseover = function() {
+            link.addEventListener('mouseover', function() {
                 // body...
                 grabLaconicText(url, handleLaconic);
-            };
+            });
         }
     }
 }
@@ -83,5 +83,5 @@ function grabLaconicText(link, callback) {
 }
 
 function handleLaconic(laconic, element) {
-    element.attr('title', laconic).change();
+    $(element).attr('title', laconic).change();
 }

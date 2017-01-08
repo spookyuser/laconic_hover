@@ -1,18 +1,12 @@
 {
-
-    "manifest_version": 2,
-    "name": "Laconic Hover",
-    "version": "0.1",
-
-    "description": "Displays the Laconic text of a trope on hover",
-
-    "icons": {
-        "48": "icons/border-48.png"
-    },
-
-    "content_scripts": [{
-        "matches": ["*://tvtropes.org/*"],
-        "js": ["Laconic_Hover.user.js", "jquery.min.js"]
-    }]
-
+  "name": "Hello World",
+  "version": "0.2",
+  "content_scripts": [
+    {
+      "matches": ["*://tvtropes.org/*"],
+      "js": ["Laconic_Hover.user.js", "jquery.min.js"]
+    }
+  ],
+  "permissions": ["tabs", "*://tvtropes.org/*"],
+  "manifest_version": 2
 }
