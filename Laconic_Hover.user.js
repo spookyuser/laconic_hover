@@ -9,6 +9,7 @@
 // @require      https://code.jquery.com/jquery.min.js
 // @require      https://raw.githubusercontent.com/briancherne/jquery-hoverIntent/master/jquery.hoverIntent.js
 // ==/UserScript==
+// Working with grabLaconicText through hover.
 /*jshint esversion: 6 */
 
 $(document).ready(function() {
