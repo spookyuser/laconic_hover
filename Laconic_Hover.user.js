@@ -14,8 +14,10 @@
 (function() {
     'use strict';
     'debugger';
-    console.log("Launching Tamper Script");
+
+    // console.log("Launching Tamper Script");
     // hoverInilt();
+    // alert('HI');
     attachToLinks();
 
 })();
@@ -38,8 +40,8 @@ function attachToLinks() {
         if (url.includes('pmwiki.php') && !url.includes('=')) {
             console.log(url);
             url.onmouseover = function() {
-              // body...
-              grabLaconicText(url, handleLaconic);
+                // body...
+                grabLaconicText(url, handleLaconic);
             };
         }
     }

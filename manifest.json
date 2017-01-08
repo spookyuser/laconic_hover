@@ -12,7 +12,7 @@
 
     "content_scripts": [{
         "matches": ["*://tvtropes.org/*"],
-        "js": ["F:\\Libraries\\Documents\\Scripts\\Laconic_Hover\\Laconic_Hover.user.js"]
+        "js": ["Laconic_Hover.user.js", "jquery.min.js"]
     }]
 
 }
