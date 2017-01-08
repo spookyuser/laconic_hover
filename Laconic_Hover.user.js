@@ -11,16 +11,10 @@
 // ==/UserScript==
 /*jshint esversion: 6 */
 
-(function() {
-    'use strict';
-    'debugger';
-
-    // console.log("Launching Tamper Script");
-    // hoverInilt();
-    // alert('HI');
-    attachToLinks();
-
-})();
+$(document).ready(function() {
+    //your code here
+    hoverInit();
+});
 
 
 
@@ -35,13 +29,13 @@ function attachToLinks() {
     //     url.onmouseover = grabLaconicText(element, handleLaconic);
     // });
 
-    for (var link of links) {
-        var url = link.href;
+    for (var linkElement of links) {
+        var url = linkElement.href;
         if (url.includes('pmwiki.php') && !url.includes('=')) {
             console.log(url);
-            link.addEventListener('mouseover', function() {
+            linkElement.addEventListener('mouseover', function() {
                 // body...
-                grabLaconicText(url, handleLaconic);
+                grabLaconicText(linkElement, handleLaconic);
             });
         }
     }
@@ -49,17 +43,17 @@ function attachToLinks() {
 
 function hoverInit() {
     $(".twikilink").hoverIntent(function() {
-        var element = $(this),
-            isLink = element.is("a");
+        var linkElement = $(this),
+            isLink = linkElement.is("a");
         if (isLink) {
-            grabLaconicText(element, handleLaconic);
+            grabLaconicText(linkElement, handleLaconic);
         }
     }, jQuery.noop);
 }
 
-function grabLaconicText(link, callback) {
+function grabLaconicText(linkElement, callback) {
     //Replace Main URL with Laconic URL
-    var laconicUrl = link.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+    var laconicUrl = linkElement.attr("href").replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
     var laconicContent;
     $.ajax({
         context: this,
@@ -70,18 +64,18 @@ function grabLaconicText(link, callback) {
             if (laconicContent.indexOf("Inexact title") >= 0) {
                 laconicContent = "No Laconic Page";
                 //intiate callback
-                callback(laconicContent, link);
+                callback(laconicContent, linkElement);
             }
             //Remove 'Go to MAIN thing'
             laconicContent = laconicContent.replace(/\n\n.*/g, '');
             console.log("Laconic Cont", [laconicContent]);
             //intiate callback
-            callback(laconicContent, link);
+            callback(laconicContent, linkElement);
         },
         dataType: 'html'
     });
 }
 
-function handleLaconic(laconic, element) {
-    $(element).attr('title', laconic).change();
+function handleLaconic(laconicContent, linkElement) {
+    linkElement.attr('title', laconicContent).change();
 }
