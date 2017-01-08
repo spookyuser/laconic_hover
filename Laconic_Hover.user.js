@@ -9,12 +9,13 @@
 // @require      https://code.jquery.com/jquery.min.js
 // @require      https://raw.githubusercontent.com/briancherne/jquery-hoverIntent/master/jquery.hoverIntent.js
 // ==/UserScript==
-// Working with grabLaconicText through hover.
+// Working with grabLaconicText on dynamic hover function.
 /*jshint esversion: 6 */
 
 $(document).ready(function() {
     //your code here
-    hoverInit();
+    // hoverInit();
+    attachToLinks();
 });
 
 
@@ -23,23 +24,20 @@ function attachToLinks() {
     // http://userscripts-mirror.org/scripts/source/482142.user.js
     // Attach to all
     // links that go somewhere inside pmwiki.php
-    var links = document.getElementsByTagName('a');
-    // links.forEach(function(element) {
-    //     console.log(element);
-    //     var url = element.href;
-    //     url.onmouseover = grabLaconicText(element, handleLaconic);
-    // });
+    var links = document.getElementsByClassName('twikilink');
 
     for (var linkElement of links) {
         var url = linkElement.href;
         if (url.includes('pmwiki.php') && !url.includes('=')) {
-            console.log(url);
-            linkElement.addEventListener('mouseover', function() {
-                // body...
-                grabLaconicText(linkElement, handleLaconic);
-            });
+          // http://userscripts-mirror.org/scripts/source/482142.user.js
+          // From ^ here as well
+            linkElement.onmouseover = testGrab;
         }
     }
+}
+
+function testGrab(mouseEvent) {
+    console.log(mouseEvent.target.href);
 }
 
 function hoverInit() {
