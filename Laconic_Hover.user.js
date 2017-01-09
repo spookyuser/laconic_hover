@@ -26,6 +26,7 @@ function initQtipOnHover() {
 }
 
 function setQtipContent(jQueryElement, currentUrl) {
+
     $(jQueryElement).qtip({
         overwrite: false,
         position: {
@@ -41,9 +42,13 @@ function setQtipContent(jQueryElement, currentUrl) {
             text: function(event, api) {
                 getLaconicPageAjax(api, currentUrl);
                 return 'Loading...';
-            }
+            },
+            title: $(jQueryElement).text()
         },
+        style: {
+            classes: 'qtip-dark qtip-shadow tipstyle'
 
+        },
         show: {
             event: event.type,
             ready: true
