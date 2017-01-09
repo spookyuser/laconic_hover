@@ -12,13 +12,13 @@
 // Working with grabLaconicText on dynamic hover function.
 /*jshint esversion: 6 */
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Start
     initQtipOnHover();
 });
 
 function initQtipOnHover() {
-    $(document).on('mouseover', '.twikilink', function(event) {
+    $(document).on('mouseover', '.twikilink', function (event) {
         var jQueryElement = $(this);
         var currentUrl = jQueryElement.attr('href');
         setQtipContent(jQueryElement, currentUrl);
@@ -40,11 +40,11 @@ function setQtipContent(jQueryElement, currentUrl) {
             effect: false
         },
         content: {
-            text: function(event, api) {
+            text: function (event, api) {
                 getLaconicPageAjax(api, currentUrl);
                 return 'Loading...';
             },
-            title: $(jQueryElement).text()
+            title: convertCamelTitle(currentUrl)
         },
         style: {
             classes: 'qtip-dark qtip-shadow tipstyle'
@@ -63,14 +63,25 @@ function getLaconicPageAjax(api, currentUrl) {
 
     // http://qtip2.com/guides#content.ajax
     $.ajax({
-            url: laconicUrl
-        })
+        url: laconicUrl
+    })
         .then(function (response) {
             laconicContent = parseLaconic(response);
             api.set('content.text', laconicContent);
-        }, function(xhr, status, error) {
+        }, function (xhr, status, error) {
             api.set('content.text', status + ': ' + error);
         });
+}
+
+function convertCamelTitle(currentUrl) {
+    // Getting the trope title from the end of the url. From http://stackoverflow.com/a/6165387/1649917
+    // Adding spaces between the words. From http://stackoverflow.com/a/13720440/1649917
+
+    var title = currentUrl.split("/").pop();
+
+    return title.replace(/^[a-z]|[A-Z]/g, function (v, i) {
+        return i === 0 ? v.toUpperCase() : " " + v.toLowerCase();
+    });
 }
 
 function parseLaconic(response) {
