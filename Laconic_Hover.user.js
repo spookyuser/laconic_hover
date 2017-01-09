@@ -22,12 +22,11 @@ function testqtip() {
     $(document).on('mouseover', '.twikilink', function(event) {
         var jQueryElement = $(this);
         var url = jQueryElement.attr('href');
-        setQtip(jQueryElement);
+        setQtip(jQueryElement, url);
     });
 }
 
-function setQtip(jQueryElement) {
-
+function setQtip(jQueryElement, url) {
     $(jQueryElement).qtip({
         overwrite: false,
         content: {
@@ -44,7 +43,7 @@ function setQtip(jQueryElement) {
 }
 
 function getLaconichtml(api, url) {
-    var laconicUrl = linkElement.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+    var laconicUrl = url.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
 
     $.ajax({
             url: laconicUrl
@@ -59,16 +58,17 @@ function getLaconichtml(api, url) {
 
 function parseLaconic(laconicContent) {
     var parsedLaconicContent;
-    //Find the main page element that contains the laconic text and remove whitespace
-    parsedLaconicContent = $(laconicContent).find(".page-content").first().text().trim();
+    // Find the main page element that contains the laconic text and remove whitespace
+    // https://stackoverflow.com/questions/3422949/jquery-remove-all-child-elements-and-leave-text
+    parsedLaconicContent = $(laconicContent).find(".page-content").first().children().remove().end().text().trim();
     if (laconicContent.indexOf("Inexact title") >= 0) {
         parsedLaconicContent = "No Laconic Page";
-        //Return the 'no laconic' message
+        // Return the 'no laconic' message
         return parsedLaconicContent;
     }
-    //Remove 'Go to MAIN thing'
-    parsedLaconicContent = parsedLaconicContent.replace(/\n\n.*/g, '');
+    // Remove 'Go to MAIN thing'
     console.log("Laconic Cont", [parsedLaconicContent]);
+    parsedLaconicContent = parsedLaconicContent.replace(/\n\n.*/g, '');
     //Return the found laconic text
     return parsedLaconicContent;
 }
