@@ -28,12 +28,22 @@ function initQtipOnHover() {
 function setQtipContent(jQueryElement, currentUrl) {
     $(jQueryElement).qtip({
         overwrite: false,
+        position: {
+            my: 'center right',  // Position my top left...
+            at: 'center left', // at the bottom right of...
+            target: $(jQueryElement), // my target
+            adjust: {
+                x: -10
+            },
+            effect: false
+        },
         content: {
             text: function(event, api) {
                 getLaconicPageAjax(api, currentUrl);
                 return 'Loading...';
             }
         },
+
         show: {
             event: event.type,
             ready: true
