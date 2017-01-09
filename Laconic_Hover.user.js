@@ -68,7 +68,6 @@ function parseLaconic(laconicContent) {
         return parsedLaconicContent;
     }
     console.log("Laconic Cont", [parsedLaconicContent]);
-    parsedLaconicContent = parsedLaconicContent.replace(/\n\n.*/g, '');
     //Return the found laconic text
     return parsedLaconicContent;
 }
