@@ -27,16 +27,7 @@ function testqtip() {
             overwrite: false,
             content: {
                 text: function(event, api) {
-                    $.ajax({
-                            url: laconicUrl
-                        })
-                        .then(function(content) {
-                            laconicContent = parseLaconic(content);
-                            api.set('content.text', laconicContent);
-                        }, function(xhr, status, error) {
-                            api.set('content.text', status + ': ' + error);
-                        });
-
+                    getLaconichtml(api, laconicUrl);
                     return 'Loading...';
                 }
             },
@@ -51,8 +42,16 @@ function testqtip() {
 
 }
 
-function getLaconichtml(){
-
+function getLaconichtml(api, laconicUrl) {
+    $.ajax({
+            url: laconicUrl
+        })
+        .then(function(content) {
+            laconicContent = parseLaconic(content);
+            api.set('content.text', laconicContent);
+        }, function(xhr, status, error) {
+            api.set('content.text', status + ': ' + error);
+        });
 }
 
 function qtipGrabLaconic(linkElement) {
