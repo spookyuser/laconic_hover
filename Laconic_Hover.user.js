@@ -67,12 +67,13 @@ function getLaconicPageAjax(api, currentUrl) {
         });
 }
 
-function parseLaconic(laconicContent) {
+function parseLaconic(response) {
     var parsedLaconicContent;
     // Find the main page element that contains the laconic text and remove whitespace
     // https://stackoverflow.com/questions/3422949/jquery-remove-all-child-elements-and-leave-text
-    parsedLaconicContent = $(laconicContent).find(".page-content").first().children().remove().end().text().trim();
-    if (laconicContent.indexOf("Inexact title") >= 0) {
+    parsedLaconicContent = $(response).find(".indent").remove().end();
+    parsedLaconicContent = $(parsedLaconicContent).find(".page-content").first().text().trim();
+    if (response.indexOf("Inexact title") >= 0) {
         parsedLaconicContent = "No Laconic Page";
         // Return the 'no laconic' message
         return parsedLaconicContent;
