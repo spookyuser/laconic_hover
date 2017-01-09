@@ -14,24 +14,23 @@
 
 $(document).ready(function() {
     // Start
-    testqtip();
+    initQtipOnHover();
 });
 
-function testqtip() {
-    // http://qtip2.com/guides#content.ajax
+function initQtipOnHover() {
     $(document).on('mouseover', '.twikilink', function(event) {
         var jQueryElement = $(this);
-        var url = jQueryElement.attr('href');
-        setQtip(jQueryElement, url);
+        var currentUrl = jQueryElement.attr('href');
+        setQtipContent(jQueryElement, currentUrl);
     });
 }
 
-function setQtip(jQueryElement, url) {
+function setQtipContent(jQueryElement, currentUrl) {
     $(jQueryElement).qtip({
         overwrite: false,
         content: {
             text: function(event, api) {
-                getLaconichtml(api, url);
+                getLaconicPageAjax(api, currentUrl);
                 return 'Loading...';
             }
         },
@@ -42,14 +41,16 @@ function setQtip(jQueryElement, url) {
     }, event);
 }
 
-function getLaconichtml(api, url) {
-    var laconicUrl = url.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+function getLaconicPageAjax(api, currentUrl) {
+    var laconicUrl = currentUrl.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+    var laconicContent;
 
+    // http://qtip2.com/guides#content.ajax
     $.ajax({
             url: laconicUrl
         })
-        .then(function(content) {
-            laconicContent = parseLaconic(content);
+        .then(function (response) {
+            laconicContent = parseLaconic(response);
             api.set('content.text', laconicContent);
         }, function(xhr, status, error) {
             api.set('content.text', status + ': ' + error);
@@ -66,7 +67,6 @@ function parseLaconic(laconicContent) {
         // Return the 'no laconic' message
         return parsedLaconicContent;
     }
-    // Remove 'Go to MAIN thing'
     console.log("Laconic Cont", [parsedLaconicContent]);
     parsedLaconicContent = parsedLaconicContent.replace(/\n\n.*/g, '');
     //Return the found laconic text
