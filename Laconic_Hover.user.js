@@ -15,8 +15,9 @@
 $(document).ready(function() {
     //your code here
     // hoverInit();
-    $('[title]').qtip();
-    attachToLinks();
+    // $('[title]').qtip();
+    // attachToLinks();
+    testqtip();
 });
 
 
@@ -36,6 +37,65 @@ function attachToLinks() {
             linkElement.onmouseover = testGrab;
         }
     }
+}
+
+function testqtip() {
+    $(document).on('mouseover', '.twikilink', function(event) {
+
+        var url = $(this).attr('href');
+        var laconicUrl = qtipGrabLaconic($(this))
+
+        // if (url.includes('pmwiki.php') && !url.includes('=')) {
+
+        $(this).qtip({
+            overwrite: false, // Make sure the tooltip won't be overridden once created
+            content: {
+                text: function(event, api) {
+                    $.ajax({
+                            url: laconicUrl // Use data-url attribute for the URL
+                        })
+                        .then(function(content) {
+                            // Set the tooltip content upon successful retrieval
+                            laconicContent = parseLaconic(content);
+                            api.set('content.text', laconicContent);
+                        }, function(xhr, status, error) {
+                            // Upon failure... set the tooltip content to the status and error value
+                            api.set('content.text', status + ': ' + error);
+                        });
+
+                    return 'Loading...'; // Set some initial text
+                }
+            },
+            show: {
+                event: event.type, // Use the same show event as the one that triggered the event handler
+                ready: true // Show the tooltip as soon as it's bound, vital so it shows up the first time you hover!
+            }
+        }, event); // Pass through our original event to qTip
+
+        // }
+
+    });
+
+
+}
+
+function qtipGrabLaconic(linkElement) {
+    return linkElement.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+}
+
+function parseLaconic(laconicContent) {
+    var parsedLaconicContent;
+    parsedLaconicContent = $(laconicContent).find(".page-content").first().text().trim();
+    if (laconicContent.indexOf("Inexact title") >= 0) {
+        parsedLaconicContent = "No Laconic Page";
+        //intiate callback
+        return parsedLaconicContent;
+    }
+    //Remove 'Go to MAIN thing'
+    parsedLaconicContent = parsedLaconicContent.replace(/\n\n.*/g, '');
+    console.log("Laconic Cont", [parsedLaconicContent]);
+    //intiate callback
+    return parsedLaconicContent;
 }
 
 function testGrab(mouseEvent) {
