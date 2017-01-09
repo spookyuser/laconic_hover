@@ -13,10 +13,6 @@
 /*jshint esversion: 6 */
 
 $(document).ready(function() {
-    //your code here
-    // hoverInit();
-    // $('[title]').qtip();
-    // attachToLinks();
     testqtip();
 });
 
@@ -25,7 +21,7 @@ function testqtip() {
     $(document).on('mouseover', '.twikilink', function(event) {
 
         var url = $(this).attr('href');
-        var laconicUrl = qtipGrabLaconic($(this))
+        var laconicUrl = qtipGrabLaconic($(this));
 
         $(this).qtip({
             overwrite: false,
@@ -52,6 +48,10 @@ function testqtip() {
 
     });
 
+
+}
+
+function getLaconichtml(){
 
 }
 
