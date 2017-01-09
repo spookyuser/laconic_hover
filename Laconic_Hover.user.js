@@ -30,6 +30,7 @@ function setQtipContent(jQueryElement, currentUrl) {
     $(jQueryElement).qtip({
         overwrite: false,
         position: {
+            viewport: $(window),
             my: 'center right',  // Position my top left...
             at: 'center left', // at the bottom right of...
             target: $(jQueryElement), // my target
