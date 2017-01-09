@@ -13,36 +13,39 @@
 /*jshint esversion: 6 */
 
 $(document).ready(function() {
+    // Start
     testqtip();
 });
 
 function testqtip() {
     // http://qtip2.com/guides#content.ajax
     $(document).on('mouseover', '.twikilink', function(event) {
-
-        var url = $(this).attr('href');
-        var laconicUrl = qtipGrabLaconic($(this));
-
-        $(this).qtip({
-            overwrite: false,
-            content: {
-                text: function(event, api) {
-                    getLaconichtml(api, laconicUrl);
-                    return 'Loading...';
-                }
-            },
-            show: {
-                event: event.type,
-                ready: true
-            }
-        }, event);
-
+        var jQueryElement = $(this);
+        var url = jQueryElement.attr('href');
+        setQtip(jQueryElement);
     });
-
-
 }
 
-function getLaconichtml(api, laconicUrl) {
+function setQtip(jQueryElement) {
+
+    $(jQueryElement).qtip({
+        overwrite: false,
+        content: {
+            text: function(event, api) {
+                getLaconichtml(api, url);
+                return 'Loading...';
+            }
+        },
+        show: {
+            event: event.type,
+            ready: true
+        }
+    }, event);
+}
+
+function getLaconichtml(api, url) {
+    var laconicUrl = linkElement.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
+
     $.ajax({
             url: laconicUrl
         })
@@ -54,21 +57,18 @@ function getLaconichtml(api, laconicUrl) {
         });
 }
 
-function qtipGrabLaconic(linkElement) {
-    return linkElement.attr('href').replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
-}
-
 function parseLaconic(laconicContent) {
     var parsedLaconicContent;
+    //Find the main page element that contains the laconic text and remove whitespace
     parsedLaconicContent = $(laconicContent).find(".page-content").first().text().trim();
     if (laconicContent.indexOf("Inexact title") >= 0) {
         parsedLaconicContent = "No Laconic Page";
-        //intiate callback
+        //Return the 'no laconic' message
         return parsedLaconicContent;
     }
     //Remove 'Go to MAIN thing'
     parsedLaconicContent = parsedLaconicContent.replace(/\n\n.*/g, '');
     console.log("Laconic Cont", [parsedLaconicContent]);
-    //intiate callback
+    //Return the found laconic text
     return parsedLaconicContent;
 }
