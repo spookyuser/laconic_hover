@@ -1,16 +1,32 @@
 {
-  "name": "Hello World",
+  "name": "Laconic Hover",
   "version": "0.2",
+  "description": "Displays laconic text when hovering over a tvtropes link",
   "content_scripts": [
     {
       "css": [
         "jquery.qtip.min.css",
         "tipstyle.css"
       ],
-      "matches": ["*://tvtropes.org/*"],
-      "js": ["jquery.min.js", "jquery.qtip.min.js", "Laconic_Hover.user.js" ]
+      "matches": [
+        "*://tvtropes.org/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "jquery.qtip.min.js",
+        "Laconic_Hover.user.js"
+      ]
     }
   ],
-  "permissions": ["tabs", "*://tvtropes.org/*"],
+  "permissions": [
+    "tabs",
+    "*://tvtropes.org/*"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "19": "icons/19.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
   "manifest_version": 2
 }
