@@ -15,6 +15,7 @@
 $(document).ready(function() {
     //your code here
     // hoverInit();
+    $('[title]').qtip();
     attachToLinks();
 });
 
@@ -31,7 +32,7 @@ function attachToLinks() {
         if (url.includes('pmwiki.php') && !url.includes('=')) {
             // http://userscripts-mirror.org/scripts/source/482142.user.js
             // From ^ here as well
-            linkElement.title = '';
+            // linkElement.title = '';
             linkElement.onmouseover = testGrab;
         }
     }
@@ -78,5 +79,13 @@ function grabLaconicText(linkElement, callback) {
 
 function handleLaconic(laconicContent, linkElement) {
     // linkElement.title = laconicContent;
-    $(linkElement).attr('title', laconicContent).tooltip('fixTitle').tooltip('show');
+    // $(linkElement).attr('title', laconicContent).tooltip('fixTitle').tooltip('show');
+    // $(linkElement).data("ui-tooltip-title", laconicContent);
+    // $(".ui-tooltip-content").html($(linkElement).data("ui-tooltip-title"));
+    $(linkElement).qtip({ // Grab some elements to apply the tooltip to
+        content: {
+            text: laconicContent
+        }
+    });
+
 }

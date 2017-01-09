@@ -3,8 +3,9 @@
   "version": "0.2",
   "content_scripts": [
     {
+      "css" : ["jquery.qtip.min.css"],
       "matches": ["*://tvtropes.org/*"],
-      "js": ["jquery.min.js", "jquery.hoverIntent.minified.js", "bootstrap.min.js", "Laconic_Hover.user.js" ]
+      "js": ["jquery.min.js", "jquery.qtip.min.js", "Laconic_Hover.user.js" ]
     }
   ],
   "permissions": ["tabs", "*://tvtropes.org/*"],
