@@ -1,16 +1,3 @@
-// ==UserScript==
-// @name         Laconic Hover
-// @namespace    http://tampermonkey.net/
-// @version      0.2
-// @description  Displays laconic text when hovering over a tvtropes link.
-// @author       spookyUser
-// @match        *://tvtropes.org/*
-// @grant        none
-// @require      https://code.jquery.com/jquery.min.js
-// @require      https://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js
-// @resource     https://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css
-// ==/UserScript==
-
 $(document).ready(function () {
     // Start
     initQtipOnHover();
