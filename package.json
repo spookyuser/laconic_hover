@@ -1,6 +1,6 @@
 {
   "name": "LaconicHover",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Displays laconic text when hovering over a tvtropes link",
   "dependencies": {
     "jquery": "2.2.2",

@@ -85,7 +85,6 @@ function parseLaconic(response) {
         // Return the 'no laconic' message
         return parsedLaconicContent;
     }
-    console.log("Laconic Cont", [parsedLaconicContent]);
     //Return the found laconic text
     return parsedLaconicContent;
 }
