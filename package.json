@@ -1,12 +1,13 @@
 {
   "name": "LaconicHover",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Displays laconic text when hovering over a tvtropes link",
   "dependencies": {
     "jquery": "2.2.2",
     "qtip2": "^3.0.3"
   },
   "devDependencies": {
+    "chrome-extension-deploy": "^2.0.3",
     "cpy-cli": "^1.0.1",
     "crx": "^3.2.1",
     "css-loader": "^0.26.1",
@@ -22,13 +23,13 @@
     "lint": "jshint ./src/js/",
     "start": "node src/js/hello.js",
     "build": "npm run clean && webpack --optimize-minimize && npm run icons",
-    "build:chrome": "npm run build && npm run manifest:chrome && npm run crx",
+    "build:chrome": "npm run build && npm run manifest:chrome && npm run crx && npm run deploy:chrome",
     "min": "uglifyjs ./build/bundle.js > ./build/bundle.min.js ",
     "icons": "ncp src/images/icons build/icons",
     "manifest:chrome": "cpy chrome/manifest.json build",
     "clean": "rimraf build && rimraf ./chrome/dist/*",
     "crx": "crx pack build -o chrome/dist/chrome.crx --zip-output chrome/dist/chrome.zip -p key.pem",
-    "testEnv": "echo $npm_package_name_"
+    "deploy:chrome": "node ./tools/chrome-deploy.js"
   },
   "keywords": [],
   "author": "",
