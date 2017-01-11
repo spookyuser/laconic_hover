@@ -18,7 +18,7 @@
     "webpack": "^1.14.0"
   },
   "scripts": {
-    "test": "lint",
+    "test": "npm run lint",
     "lint": "jshint ./src/js/",
     "start": "node src/js/hello.js",
     "build": "npm run clean && webpack --optimize-minimize && npm run icons",
