@@ -1,6 +1,6 @@
 {
   "name": "Laconic Hover",
-  "version": "0.2",
+  "version": "0.0.2",
   "description": "Displays laconic text when hovering over a tvtropes link",
   "content_scripts": [
     {
@@ -21,7 +21,6 @@
   ],
   "icons": {
     "16": "icons/16.png",
-    "19": "icons/19.png",
     "48": "icons/48.png",
     "128": "icons/128.png"
   },

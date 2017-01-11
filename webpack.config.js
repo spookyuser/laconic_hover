@@ -2,7 +2,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: './src/js/Laconic_Hover.user.js',
     output: {
-        filename: 'dist/bundle.js',
+        filename: 'build/bundle.js',
         chunkFilename: "[id].js"
     },
     module: {
@@ -13,6 +13,6 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin("dist/bundle.css")
+        new ExtractTextPlugin("build/bundle.css")
     ]
 }

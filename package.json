@@ -3,12 +3,16 @@
   "version": "0.0.2",
   "description": "Displays laconic text when hovering over a tvtropes link",
   "dependencies": {
+    "cp-file": "^4.1.1",
     "jquery": "2.2.2",
     "qtip2": "^3.0.3"
   },
   "devDependencies": {
     "browserify": "^13.3.0",
     "copy": "^0.3.0",
+    "cp-file": "^4.1.1",
+    "cpy-cli": "^1.0.1",
+    "cross-env": "^3.1.4",
     "crx": "^3.2.1",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -27,11 +31,12 @@
     "start": "node src/js/hello.js",
     "build": "npm run clean && webpack --optimize-minimize && npm run icons",
     "build:chrome": "npm run build && npm run manifest:chrome && npm run crx",
-    "min": "uglifyjs ./dist/bundle.js > ./dist/bundle.min.js ",
-    "icons": "ncp src/images/icons dist/icons",
-    "manifest:chrome": "ncp chrome dist",
-    "clean": "rimraf dist && rimraf ./chrome/dist/",
-    "crx" : "crx pack dist -o chrome/dist/signed.crx -p key.pem"
+    "min": "uglifyjs ./build/bundle.js > ./build/bundle.min.js ",
+    "icons": "ncp src/images/icons build/icons",
+    "manifest:chrome": "cpy chrome/manifest.json build",
+    "clean": "rimraf build && rimraf ./chrome/dist/*",
+    "crx": "crx pack build -o chrome/dist/chrome.crx --zip-output chrome/dist/chrome.zip -p key.pem",
+    "testEnv": "echo $npm_package_name_"
   },
   "keywords": [],
   "author": "",

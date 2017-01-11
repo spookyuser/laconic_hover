@@ -49,5 +49,7 @@ jspm_packages
 # Intellij Idea and Custom
 /.idea
 /dist
-/build/Release
+/build
 key.pem
+/chrome/dist
+/firefox/dist
