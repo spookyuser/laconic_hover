@@ -1,0 +1,44 @@
+{
+  "name": "LaconicHover",
+  "version": "0.0.2",
+  "description": "Displays laconic text when hovering over a tvtropes link",
+  "dependencies": {
+    "cp-file": "^4.1.1",
+    "jquery": "2.2.2",
+    "qtip2": "^3.0.3"
+  },
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "copy": "^0.3.0",
+    "cp-file": "^4.1.1",
+    "cpy-cli": "^1.0.1",
+    "cross-env": "^3.1.4",
+    "crx": "^3.2.1",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "glob": "latest",
+    "jshint": "latest",
+    "jszip": "^3.1.3",
+    "rimraf": "^2.5.4",
+    "style-loader": "^0.13.1",
+    "uglify-js": "^2.7.5",
+    "webpack": "^1.14.0",
+    "zip-folder": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint ./src/js/",
+    "start": "node src/js/hello.js",
+    "build": "npm run clean && webpack --optimize-minimize && npm run icons",
+    "build:chrome": "npm run build && npm run manifest:chrome && npm run crx",
+    "min": "uglifyjs ./build/bundle.js > ./build/bundle.min.js ",
+    "icons": "ncp src/images/icons build/icons",
+    "manifest:chrome": "cpy chrome/manifest.json build",
+    "clean": "rimraf build && rimraf ./chrome/dist/*",
+    "crx": "crx pack build -o chrome/dist/chrome.crx --zip-output chrome/dist/chrome.zip -p key.pem",
+    "testEnv": "echo $npm_package_name_"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

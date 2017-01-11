@@ -1,3 +1,8 @@
+var qtip = require("qtip2");
+var $ = require("jquery");
+require('../css/tipstyle.css');
+require('qtip2/dist/jquery.qtip.min.css');
+
 $(document).ready(function () {
     // Start
     initQtipOnHover();
