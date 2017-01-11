@@ -5,16 +5,13 @@
   "content_scripts": [
     {
       "css": [
-        "jquery.qtip.min.css",
-        "tipstyle.css"
+        "bundle.css"
       ],
       "matches": [
         "*://tvtropes.org/*"
       ],
       "js": [
-        "jquery.min.js",
-        "jquery.qtip.min.js",
-        "Laconic_Hover.user.js"
+        "bundle.js"
       ]
     }
   ],
