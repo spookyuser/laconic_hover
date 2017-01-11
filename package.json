@@ -24,7 +24,7 @@
     "lint": "jshint ./src/js/",
     "start": "node src/js/hello.js",
     "build": "npm run clean && webpack --optimize-minimize && npm run icons",
-    "build:chrome": "npm run build && npm run manifest:chrome && npm run crx && npm run deploy:chrome",
+    "build:chrome": "npm run build && npm run manifest:chrome && npm run crx",
     "min": "uglifyjs ./build/bundle.js > ./build/bundle.min.js ",
     "icons": "ncp src/images/icons build/icons",
     "manifest:chrome": "cpy chrome/manifest.json build",

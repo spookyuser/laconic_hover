@@ -10,3 +10,6 @@ before_script:
   mkdir chrome/dist
 script:
   npm run build:chrome
+deploy:
+  provider: script
+  script: npm run deploy:chrome
