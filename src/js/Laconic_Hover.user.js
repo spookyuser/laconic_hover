@@ -5,7 +5,7 @@ require('../css/tipstyle.css');
 require('qtip2/dist/jquery.qtip.min.css');
 
 $(document).ready(function () {
-    // Start
+    //Start
     initQtipOnHover();
 });
 
@@ -61,7 +61,7 @@ function getLaconicPageAjax(api, currentUrl) {
     var laconicUrl = currentUrl.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
     var laconicContent;
 
-    // From http://qtip2.com/guides#content.ajax
+    //From http://qtip2.com/guides#content.ajax
     $.ajax({
         url: laconicUrl
     })
@@ -74,8 +74,8 @@ function getLaconicPageAjax(api, currentUrl) {
 }
 
 function convertCamelTitle(currentUrl) {
-    // Getting the trope title from the end of the url. From http://stackoverflow.com/a/6165387/1649917
-    // Adding spaces between the words. From http://stackoverflow.com/a/13720440/1649917
+    //Getting the trope title from the end of the url. From http://stackoverflow.com/a/6165387/1649917
+    //Adding spaces between the words. From http://stackoverflow.com/a/13720440/1649917
 
     var title = currentUrl.split("/").pop();
 
@@ -86,14 +86,14 @@ function convertCamelTitle(currentUrl) {
 
 function parseLaconic(response) {
     var parsedLaconicContent;
-    // Find the main page element that contains the laconic text and remove whitespace
+    //Find the main page element that contains the laconic text and remove whitespace
     parsedLaconicContent = $(response).find(".indent").remove().end();
     parsedLaconicContent = $(parsedLaconicContent).find(".page-content").first().text().trim();
 
     //If the tvtropes page has no Laconic entry
     if (response.indexOf("Inexact title") >= 0) {
         parsedLaconicContent = "No Laconic Page";
-        // Return the 'no laconic' message
+        //Return the 'no laconic' message
         return parsedLaconicContent;
     }
     //Return the found laconic text
