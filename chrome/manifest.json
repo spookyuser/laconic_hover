@@ -1,7 +1,9 @@
 {
   "name": "Laconic Hover",
   "version": "0.0.5",
-  "description": "Displays laconic text when hovering over a tvtropes link",
+  "homepage_url": "https://github.com/spookyUnknownUser/Laconic_Hover",
+  "author": "Spooky User",
+  "description": "Displays laconic text when hovering over a Tvtropes link",
   "content_scripts": [
     {
       "css": [

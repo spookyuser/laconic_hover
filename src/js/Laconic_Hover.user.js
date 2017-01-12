@@ -1,3 +1,4 @@
+//Node Requires
 var qtip = require("qtip2");
 var $ = require("jquery");
 require('../css/tipstyle.css');
@@ -10,13 +11,17 @@ $(document).ready(function () {
 
 function initQtipOnHover() {
     $(document).on('mouseover', '.twikilink', function (evt) {
+        //When mouse is over a wiki link (class: .twikilink)
         var jQueryElement = $(this);
+        //Get the linked URL
         var currentUrl = jQueryElement.attr('href');
+        //Init the qtip library
         setQtipContent(jQueryElement, currentUrl, evt);
     });
 }
 
 function setQtipContent(jQueryElement, currentUrl, evt) {
+    //qtip related config
     $(jQueryElement).qtip({
         overwrite: false,
         position: {
@@ -27,13 +32,17 @@ function setQtipContent(jQueryElement, currentUrl, evt) {
             adjust: {
                 x: -10
             },
+            //No slide in
             effect: false
         },
         content: {
             text: function (event, api) {
+                //Create ajax request to laconic page
                 getLaconicPageAjax(api, currentUrl);
+                //Return 'Loading" until ajax is done
                 return 'Loading...';
             },
+            //Set the title of the page to the title of the qtip box
             title: convertCamelTitle(currentUrl)
         },
         style: {
@@ -48,10 +57,11 @@ function setQtipContent(jQueryElement, currentUrl, evt) {
 }
 
 function getLaconicPageAjax(api, currentUrl) {
+    //Regex to replace normal link with link directly to laconic page
     var laconicUrl = currentUrl.replace(/(pmwiki\.php)\/.*\//g, 'pmwiki.php/Laconic/');
     var laconicContent;
 
-    // http://qtip2.com/guides#content.ajax
+    // From http://qtip2.com/guides#content.ajax
     $.ajax({
         url: laconicUrl
     })
@@ -79,6 +89,8 @@ function parseLaconic(response) {
     // Find the main page element that contains the laconic text and remove whitespace
     parsedLaconicContent = $(response).find(".indent").remove().end();
     parsedLaconicContent = $(parsedLaconicContent).find(".page-content").first().text().trim();
+
+    //If the tvtropes page has no Laconic entry
     if (response.indexOf("Inexact title") >= 0) {
         parsedLaconicContent = "No Laconic Page";
         // Return the 'no laconic' message
