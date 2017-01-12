@@ -17,19 +17,19 @@
     "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "uglify-js": "^2.7.5",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-archive-plugin": "^2.0.0"
   },
   "scripts": {
     "test": "npm run lint",
     "lint": "jshint ./src/js/",
     "start": "node src/js/hello.js",
-    "build": "npm run clean && webpack --optimize-minimize && npm run icons",
-    "build:chrome": "npm run build && npm run manifest:chrome && npm run crx",
+    "build": "npm run clean && npm run icons && npm run manifest && webpack --optimize-minimize",
     "min": "uglifyjs ./build/bundle.js > ./build/bundle.min.js ",
     "icons": "ncp src/images/icons build/icons",
-    "manifest:chrome": "cpy chrome/manifest.json build",
-    "clean": "rimraf build && rimraf ./chrome/dist/*",
-    "crx": "crx pack build -o chrome/dist/chrome.crx --zip-output chrome/dist/chrome.zip -p key.pem",
+    "manifest": "cpy manifest.json build",
+    "clean": "rimraf build && rimraf ./dist/* && mkdir build",
+    "crx": "crx pack build -o dist/chrome.crx --zip-output dist/laconic-hover.zip -p key.pem",
     "deploy:chrome": "node ./tools/chrome-deploy.js"
   },
   "keywords": [],
