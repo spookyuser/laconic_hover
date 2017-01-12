@@ -9,15 +9,14 @@ $(document).ready(function () {
 });
 
 function initQtipOnHover() {
-    $(document).on('mouseover', '.twikilink', function (event) {
+    $(document).on('mouseover', '.twikilink', function (evt) {
         var jQueryElement = $(this);
         var currentUrl = jQueryElement.attr('href');
-        setQtipContent(jQueryElement, currentUrl);
+        setQtipContent(jQueryElement, currentUrl, evt);
     });
 }
 
-function setQtipContent(jQueryElement, currentUrl) {
-
+function setQtipContent(jQueryElement, currentUrl, evt) {
     $(jQueryElement).qtip({
         overwrite: false,
         position: {
@@ -42,10 +41,10 @@ function setQtipContent(jQueryElement, currentUrl) {
 
         },
         show: {
-            event: event.type,
+            event: evt.type,
             ready: true
         }
-    }, event);
+    }, evt);
 }
 
 function getLaconicPageAjax(api, currentUrl) {
