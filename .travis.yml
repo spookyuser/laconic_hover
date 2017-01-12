@@ -11,4 +11,4 @@ before_script:
 script:
   npm run build:chrome
 after_success:
-  npm run deploy:chrome
+  - test $TRAVIS_BRANCH = "master" && npm run deploy:chrome
