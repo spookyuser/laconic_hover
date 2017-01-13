@@ -12,4 +12,5 @@ deploy({
     console.log("Successful chrome deploy!");
 }, function (err) {
     console.log("Failed to deploy:", err);
+    throw err
 });
