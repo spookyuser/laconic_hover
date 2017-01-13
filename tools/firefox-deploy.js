@@ -11,14 +11,15 @@ deploy({
     secret: process.env.FIREFOX_SECRET,
 
     // the ID of your extension
-    id: 'exampleId@jetpack',
+    id: 'laconic-hover@firefox.webext',
     // the version to publish
     version: require('../package.json').version,
 
     // a ReadStream containing a .zip (WebExtensions) or .xpi (Add-on SDK)
-    src: fs.createReadStream('path/to/zipped/extension.zip')
+    src: fs.createReadStream('./dist/extension.zip')
 }).then(function () {
     // success!
+    console.log("Successful Firefox deploy!");
 }, function (err) {
     console.error('Firefox deploy fail:', err);
     process.exitCode = 1;

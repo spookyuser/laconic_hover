@@ -18,7 +18,8 @@ output.on('close', function () {
 
 // good practice to catch this error explicitly
 archive.on('error', function (err) {
-    throw err;
+    console.log("Zipping fail:", err);
+    process.exitCode = 1;
 });
 archive.pipe(output);
 

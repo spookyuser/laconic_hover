@@ -26,5 +26,6 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
+  "id": "laconic-hover@firefox.webext",
   "manifest_version": 2
 }

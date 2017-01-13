@@ -11,6 +11,6 @@ deploy({
 }).then(function () {
     console.log("Successful chrome deploy!");
 }, function (err) {
-    console.log("Failed to deploy:", err);
+    console.log("Chrome deploy fail:", err);
     process.exitCode = 1;
 });
