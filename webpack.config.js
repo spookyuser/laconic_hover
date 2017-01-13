@@ -1,4 +1,6 @@
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = {
     entry: './src/js/Laconic_Hover.user.js',
@@ -13,7 +15,13 @@ module.exports = {
     },
 
     plugins: [
-        new ExtractTextPlugin("build/bundle.css")
+        new ExtractTextPlugin("build/bundle.css"),
+        new CopyWebpackPlugin([
+            {from: 'src/images/icons', to: 'build/icons'},
+            {from: 'manifest.json', to: 'build'}
+
+        ])
+
     ]
 
 };
