@@ -32,9 +32,10 @@ The script is so basic it started out as a userscript. Where the laconic was jus
 Yes, I think so:
 * [1](http://userscripts-mirror.org/scripts/show/130346)
 * [2](https://chrome.google.com/webstore/detail/tropes-helper-beta/nbmecnaokkbfonmbplonmnekhiklkjlm)
+
 But neither were ever updated, hopefully this will be different. 
 
-
+---
 ###Forward
 * Fixing the title
   - Currently using a weird camelCase method to get the title from the url. Not very accurate.
@@ -49,7 +50,7 @@ Building is done with node and webpack.
 Specifically `npm run build`.
 
 ###Third Party Licenses
-[qTip2: MIT](https://github.com/qTip2/qTip2/blob/master/LICENSE)
-[lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
+* [qTip2: MIT](https://github.com/qTip2/qTip2/blob/master/LICENSE)
+* [lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
 
 
