@@ -1,26 +1,29 @@
-// /*jshint esversion: 6 */
-// var JSZip = require("jszip");
-// var zipFolder = require('zip-folder');
-// var fs = require("fs");
-// var pjson = require('../package.json');
-//
-// var zip = new JSZip();
-// var distZip = zip.folder("/dist");
-// var filename = pjson.name + "_" + pjson.version + "_" + process.argv[2] + ".zip";
-// var location = "./" + process.argv[2] + "/dist/";
-//
-// try {
-//     fs.mkdir(location);
-// } catch (e) {
-//     // do nothing
-// } finally {
-//
-// }
-//
-// zipFolder('./dist', location + filename, function(err) {
-//     if (err) {
-//         console.log('Zip err', err);
-//     } else {
-//         console.log('Zipping succesful');
-//     }
-// });
+// From https://archiverjs.com/docs/
+// From https://github.com/archiverjs/node-archiver/issues/156#issuecomment-135497173
+// require modules
+var fs = require('fs');
+var archiver = require('archiver');
+
+// create a file to stream archive data to.
+var output = fs.createWriteStream('./dist/laconic-hover.zip');
+var archive = archiver('zip', {
+    store: true // Sets the compression method to STORE.
+});
+
+// listen for all archive data to be written
+output.on('close', function () {
+    console.log(archive.pointer() + ' total bytes');
+    console.log('archiver has been finalized and the output file descriptor has closed.');
+});
+
+// good practice to catch this error explicitly
+archive.on('error', function (err) {
+    throw err;
+});
+archive.pipe(output);
+
+// append files from a directory
+archive.directory('build/', '/');
+
+// finalize the archive (ie we are done appending files but streams have to finish yet)
+archive.finalize();
