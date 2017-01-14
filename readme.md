@@ -9,7 +9,7 @@ Shows laconic text when hovering on tvtropes links... That's it.
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.com/spookyUnknownUser/Laconic_Hover"><img src="https://travis-ci.com/spookyUnknownUser/Laconic_Hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master"></a>
+  <a href="https://travis-ci.com/spookyUnknownUser/laconic_hover"><img src="https://travis-ci.com/spookyUnknownUser/laconic_hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master"></a>
 </p>
 
 <p align = "center">
