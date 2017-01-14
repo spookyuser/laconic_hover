@@ -11,12 +11,12 @@ deploy({
     secret: process.env.FIREFOX_SECRET,
 
     // the ID of your extension
-    id: 'laconic-hover@firefox.webext',
+    id: '{c7a8881a-5be2-4f11-871b-9d5ea43c692c}',
     // the version to publish
     version: require('../package.json').version,
 
     // a ReadStream containing a .zip (WebExtensions) or .xpi (Add-on SDK)
-    src: fs.createReadStream('./dist/extension.zip')
+    src: fs.createReadStream('./dist/laconic-hover.zip')
 }).then(function () {
     // success!
     console.log("Successful Firefox deploy!");

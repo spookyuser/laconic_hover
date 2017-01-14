@@ -1,9 +1,9 @@
 {
   "name": "Laconic Hover",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "homepage_url": "https://github.com/spookyUnknownUser/Laconic_Hover",
   "author": "Spooky User",
-  "description": "Displays laconic text when hovering over a Tvtropes link",
+  "description": "Shows laconic text when hovering on tvtropes links... That's it.",
   "content_scripts": [
     {
       "css": [
@@ -26,6 +26,5 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
-  "id": "laconic-hover@firefox.webext",
   "manifest_version": 2
 }
