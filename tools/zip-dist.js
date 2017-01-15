@@ -7,7 +7,7 @@ var archiver = require('archiver');
 // create a file to stream archive data to.
 var output = fs.createWriteStream('./dist/laconic-hover.zip');
 var archive = archiver('zip', {
-    store: true // Sets the compression method to STORE.
+//    DON'T SET STORE = TRUE. MUST BE ZIPPED FOR CHROME.
 });
 
 // listen for all archive data to be written
