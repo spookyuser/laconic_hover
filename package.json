@@ -1,6 +1,6 @@
 {
   "name": "LaconicHover",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Shows laconic text when hovering on tvtropes links... That's it.",
   "repository": {
     "type": "git",
