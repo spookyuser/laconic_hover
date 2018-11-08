@@ -6,21 +6,12 @@
   "description": "Shows laconic text when hovering on tvtropes links... That's it.",
   "content_scripts": [
     {
-      "css": [
-        "bundle.css"
-      ],
-      "matches": [
-        "*://tvtropes.org/*"
-      ],
-      "js": [
-        "bundle.js"
-      ]
+      "run_at": "document_start",
+      "matches": ["*://tvtropes.org/*"],
+      "js": ["laconic-hover.js"]
     }
   ],
-  "permissions": [
-    "tabs",
-    "*://tvtropes.org/*"
-  ],
+  "permissions": ["tabs", "*://tvtropes.org/*"],
   "icons": {
     "16": "icons/16.png",
     "48": "icons/48.png",
