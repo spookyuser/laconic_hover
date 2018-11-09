@@ -37,7 +37,9 @@ async function fetchQuerySelector(url, querySelector) {
   let html = await response.text();
   let parser = new DOMParser();
   let document = parser.parseFromString(html, "text/html");
-  return document.querySelector(querySelector).textContent;
+  return (
+    document.querySelector(querySelector).textContent || Constants.NO_LACONIC
+  );
 }
 
 function darkModeEnabled() {
