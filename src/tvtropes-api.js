@@ -1,6 +1,6 @@
 import Constants from "./lib/constants";
 
-export class Trope {
+class Trope {
   constructor(url, title, laconic) {
     this.url = url;
     this._title = title;
@@ -19,7 +19,6 @@ export class Trope {
     //Regex to replace normal link with link directly to laconic page
     return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
   }
-
 
   async toString() {
     // From https://stackoverflow.com/a/41292710/1649917
@@ -40,3 +39,15 @@ async function fetchQuerySelector(url, querySelector) {
   let document = parser.parseFromString(html, "text/html");
   return document.querySelector(querySelector).textContent;
 }
+
+function darkModeEnabled() {
+  if (
+    document.cookie
+      .split(";")
+      .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length
+  )
+    return true;
+  else return false;
+}
+
+export { Trope, darkModeEnabled };
