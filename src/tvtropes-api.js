@@ -50,9 +50,9 @@ function darkModeEnabled() {
   else return false;
 }
 
-function getTheme() {
-  if (darkModeEnabled()) return Constants.DARK_THEME;
-  else return Constants.LIGHT_THEME;
-}
+// function getTheme() {
+//   if (darkModeEnabled()) return Constants.DARK_THEME;
+//   else return Constants.LIGHT_THEME;
+// }
 
-export { Trope, getTheme };
+export { Trope, darkModeEnabled };
