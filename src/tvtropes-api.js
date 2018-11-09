@@ -9,9 +9,7 @@ export class Trope {
 
   laconicUrl() {
     //Regex to replace normal link with link directly to laconic page
-    const url = this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
-    console.log(url);
-    return url;
+    return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
   }
 
   get title() {
