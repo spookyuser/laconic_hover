@@ -7,11 +7,6 @@ export class Trope {
     this._laconic = laconic;
   }
 
-  laconicUrl() {
-    //Regex to replace normal link with link directly to laconic page
-    return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
-  }
-
   get title() {
     return fetchQuerySelector(this.url, Constants.TITLE_SELECTOR);
   }
@@ -19,6 +14,12 @@ export class Trope {
   get laconic() {
     return fetchQuerySelector(this.laconicUrl(), Constants.LACONIC_SELECTOR);
   }
+
+  laconicUrl() {
+    //Regex to replace normal link with link directly to laconic page
+    return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
+  }
+
 
   async toString() {
     // From https://stackoverflow.com/a/41292710/1649917
