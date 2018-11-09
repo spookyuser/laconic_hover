@@ -1,7 +1,7 @@
 import html from "innerself";
 import { darkModeEnabled } from "./tvtropes-api";
 
-export function HoverTemplate(trope) {
+export function hoverTemplate(trope) {
   // TODO: Refactor out styles
   const dark = html`
     <div

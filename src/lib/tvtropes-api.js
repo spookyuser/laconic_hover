@@ -22,8 +22,8 @@ class Trope {
 
   async toString() {
     // From https://stackoverflow.com/a/41292710/1649917
-    const title = this.title;
-    const laconic = this.laconic;
+    const { title } = this.title;
+    const { laconic } = this.laconic;
 
     return {
       title: await title,
@@ -46,7 +46,7 @@ function darkModeEnabled() {
   if (
     document.cookie
       .split(";")
-      .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length
+      .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length > 0
   )
     return true;
   return false;

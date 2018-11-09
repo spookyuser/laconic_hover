@@ -15,7 +15,7 @@
     "build:dev": "webpack --mode=development --watch",
     "start:firefox": "web-ext run --source-dir ./distribution/",
     "lint": "xo",
-    "lint:fix" : "xo --fix"
+    "lint:fix": "xo --fix"
   },
   "dependencies": {
     "innerself": "^0.1.1",
@@ -47,8 +47,14 @@
     ]
   },
   "xo": {
+    "env": [
+      "browser"
+    ],
     "space": true,
-    "prettier": true
+    "prettier": true,
+    "rules": {
+      "import/no-unassigned-import": 0
+    }
   },
   "prettier": {
     "singleQuote": false,
