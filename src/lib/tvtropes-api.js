@@ -22,8 +22,7 @@ class Trope {
 
   async toString() {
     // From https://stackoverflow.com/a/41292710/1649917
-    const { title } = this.title;
-    const { laconic } = this.laconic;
+    const { title, laconic } = { title: this.title, laconic: this.laconic };
 
     return {
       title: await title,
