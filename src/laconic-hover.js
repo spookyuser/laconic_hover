@@ -1,14 +1,12 @@
 import tippy from "tippy.js";
 import { Trope } from "./tvtropes-api";
+import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
-
-const HOVER_SELECTOR = ".twikilink";
-const INITIAL_CONTENT = "Loading...";
 
 console.log("Starting script");
 
-tippy(HOVER_SELECTOR, {
-  content: INITIAL_CONTENT,
+tippy(Constants.HOVER_SELECTOR, {
+  content: Constants.INITIAL_CONTENT,
   async onShow(tip) {
     const url = tip.reference.href;
     const trope = new Trope(url);
@@ -24,6 +22,6 @@ tippy(HOVER_SELECTOR, {
     }
   },
   onHidden(tip) {
-    tip.setContent(INITIAL_CONTENT);
+    tip.setContent(Constants.INITIAL_CONTENT);
   }
 });
