@@ -13,7 +13,9 @@
   },
   "scripts": {
     "build:dev": "webpack --mode=development --watch",
-    "start:firefox": "web-ext run --source-dir ./distribution/"
+    "start:firefox": "web-ext run --source-dir ./distribution/",
+    "lint": "xo",
+    "lint:fix" : "xo --fix"
   },
   "dependencies": {
     "innerself": "^0.1.1",
@@ -29,7 +31,8 @@
     "style-loader": "^0.23.1",
     "web-ext": "^2.9.1",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "xo": "^0.23.0"
   },
   "babel": {
     "presets": [
@@ -42,5 +45,13 @@
         }
       ]
     ]
+  },
+  "xo": {
+    "space": true,
+    "prettier": true
+  },
+  "prettier": {
+    "singleQuote": false,
+    "bracketSpacing": true
   }
 }
