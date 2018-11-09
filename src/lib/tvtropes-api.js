@@ -1,4 +1,4 @@
-import Constants from "./lib/constants";
+import Constants from "./constants";
 
 class Trope {
   constructor(url, title, laconic) {

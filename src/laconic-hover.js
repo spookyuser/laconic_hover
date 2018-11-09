@@ -1,6 +1,6 @@
 import tippy from "tippy.js";
 import { HoverTemplate } from "./lib/templates";
-import { Trope, darkModeEnabled } from "./tvtropes-api";
+import { Trope, darkModeEnabled } from "./lib/tvtropes-api";
 import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/dist/themes/light.css";

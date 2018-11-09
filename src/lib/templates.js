@@ -1,5 +1,5 @@
 import html from "innerself";
-import { darkModeEnabled } from "../tvtropes-api";
+import { darkModeEnabled } from "./tvtropes-api";
 
 export function HoverTemplate(trope) {
   // TODO: Refactor out styles
