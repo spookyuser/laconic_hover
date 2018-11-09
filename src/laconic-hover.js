@@ -10,11 +10,11 @@ tippy(Constants.HOVER_SELECTOR, {
   async onShow(tip) {
     const url = tip.reference.href;
     const trope = new Trope(url);
-    const title = await trope.getTitle();
-
+    const info = await trope.toString();
+    const html = `<p>${info.title}<p><hr><p>${info.laconic}</p>`;
     try {
       if (tip.state.isVisible) {
-        tip.setContent(title);
+        tip.setContent(html);
       }
     } catch (e) {
       tip.setContent(`Fetch failed. ${e}`);

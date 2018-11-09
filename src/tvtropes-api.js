@@ -1,26 +1,37 @@
 import Constants from "./lib/constants";
 
 export class Trope {
-  constructor(url, laconic, title) {
+  constructor(url, title, laconic) {
     this.url = url;
-    this.laconic = laconic;
-    this.title = title;
+    this._title = title;
+    this._laconic = laconic;
   }
 
-  // Adding a method to the constructor
-  async getTitle() {
-    let title = await fetchQuerySelector(this.url, Constants.TITLE_SELECTOR);
-    return title;
+  laconicUrl() {
+    //Regex to replace normal link with link directly to laconic page
+    const url = this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
+    console.log(url);
+    return url;
   }
 
-  async getLaconic() {
-    //  let
+  get title() {
+    return fetchQuerySelector(this.url, Constants.TITLE_SELECTOR);
   }
-}
 
-function getLaconicUrl(url) {
-  //Regex to replace normal link with link directly to laconic page
-  return url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
+  get laconic() {
+    return fetchQuerySelector(this.laconicUrl(), Constants.LACONIC_SELECTOR);
+  }
+
+  async toString() {
+    // From https://stackoverflow.com/a/41292710/1649917
+    const title = this.title;
+    const laconic = this.laconic;
+
+    return {
+      title: await title,
+      laconic: await laconic
+    };
+  }
 }
 
 async function fetchQuerySelector(url, querySelector) {
@@ -28,5 +39,5 @@ async function fetchQuerySelector(url, querySelector) {
   let html = await response.text();
   let parser = new DOMParser();
   let document = parser.parseFromString(html, "text/html");
-  return document.querySelector(querySelector).innerHTML;
+  return document.querySelector(querySelector).textContent;
 }
