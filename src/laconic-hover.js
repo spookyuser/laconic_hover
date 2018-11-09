@@ -1,34 +1,29 @@
 import tippy from "tippy.js";
+import { Trope } from "./tvtropes-api";
 import "tippy.js/dist/tippy.css";
 
 const HOVER_SELECTOR = ".twikilink";
 const INITIAL_CONTENT = "Loading...";
-
-const state = {
-  isFetching: false,
-  canFetch: true
-};
 
 console.log("Starting script");
 
 tippy(HOVER_SELECTOR, {
   content: INITIAL_CONTENT,
   async onShow(tip) {
-    if (state.isFetching || !state.canFetch) return;
-
-    state.isFetching = true;
-    state.canFetch = false;
+    const url = tip.reference.href;
+    const trope = new Trope(url);
+    const title = await trope.getTitle();
 
     try {
-      const url = tip.reference.href
+      if (tip.state.isVisible) {
+        tip.setContent(title);
+      }
     } catch (e) {
       tip.setContent(`Fetch failed. ${e}`);
-    } finally {
-      state.isFetching = false;
+      console.error(e);
     }
   },
   onHidden(tip) {
-    state.canFetch = true;
     tip.setContent(INITIAL_CONTENT);
   }
 });
