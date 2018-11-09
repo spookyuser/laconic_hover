@@ -16,7 +16,7 @@ class Trope {
   }
 
   laconicUrl() {
-    //Regex to replace normal link with link directly to laconic page
+    // Regex to replace normal link with link directly to laconic page
     return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
   }
 
@@ -33,10 +33,10 @@ class Trope {
 }
 
 async function fetchQuerySelector(url, querySelector) {
-  let response = await fetch(url);
-  let html = await response.text();
-  let parser = new DOMParser();
-  let document = parser.parseFromString(html, "text/html");
+  const response = await fetch(url);
+  const html = await response.text();
+  const parser = new DOMParser();
+  const document = parser.parseFromString(html, "text/html");
   return (
     document.querySelector(querySelector).textContent || Constants.NO_LACONIC
   );
@@ -49,7 +49,7 @@ function darkModeEnabled() {
       .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length
   )
     return true;
-  else return false;
+  return false;
 }
 
 export { Trope, darkModeEnabled };

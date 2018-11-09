@@ -35,5 +35,5 @@ module.exports = {
     ]),
     new CleanWebpackPlugin(["distribution"])
   ]
-  //TODO: Add optimization
+  // TODO: Add optimization
 };
