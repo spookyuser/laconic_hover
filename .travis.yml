@@ -1,6 +1,13 @@
 language: node_js
 node_js:
-- node
+  - node
 script: npm run build
-after_success:
-- test $TRAVIS_BRANCH = "master" && npm run deploy:chrome && npm run deploy:firefox
+env:
+  - EXTENSION_ID=ignndocldlheghlflchdbokagecncgmm
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: npm run release
+    on:
+      branch: master
+      tags: true
