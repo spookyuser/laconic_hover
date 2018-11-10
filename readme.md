@@ -7,17 +7,14 @@
 
 tvtropes is great but its even better when you have the power of a million tropes in the palm of your hand.
 
-<P>
+<p align="center">
 
-<a href="https://travis-ci.com/spookyUnknownUser/laconic_hover"><img valign="middle" src="https://travis-ci.com/spookyUnknownUser/laconic_hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master"></a>
+  [![Build](https://travis-ci.com/spookyUnknownUser/laconic_hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master)](https://travis-ci.com/spookyUnknownUser/laconic_hover)
+  [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style)](https://github.com/prettier/prettier)
+  [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+  [![Dependencies license](https://david-dm.org/spookyUnknownUser/laconic_hover.svg)](https://david-dm.org/spookyUnknownUser/laconic_hover.svg)
+</p>
 
-<a href="https://github.com/prettier/prettier"><img valign="middle" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style"></a>
-
-<a href="https://github.com/Naereen/StrapDown.js/blob/master/LICENSE"><img valign="middle" src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg"></a>
-
-<a href="https://david-dm.org/spookyUnknownUser/laconic_hover.svg"><img valign="middle" src="https://david-dm.org/spookyUnknownUser/laconic_hover.svg"></a>
-
-</P>
 
 ## Install
 
