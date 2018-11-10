@@ -6,7 +6,7 @@
   "description": "Shows laconic text when hovering on tvtropes links... That's it.",
   "content_scripts": [
     {
-      "run_at": "document_start",
+      "run_at": "document_idle",
       "matches": ["*://tvtropes.org/*"],
       "js": ["laconic-hover.js"]
     }
