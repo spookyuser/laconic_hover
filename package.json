@@ -4,7 +4,7 @@
     "build:dev": "webpack --mode=development --watch",
     "build:prod": "webpack --mode=production",
     "start:firefox": "web-ext run --source-dir ./distribution/",
-    "update-version": "VERSION=$(find-versions git-latest-semver-tag); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
+    "update-version": "VERSION=$(find-versions $(git-latest-semver-tag)); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
     "lint": "xo",
     "lint:fix": "xo --fix"
   },
