@@ -9,7 +9,7 @@
     "lint": "xo",
     "lint:fix": "xo --fix",
     "test": "run-s lint build:prod",
-    "release": "run-s build update-version save-url ...*"
+    "release": "run-s build:prod update-version save-url ...*"
   },
   "dependencies": {
     "innerself": "^0.1.1",
