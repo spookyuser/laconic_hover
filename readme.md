@@ -9,13 +9,13 @@ tvtropes is great but its even better when you have the power of a million trope
 
 <P>
 
-[![code style: prettier](https://travis-ci.com/spookyUnknownUser/laconic_hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master)](https://travis-ci.com/spookyUnknownUser/laconic_hover)
+<a href="https://travis-ci.com/spookyUnknownUser/laconic_hover"><img valign="middle" src="https://travis-ci.com/spookyUnknownUser/laconic_hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master"></a>
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style)](https://github.com/prettier/prettier)
+<a href="https://github.com/prettier/prettier"><img valign="middle" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style"></a>
 
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+<a href="https://github.com/Naereen/StrapDown.js/blob/master/LICENSE"><img valign="middle" src="https://img.shields.io/github/license/Naereen/StrapDown.js.svg"></a>
 
-[![Dependencies license](https://david-dm.org/spookyUnknownUser/laconic_hover.svg)](https://david-dm.org/spookyUnknownUser/laconic_hover.svg)
+<a href="https://david-dm.org/spookyUnknownUser/laconic_hover.svg"><img valign="middle" src="https://david-dm.org/spookyUnknownUser/laconic_hover.svg"></a>
 
 </P>
 
