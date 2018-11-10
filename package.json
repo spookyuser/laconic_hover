@@ -1,20 +1,10 @@
 {
-  "name": "LaconicHover",
-  "version": "0.0.12",
-  "description": "Shows laconic text when hovering on tvtropes links... That's it.",
-  "keywords": [],
-  "author": "Spooky User",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/spookyUnknownUser/laconic_hover.git",
-    "username": "spookyUnknownUser",
-    "repository": "laconic-hover"
-  },
+  "private": true,
   "scripts": {
     "build:dev": "webpack --mode=development --watch",
     "build:prod": "webpack --mode=production",
     "start:firefox": "web-ext run --source-dir ./distribution/",
+    "update-version": "VERSION=$(utc-version); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
     "lint": "xo",
     "lint:fix": "xo --fix"
   },
@@ -29,6 +19,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
+    "dot-json": "^1.0.4",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^1.3.0",
     "web-ext": "^2.9.1",
