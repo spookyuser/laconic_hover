@@ -1,40 +1,66 @@
 {
-  "name": "LaconicHover",
-  "version": "0.0.12",
-  "description": "Shows laconic text when hovering on tvtropes links... That's it.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/spookyUnknownUser/laconic_hover.git",
-    "username": "spookyUnknownUser",
-    "repository": "laconic-hover"
+  "private": true,
+  "scripts": {
+    "build:dev": "webpack --mode=development --watch",
+    "build": "webpack --mode=production",
+    "start:firefox": "web-ext run --source-dir ./distribution/",
+    "update-version": "VERSION=$(find-versions $(git-latest-semver-tag)); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
+    "save-url": "echo https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_COMMIT > distribution/SOURCE_URL",
+    "lint": "xo",
+    "lint:fix": "xo --fix",
+    "test": "run-s lint build",
+    "release:chrome" : "shipit chrome ./distribution/",
+    "release:firefox": "shipit firefox ./distribution/",
+    "release": "run-s build update-version save-url release:*"
   },
   "dependencies": {
-    "jquery": "2.2.2",
-    "qtip2": "^3.0.3"
+    "innerself": "^0.1.1",
+    "tippy.js": "^3.1.1"
   },
   "devDependencies": {
-    "archiver": "^1.3.0",
-    "chrome-extension-deploy": "^2.0.3",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.26.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "firefox-extension-deploy": "0.0.2",
-    "jshint": "latest",
-    "rimraf": "^2.5.4",
-    "style-loader": "^0.13.1",
-    "uglify-js": "^2.7.5",
-    "webpack": "^1.14.0"
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@wext/shipit": "git+https://github.com/spookyUnknownUser/wext-shipit.git",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^1.0.1",
+    "dot-json": "^1.0.4",
+    "find-versions-cli": "^3.0.0",
+    "git-latest-semver-tag": "^1.0.2",
+    "npm-run-all": "^4.1.3",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "web-ext": "^2.9.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "xo": "^0.23.0"
   },
-  "scripts": {
-    "test": "npm run lint",
-    "lint": "jshint ./src/js/",
-    "build": "npm run clean && webpack --optimize-minimize && npm run zip",
-    "clean": "rimraf build && rimraf dist && mkdir build && mkdir dist",
-    "zip": "node ./tools/zip-dist.js",
-    "deploy:chrome": "node ./tools/chrome-deploy.js",
-    "deploy:firefox": "node ./tools/firefox-deploy.js"
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "chrome": "55",
+            "firefox": "55"
+          }
+        }
+      ]
+    ]
   },
-  "keywords": [],
-  "author": "Spooky User",
-  "license": "GPL-3.0"
+  "xo": {
+    "env": [
+      "browser"
+    ],
+    "space": true,
+    "prettier": true,
+    "rules": {
+      "import/no-unassigned-import": 0
+    }
+  },
+  "prettier": {
+    "singleQuote": false,
+    "bracketSpacing": true
+  }
 }
