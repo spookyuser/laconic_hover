@@ -9,7 +9,9 @@
     "lint": "xo",
     "lint:fix": "xo --fix",
     "test": "run-s lint build",
-    "release": "run-s build update-version save-url ...*"
+    "release:chrome" : "shipit chrome ./distribution/",
+    "release:firefox": "shipit firefox ./distribution/",
+    "release": "run-s build update-version save-url release:*"
   },
   "dependencies": {
     "innerself": "^0.1.1",
