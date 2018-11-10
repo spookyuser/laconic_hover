@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build:dev": "webpack --mode=development --watch",
-    "build:prod": "webpack --mode=production --sm",
+    "build:prod": "webpack --mode=production",
     "start:firefox": "web-ext run --source-dir ./distribution/",
     "lint": "xo",
     "lint:fix": "xo --fix"
