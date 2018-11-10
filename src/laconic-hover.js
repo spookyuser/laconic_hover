@@ -5,8 +5,6 @@ import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/dist/themes/light.css";
 
-console.log("Starting script");
-
 tippy(Constants.HOVER_SELECTOR, {
   content: Constants.INITIAL_CONTENT,
   async onShow(tip) {
