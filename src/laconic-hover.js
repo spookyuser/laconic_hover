@@ -15,12 +15,10 @@ tippy(Constants.HOVER_SELECTOR, {
       theme: darkModeEnabled() ? Constants.DARK_THEME : Constants.LIGHT_THEME
     });
 
-    const url = tip.reference.href;
-    const trope = new Trope(url);
-    const info = await trope.toString();
+    const trope = await new Trope(tip.reference.href).toString();
 
     try {
-      if (tip.state.isVisible) tip.setContent(hoverTemplate(info));
+      if (tip.state.isVisible) tip.setContent(hoverTemplate(trope));
     } catch (error) {
       tip.setContent(`Fetch failed. ${error}`);
       console.error(error);
