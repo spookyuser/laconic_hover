@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - node
 env:
-  - EXTENSION_ID=ignndocldlheghlflchdbokagecncgmm
+  - WEXT_SHIPIT_CHROME_EXTENSION_ID=ignndocldlheghlflchdbokagecncgmm
 deploy:
   - provider: script
     skip_cleanup: true
