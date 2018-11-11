@@ -1,8 +1,14 @@
 export default {
   // Query Selectors
-  TITLE_SELECTOR: ".entry-title",
   HOVER_SELECTOR: ".twikilink",
-  LACONIC_SELECTOR: "#main-article > p:nth-child(1)",
+  TITLE_SELECTOR: {
+    querySelector: ".entry-title",
+    property: "textContent"
+  },
+  LACONIC_SELECTOR: {
+    querySelector: "meta[property='og:description']",
+    property: "content"
+  },
   DARK_MODE_COOKIE: "night-vision=true",
 
   // Strings

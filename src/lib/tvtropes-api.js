@@ -8,11 +8,19 @@ class Trope {
   }
 
   get title() {
-    return fetchQuerySelector(this.url, Constants.TITLE_SELECTOR);
+    return fetchQuerySelector(
+      this.url,
+      Constants.TITLE_SELECTOR.querySelector,
+      Constants.TITLE_SELECTOR.property
+    );
   }
 
   get laconic() {
-    return fetchQuerySelector(this.laconicUrl(), Constants.LACONIC_SELECTOR);
+    return fetchQuerySelector(
+      this.laconicUrl(),
+      Constants.LACONIC_SELECTOR.querySelector,
+      Constants.LACONIC_SELECTOR.property
+    );
   }
 
   laconicUrl() {
