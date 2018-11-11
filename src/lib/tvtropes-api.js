@@ -43,7 +43,7 @@ async function fetchQuerySelector(url, querySelector, property) {
   // Search the cache for the selected url, if it exists return cache
   // else get the page and save it to the cache
   // See-Also: https://developer.mozilla.org/en-US/docs/Web/API/Cache
-  let html = async () => {
+  const html = async () => {
     let response;
     const cache = await caches.open(Constants.CACHE_NAME);
     const cachedResponse = await cache.match(url);
