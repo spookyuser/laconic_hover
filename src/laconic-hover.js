@@ -25,7 +25,7 @@ tippy(Constants.HOVER_SELECTOR, {
   onHidden(tip) {
     tip.setContent(Constants.INITIAL_CONTENT);
   },
-  placement: "right",
+  placement: "top-start",
   performance: true,
   animation: "perspective",
   delay: 100
