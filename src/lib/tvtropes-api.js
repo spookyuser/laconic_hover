@@ -1,4 +1,5 @@
 import Constants from "./constants";
+import { decodeBuffer } from "./utils";
 
 class Trope {
   constructor(url, title, laconic) {
@@ -52,8 +53,7 @@ async function fetchQuerySelector(url, querySelector, property) {
       cache.put(url, response.clone());
     } else response = cachedResponse;
     let buffer = response.arrayBuffer();
-    let text = decodeBuffer(await buffer);
-    return text;
+    return decodeBuffer(await buffer);
   };
 
   // Find the selected query selector and property, else return not found message
@@ -70,22 +70,4 @@ async function fetchQuerySelector(url, querySelector, property) {
     : result || Constants.NO_LACONIC;
 }
 
-function darkModeEnabled() {
-  if (
-    document.cookie
-      .split(";")
-      .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length > 0
-  )
-    return true;
-  return false;
-}
-
-function decodeBuffer(buffer) {
-  // From https://schneide.blog/2018/08/08/decoding-non-utf8-server-responses-using-the-fetch-api/
-  console.log("decoding");
-  let decoder = new TextDecoder("iso-8859-1");
-  let text = decoder.decode(buffer);
-  return text;
-}
-
-export { Trope, darkModeEnabled };
+export { Trope };
