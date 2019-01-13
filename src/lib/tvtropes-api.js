@@ -51,7 +51,9 @@ async function fetchQuerySelector(url, querySelector, property) {
       response = await fetch(url);
       cache.put(url, response.clone());
     } else response = cachedResponse;
-    return response.text();
+    let buffer = response.arrayBuffer();
+    let text = decodeBuffer(await buffer);
+    return text;
   };
 
   // Find the selected query selector and property, else return not found message
@@ -76,6 +78,14 @@ function darkModeEnabled() {
   )
     return true;
   return false;
+}
+
+function decodeBuffer(buffer) {
+  // From https://schneide.blog/2018/08/08/decoding-non-utf8-server-responses-using-the-fetch-api/
+  console.log("decoding");
+  let decoder = new TextDecoder("iso-8859-1");
+  let text = decoder.decode(buffer);
+  return text;
 }
 
 export { Trope, darkModeEnabled };
