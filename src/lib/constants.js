@@ -9,8 +9,8 @@ export default {
     property: "textContent"
   },
   LACONIC: {
-    querySelector: "meta[property='og:description']",
-    property: "content"
+    querySelector: "#main-article > p",
+    property: "textContent"
   },
 
   // Strings
