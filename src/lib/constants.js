@@ -19,5 +19,6 @@ export default {
   // Misc
   DARK_THEME: "dark",
   LIGHT_THEME: "light",
-  CACHE_NAME: "laconic-hover-cache"
+  CACHE_NAME: "laconic-hover-cache",
+  DEFAULT_CHARACTER_ENCODING: "iso-8859-1"
 };

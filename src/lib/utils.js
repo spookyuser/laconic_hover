@@ -15,7 +15,7 @@ function getCharacterEncoding(headers) {
     .get("Content-Type")
     .split(";")
     .filter(header => header.includes("charset"))[0];
-  return charset ? charset.split("=")[1] : "iso-8859-1";
+  return charset ? charset.split("=")[1] : Constants.DEFAULT_CHARACTER_ENCODING;
 }
 
 function decodeBuffer(buffer, encoding) {
