@@ -10,6 +10,7 @@ tvtropes is great but its even better when you have the power of a million trope
   [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style)](https://github.com/prettier/prettier)
   [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
   [![Dependencies license](https://david-dm.org/spookyUnknownUser/laconic_hover.svg)](https://david-dm.org/spookyUnknownUser/laconic_hover)
+  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e28d68962dd9405cb80f3490d74eaad7)](https://www.codacy.com/app/spookyUnknownUser/laconic_hover?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=spookyUnknownUser/laconic_hover&amp;utm_campaign=Badge_Grade)
 
 </p>
 
