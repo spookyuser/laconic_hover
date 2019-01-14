@@ -39,21 +39,23 @@ But neither were ever updated, hopefully this will be different.
 
 See the npm scripts for more information. To get started make sure [Node.js®](https://nodejs.org/en/) is installed. You can then clone the repo and install the repositories:
 
-`$ git clone https://github.com/spookyUnknownUser/laconic_hover`  
-`$ cd laconic_hover`  
-`$ npm install`
+```shell
+git clone https://github.com/spookyUnknownUser/laconic_hover
+cd laconic_hover
+npm install
+```
 
 If you want to play around with the project around
 
-`$ npm run build:dev`
+`npm run build:dev`
 
 This will make webpack watch for any changes and output the unpacked extension to `/distribution/`.  
 Now you're ready to start editing the project. You can go straight into `/src/` and mess around if you want.  
 To see your changes I recommend using firefox because it automatically reloads your changes and can be launched from the project by running:
 
-`$ npm run start:firefox`
+`npm run start:firefox`
 
-To build for production just run `$ npm run build`
+To build for production just run `npm run build`
 
 Meta note: The structure of this project in large part comes from [github-refined](https://github.com/sindresorhus/refined-github/tree/65fd58a1f1505ff348e3a9111ccda1236c3b563f)  
 If you're looking for the right way to structure a webextension, then this is probably the best you're going to find at the moment. Thanks [sindresorhus](https://github.com/sindresorhus/refined) and everyone that contributed to github-refined!!
