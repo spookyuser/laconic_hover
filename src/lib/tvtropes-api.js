@@ -1,5 +1,5 @@
 import Constants from "./constants";
-import { decodeBuffer, getCharacterEncoding } from "./utils";
+import { decodeBuffer, getCharset } from "./utils";
 
 /** Class representing a Trope on tvtropes */
 class Trope {
@@ -85,7 +85,7 @@ async function fetchElement(url, element) {
 
     return decodeBuffer(
       await response.arrayBuffer(),
-      getCharacterEncoding(response.headers)
+      getCharset(response.headers)
     );
   };
 

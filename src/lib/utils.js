@@ -20,7 +20,7 @@ function darkModeEnabled() {
  *
  * @example"text/html; charset=ISO-8859-1" // returns "ISO-8859-1"
  */
-function getCharacterEncoding(headers) {
+function getCharset(headers) {
   let charset = headers
     .get("Content-Type")
     .split(";")
@@ -47,4 +47,4 @@ function decodeBuffer(buffer, charset) {
   return decoder.decode(buffer);
 }
 
-export { decodeBuffer, darkModeEnabled, getCharacterEncoding };
+export { decodeBuffer, darkModeEnabled, getCharset };
