@@ -9,19 +9,11 @@ class Trope {
   }
 
   get title() {
-    return fetchQuerySelector(
-      this.url,
-      Constants.TITLE_SELECTOR.querySelector,
-      Constants.TITLE_SELECTOR.property
-    );
+    return fetchElement(this.url, Constants.TITLE);
   }
 
   get laconic() {
-    return fetchQuerySelector(
-      this.laconicUrl(),
-      Constants.LACONIC_SELECTOR.querySelector,
-      Constants.LACONIC_SELECTOR.property
-    );
+    return fetchElement(this.laconicUrl(), Constants.LACONIC);
   }
 
   laconicUrl() {
@@ -40,7 +32,7 @@ class Trope {
   }
 }
 
-async function fetchQuerySelector(url, querySelector, property) {
+async function fetchElement(url, element) {
   // Search the cache for the selected url, if it exists return cache
   // else get the page and save it to the cache
   // See-Also: https://developer.mozilla.org/en-US/docs/Web/API/Cache
@@ -62,7 +54,9 @@ async function fetchQuerySelector(url, querySelector, property) {
   // Find the selected query selector and property, else return not found message
   const parser = new DOMParser();
   const document = parser.parseFromString(await html(), "text/html");
-  const result = document.querySelector(querySelector)[property];
+  const result = document.querySelector(element.querySelector)[
+    element.property
+  ];
 
   // Check if the result includes a specific error string
   // if it does return the no laconic message
