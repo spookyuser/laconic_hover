@@ -1,15 +1,17 @@
 export default {
   // Query Selectors
   HOVER_SELECTOR: ".twikilink",
-  TITLE_SELECTOR: {
+  DARK_MODE_COOKIE: "night-vision=true",
+
+  // Elements
+  TITLE: {
     querySelector: ".entry-title",
     property: "textContent"
   },
-  LACONIC_SELECTOR: {
-    querySelector: "meta[property='og:description']",
-    property: "content"
+  LACONIC: {
+    querySelector: "#main-article > p",
+    property: "textContent"
   },
-  DARK_MODE_COOKIE: "night-vision=true",
 
   // Strings
   INITIAL_CONTENT: "Loading...",
@@ -19,5 +21,6 @@ export default {
   // Misc
   DARK_THEME: "dark",
   LIGHT_THEME: "light",
-  CACHE_NAME: "laconic-hover-cache"
+  CACHE_NAME: "laconic-hover-cache",
+  DEFAULT_CHARACTER_ENCODING: "iso-8859-1"
 };

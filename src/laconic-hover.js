@@ -1,6 +1,7 @@
 import tippy from "tippy.js";
 import { hoverTemplate } from "./lib/templates";
-import { Trope, darkModeEnabled } from "./lib/tvtropes-api";
+import { Trope } from "./lib/tvtropes-api";
+import { darkModeEnabled } from "./lib/utils";
 import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/dist/themes/light.css";
@@ -16,10 +17,11 @@ tippy(Constants.HOVER_SELECTOR, {
     const trope = await new Trope(tip.reference.href).toString();
 
     try {
-      if (tip.state.isVisible) tip.setContent(hoverTemplate(trope));
+      if (tip.state.isVisible) {
+        tip.setContent(hoverTemplate(trope));
+      }
     } catch (error) {
       tip.setContent(`Fetch failed. ${error}`);
-      console.error(error);
     }
   },
   onHidden(tip) {
