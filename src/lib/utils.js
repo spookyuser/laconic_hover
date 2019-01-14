@@ -5,9 +5,11 @@ function darkModeEnabled() {
     document.cookie
       .split(";")
       .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length > 0
-  )
+  ) {
     return true;
-  return false;
+  } else {
+    return false;
+  }
 }
 
 /** Given a response.headers object find the charset contained in its content type

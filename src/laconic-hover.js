@@ -17,10 +17,11 @@ tippy(Constants.HOVER_SELECTOR, {
     const trope = await new Trope(tip.reference.href).toString();
 
     try {
-      if (tip.state.isVisible) tip.setContent(hoverTemplate(trope));
+      if (tip.state.isVisible) {
+        tip.setContent(hoverTemplate(trope));
+      }
     } catch (error) {
       tip.setContent(`Fetch failed. ${error}`);
-      console.error(error);
     }
   },
   onHidden(tip) {

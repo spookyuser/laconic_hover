@@ -1,8 +1,5 @@
 # <img src="https://cdn.rawgit.com/spookyUnknownUser/6bfc0fb6d49d9c0a20f28038fafebacf/raw/eb7bc8649b0fa458291d675bcef2c6261bcaf348/hover.svg" width="55"> Laconic Hover
 
-[link-cws]: https://chrome.google.com/webstore/detail/laconic-hover/ignndocldlheghlflchdbokagecncgmm "Version published on Chrome Web Store"
-[link-amo]: https://addons.mozilla.org/en-US/firefox/addon/laconic-hover/ "Version published on Mozilla Add-ons"
-
 > Shows laconic text when hovering on a trope link... that's it.
 
 tvtropes is great but its even better when you have the power of a million tropes in the palm of your hand.
@@ -16,11 +13,10 @@ tvtropes is great but its even better when you have the power of a million trope
 
 </p>
 
-
 ## Install
 
-- [**Chrome** extension][link-cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/ignndocldlheghlflchdbokagecncgmm.svg?label=%20">][link-cws]
-- [**Firefox** add-on][link-amo] [<img valign="middle" src="https://img.shields.io/amo/v/laconic-hover.svg?label=%20">][link-amo]
+-   [**Chrome** extension][link-cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/ignndocldlheghlflchdbokagecncgmm.svg?label=%20">][link-cws]
+-   [**Firefox** add-on][link-amo] [<img valign="middle" src="https://img.shields.io/amo/v/laconic-hover.svg?label=%20">][link-amo]
 
 <p align = "left">
     <img width="750" src="https://user-images.githubusercontent.com/16196262/48306356-c8d67b80-e53f-11e8-94fb-6564224b73a3.gif">
@@ -32,11 +28,11 @@ This used to be close to a user script but its become more of a fully fledged ex
 
 This also uses [tippy.js](https://atomiks.github.io/tippyjs/) which is super neat and replaces the old [qtip2](http://qtip2.com/) library, which was great while it lasted.
 
-## Hasn't this been done before?
+## Hasn't this been done before
 
 Yes, I think so:
-[[1](http://userscripts-mirror.org/scripts/show/130346)]
-[[2](https://chrome.google.com/webstore/detail/tropes-helper-beta/nbmecnaokkbfonmbplonmnekhiklkjlm)]  
+\[[1](http://userscripts-mirror.org/scripts/show/130346)]
+\[[2](https://chrome.google.com/webstore/detail/tropes-helper-beta/nbmecnaokkbfonmbplonmnekhiklkjlm)]  
 But neither were ever updated, hopefully this will be different.
 
 ## Development
@@ -64,12 +60,12 @@ If you're looking for the right way to structure a webextension, then this is pr
 
 ## Forward
 
-- ~~Fixing the title~~
-  - ~~Currently using a weird camelCase method to get the title from the url. Not very accurate.~~
-- ~~Better CSS~~
-  - ~~The CSS looks great in normal mode. But doesn't stand out much in night mode. Colors need tweaking.~~
-- ~~Better box placement~~
-  - ~~The box sometimes doesn't read well with text. Sometimes blocking what the link is referencing. Could use dynamic placement.~~
+-   ~~Fixing the title~~
+    -   ~~Currently using a weird camelCase method to get the title from the url. Not very accurate.~~
+-   ~~Better CSS~~
+    -   ~~The CSS looks great in normal mode. But doesn't stand out much in night mode. Colors need tweaking.~~
+-   ~~Better box placement~~
+    -   ~~The box sometimes doesn't read well with text. Sometimes blocking what the link is referencing. Could use dynamic placement.~~
 
 > you tell me 🌯
 
@@ -79,4 +75,8 @@ I would welcome anything anyone has to offer if you have an idea for a pull requ
 
 ## Third Party Licenses
 
-- [lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
+-   [lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
+
+[link-cws]: https://chrome.google.com/webstore/detail/laconic-hover/ignndocldlheghlflchdbokagecncgmm "Version published on Chrome Web Store"
+
+[link-amo]: https://addons.mozilla.org/en-US/firefox/addon/laconic-hover/ "Version published on Mozilla Add-ons"
