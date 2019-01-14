@@ -62,8 +62,10 @@ If you're looking for the right way to structure a webextension, then this is pr
 
 -   ~~Fixing the title~~
     -   ~~Currently using a weird camelCase method to get the title from the url. Not very accurate.~~
+
 -   ~~Better CSS~~
     -   ~~The CSS looks great in normal mode. But doesn't stand out much in night mode. Colors need tweaking.~~
+
 -   ~~Better box placement~~
     -   ~~The box sometimes doesn't read well with text. Sometimes blocking what the link is referencing. Could use dynamic placement.~~
 
