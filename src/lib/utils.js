@@ -7,8 +7,6 @@ function darkModeEnabled() {
       .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length > 0
   ) {
     return true;
-  } else {
-    return false;
   }
 }
 
@@ -23,7 +21,7 @@ function darkModeEnabled() {
  * @example"text/html; charset=ISO-8859-1" // returns "ISO-8859-1"
  */
 function getCharset(headers) {
-  let charset = headers
+  const charset = headers
     .get("Content-Type")
     .split(";")
     .filter(header => header.includes("charset"))[0];
@@ -45,7 +43,7 @@ function getCharset(headers) {
  * @param {String} charset A charset string e.g: "ISO-8859-1"
  */
 function decodeBuffer(buffer, charset) {
-  let decoder = new TextDecoder(charset);
+  const decoder = new TextDecoder(charset);
   return decoder.decode(buffer);
 }
 
