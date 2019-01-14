@@ -10,12 +10,18 @@ function darkModeEnabled() {
   return false;
 }
 
-function decodeBuffer(buffer) {
-  // From https://schneide.blog/2018/08/08/decoding-non-utf8-server-responses-using-the-fetch-api/
-  console.log("decoding");
-  let decoder = new TextDecoder("iso-8859-1");
-  let text = decoder.decode(buffer);
-  return text;
+function getCharacterEncoding(headers) {
+  let charset = headers
+    .get("Content-Type")
+    .split(";")
+    .filter(header => header.includes("charset"))[0];
+  return charset ? charset.split("=")[1] : "iso-8859-1";
 }
 
-export { decodeBuffer, darkModeEnabled };
+function decodeBuffer(buffer, encoding) {
+  // From https://schneide.blog/2018/08/08/decoding-non-utf8-server-responses-using-the-fetch-api/
+  let decoder = new TextDecoder(encoding);
+  return decoder.decode(buffer);
+}
+
+export { decodeBuffer, darkModeEnabled, getCharacterEncoding };

@@ -1,5 +1,5 @@
 import Constants from "./constants";
-import { decodeBuffer } from "./utils";
+import { decodeBuffer, getCharacterEncoding } from "./utils";
 
 class Trope {
   constructor(url, title, laconic) {
@@ -52,8 +52,11 @@ async function fetchQuerySelector(url, querySelector, property) {
       response = await fetch(url);
       cache.put(url, response.clone());
     } else response = cachedResponse;
-    let buffer = response.arrayBuffer();
-    return decodeBuffer(await buffer);
+
+    return decodeBuffer(
+      await response.arrayBuffer(),
+      getCharacterEncoding(response.headers)
+    );
   };
 
   // Find the selected query selector and property, else return not found message
