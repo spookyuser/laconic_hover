@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "common-tags": "^1.8.0",
-    "innerself": "^0.1.1",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "remove-files-webpack-plugin": "^1.4.0",
