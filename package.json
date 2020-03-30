@@ -3,7 +3,7 @@
   "scripts": {
     "build:dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
-    "start:firefox": "web-ext run --source-dir ./distribution/",
+    "start:firefox": "web-ext run --source-dir ./distribution/ --browser-console --start-url https://tvtropes.org/",
     "update-version": "VERSION=$(find-versions $(git-latest-semver-tag)); echo $VERSION; dot-json distribution/manifest.json version $VERSION",
     "save-url": "echo https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_COMMIT > distribution/SOURCE_URL",
     "lint": "xo",
