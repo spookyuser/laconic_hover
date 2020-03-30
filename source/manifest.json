@@ -16,7 +16,7 @@
     {
       "run_at": "document_idle",
       "matches": ["*://tvtropes.org/*"],
-      "js": ["laconic-hover.js"]
+      "js": ["content-script.js"]
     }
   ],
   "permissions": ["*://tvtropes.org/*"],

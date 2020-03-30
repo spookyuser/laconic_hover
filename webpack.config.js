@@ -1,4 +1,3 @@
-"use strict";
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
@@ -7,7 +6,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   devtool: "sourcemap",
   entry: {
-    "laconic-hover": "./source/laconic-hover.js"
+    "content-script": "./source/content-script.js"
   },
   output: {
     path: path.join(__dirname, "distribution"),
