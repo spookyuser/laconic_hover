@@ -14,6 +14,7 @@
     "release": "run-s build update-version save-url release:*"
   },
   "dependencies": {
+    "common-tags": "^1.8.0",
     "innerself": "^0.1.1",
     "tippy.js": "^3.4.1"
   },
