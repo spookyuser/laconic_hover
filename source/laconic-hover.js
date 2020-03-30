@@ -1,5 +1,5 @@
 import tippy from "tippy.js";
-import { hoverTemplate } from "./lib/templates";
+import { hoverTemplate } from "./templates/hover-template";
 import { Trope } from "./lib/objects";
 import { darkModeEnabled } from "./lib/utils";
 import Constants from "./lib/constants";

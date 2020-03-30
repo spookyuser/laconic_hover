@@ -1,5 +1,5 @@
 import html from "innerself";
-import { darkModeEnabled } from "./utils";
+import { darkModeEnabled } from "../lib/utils";
 
 /** A small function that generates the custom HTML tippy will show when hovering on a trope
  *

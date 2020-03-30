@@ -1,5 +1,5 @@
 import Constants from "./constants";
-import { fetchElement } from "./tvtropes-api";
+import { fetchElement } from "./api";
 
 /** Class representing a Trope on tvtropes */
 export class Trope {

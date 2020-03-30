@@ -51,3 +51,4 @@ jspm_packages
 /distribution
 /assets/
 /.vscode
+jsconfig.json

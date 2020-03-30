@@ -7,7 +7,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 module.exports = {
   devtool: "sourcemap",
   entry: {
-    "laconic-hover": "./src/laconic-hover.js"
+    "laconic-hover": "./source/laconic-hover.js"
   },
   output: {
     path: path.join(__dirname, "distribution"),
@@ -30,7 +30,7 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: "**/*",
-        context: "src",
+        context: "source",
         ignore: "*.js"
       }
     ]),
