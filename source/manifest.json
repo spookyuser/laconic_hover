@@ -16,7 +16,8 @@
     {
       "run_at": "document_idle",
       "matches": ["*://tvtropes.org/*"],
-      "js": ["content-script.js"]
+      "js": ["content-script.js"],
+      "css": ["content-script.css"]
     }
   ],
   "permissions": ["*://tvtropes.org/*"],

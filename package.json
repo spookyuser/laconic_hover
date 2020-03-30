@@ -16,13 +16,14 @@
   "dependencies": {
     "common-tags": "^1.8.0",
     "innerself": "^0.1.1",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "remove-files-webpack-plugin": "^1.4.0",
+    "size-plugin": "^2.0.1",
+    "terser-webpack-plugin": "^2.3.5",
     "tippy.js": "^3.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "@wext/shipit": "git+https://github.com/spookyUnknownUser/wext-shipit.git",
-    "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
@@ -31,23 +32,9 @@
     "git-latest-semver-tag": "^1.0.2",
     "npm-run-all": "^4.1.3",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^1.3.0",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "xo": "^0.23.0"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "chrome": "55",
-            "firefox": "55"
-          }
-        }
-      ]
-    ]
   },
   "xo": {
     "env": [

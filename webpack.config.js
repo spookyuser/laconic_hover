@@ -1,12 +1,15 @@
-const path = require("path");
+const path = require("path"); // eslint-disable-line import/no-extraneous-dependencies
+const SizePlugin = require("size-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const RemovePlugin = require("remove-files-webpack-plugin");
 
-module.exports = {
-  devtool: "sourcemap",
+const config = {
+  stats: "errors-only",
   entry: {
-    "content-script": "./source/content-script.js"
+    "content-script": "./source/content-script"
   },
   output: {
     path: path.join(__dirname, "distribution"),
@@ -14,36 +17,33 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader"
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      }
+      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, "css-loader"] }
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({ filename: "content-script.css" }),
+    new SizePlugin(),
+    new RemovePlugin({
+      /**
+       * Before compilation permanently removes
+       * entire `./dist` folder.
+       */
+      before: {
+        include: ["./distribution"]
+      }
+    }),
     new CopyWebpackPlugin([
       {
         from: "**/*",
         context: "source",
-        ignore: "*.js"
+        ignore: ["*.js", "*.css"]
       }
-    ]),
-    new CleanWebpackPlugin(["distribution"])
+    ])
   ],
   optimization: {
-    // From https://github.com/sindresorhus/refined-github/blob/65fd58a1f1505ff348e3a9111ccda1236c3b563f/webpack.config.js
-    // Without this, function names will be garbled and enableFeature won't work
-    concatenateModules: true,
-
-    // Automatically enabled on prod; keeps it somewhat readable for AMO reviewers
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
+      new TerserPlugin({
+        terserOptions: {
           mangle: false,
           compress: false,
           output: {
@@ -54,4 +54,18 @@ module.exports = {
       })
     ]
   }
+};
+
+// Mode specific settings
+// From: https://webpack.js.org/configuration/mode/
+module.exports = (env, argv) => {
+  if (argv.mode === "development") {
+    config.devtool = "source-map";
+  }
+
+  if (argv.mode === "production") {
+    config.plugins.push(new OptimizeCSSAssetsPlugin());
+  }
+
+  return config;
 };
