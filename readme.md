@@ -1,4 +1,9 @@
-# <img src="https://cdn.rawgit.com/spookyUnknownUser/6bfc0fb6d49d9c0a20f28038fafebacf/raw/eb7bc8649b0fa458291d675bcef2c6261bcaf348/hover.svg" width="55"> Laconic Hover
+# <img src="media/icon.svg" width="45" align="left"> Laconic Hover
+
+[link-cws]: https://chrome.google.com/webstore/detail/laconic-hover/ignndocldlheghlflchdbokagecncgmm "Version published on Chrome Web Store"
+
+[link-amo]: https://addons.mozilla.org/en-US/firefox/addon/laconic-hover/ "Version published on Mozilla Add-ons"
+
 
 > Shows laconic text when hovering on a trope link... that's it.
 
@@ -81,7 +86,3 @@ I would welcome anything anyone has to offer if you have an idea for a pull requ
 ## Third Party Licenses
 
 -   [lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
-
-[link-cws]: https://chrome.google.com/webstore/detail/laconic-hover/ignndocldlheghlflchdbokagecncgmm "Version published on Chrome Web Store"
-
-[link-amo]: https://addons.mozilla.org/en-US/firefox/addon/laconic-hover/ "Version published on Mozilla Add-ons"
