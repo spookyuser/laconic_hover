@@ -23,7 +23,7 @@ async function fetchElement(url, element) {
     const cachedResponse = await cache.match(url);
     if (typeof cachedResponse === "undefined") {
       response = await fetch(url);
-      cache.put(url, response.clone());
+      cache.add(url, response.clone());
     } else {
       response = cachedResponse;
     }
