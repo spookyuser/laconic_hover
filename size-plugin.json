@@ -1,1 +1,1 @@
-[{"timestamp":1585591196546,"files":[{"filename":"content-script.css","previous":0,"size":1771,"diff":1771},{"filename":"content-script.js","previous":0,"size":23914,"diff":23914}]}]
+[{"timestamp":1585591986429,"files":[{"filename":"content-script.css","previous":1771,"size":563,"diff":-1208},{"filename":"content-script.js","previous":23914,"size":26266,"diff":2352}]},{"timestamp":1585591196546,"files":[{"filename":"content-script.css","previous":0,"size":1771,"diff":1771},{"filename":"content-script.js","previous":0,"size":23914,"diff":23914}]}]

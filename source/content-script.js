@@ -4,7 +4,6 @@ import { Trope } from "./lib/objects";
 import { darkModeEnabled } from "./lib/utils";
 import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
-import "tippy.js/dist/themes/light.css";
 
 tippy(Constants.HOVER_SELECTOR, {
   content: Constants.INITIAL_CONTENT,
