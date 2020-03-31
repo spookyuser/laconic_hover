@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "common-tags": "^1.8.0",
-    "tippy.js": "^6.1.0"
+    "tippy.js": "^5.2.1"
   },
   "devDependencies": {
     "size-plugin": "^2.0.1",

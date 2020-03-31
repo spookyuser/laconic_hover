@@ -4,12 +4,14 @@ import { Trope } from "./lib/objects";
 import { darkModeEnabled } from "./lib/utils";
 import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
+import "tippy.js/animations/perspective.css";
 
 tippy(Constants.HOVER_SELECTOR, {
   content: Constants.INITIAL_CONTENT,
   async onShow(tip) {
     tip.reference.title = ""; // Disables built in browser tooltip floating on top of tippy
-    tip.set({
+    tip.setProps({
       theme: darkModeEnabled() ? Constants.DARK_THEME : Constants.LIGHT_THEME
     });
 
@@ -27,7 +29,7 @@ tippy(Constants.HOVER_SELECTOR, {
     tip.setContent(Constants.INITIAL_CONTENT);
   },
   placement: "top-start",
-  performance: true,
+  ignoreAttributes: true,
   animation: "perspective",
   delay: 100
 });
