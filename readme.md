@@ -1,40 +1,28 @@
 # <img src="media/icon.svg" width="45" align="left"> Laconic Hover
 
 [link-cws]: https://chrome.google.com/webstore/detail/laconic-hover/ignndocldlheghlflchdbokagecncgmm "Version published on Chrome Web Store"
-
 [link-amo]: https://addons.mozilla.org/en-US/firefox/addon/laconic-hover/ "Version published on Mozilla Add-ons"
 
+> A browser extension which shows Laconic text when hovering on a TV Tropes link.
 
-> Shows laconic text when hovering on a trope link... that's it.
-
-tvtropes is great but its even better when you have the power of a million tropes in the palm of your hand.
-
-<p>
-
-  [![Build](https://travis-ci.com/spookyUnknownUser/laconic_hover.svg?token=PJHXpbDxewtgA5uyyPPy&branch=master)](https://travis-ci.com/spookyUnknownUser/laconic_hover)
-  [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style)](https://github.com/prettier/prettier)
-  [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-  [![Dependencies license](https://david-dm.org/spookyUnknownUser/laconic_hover.svg)](https://david-dm.org/spookyUnknownUser/laconic_hover)
-  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e28d68962dd9405cb80f3490d74eaad7)](https://www.codacy.com/app/spookyUnknownUser/laconic_hover?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=spookyUnknownUser/laconic_hover&amp;utm_campaign=Badge_Grade)
-
-</p>
+TV Tropes is great but its even better when you have the power of a million tropes in the palm of your hand.
 
 ## Install
 
--   [**Chrome** extension][link-cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/ignndocldlheghlflchdbokagecncgmm.svg?label=%20">][link-cws]
--   [**Firefox** add-on][link-amo] [<img valign="middle" src="https://img.shields.io/amo/v/laconic-hover.svg?label=%20">][link-amo]
+- [**Chrome** extension][link-cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/ignndocldlheghlflchdbokagecncgmm.svg?label=%20">][link-cws]
+- [**Firefox** add-on][link-amo] [<img valign="middle" src="https://img.shields.io/amo/v/laconic-hover.svg?label=%20">][link-amo]
 
 <p align = "left">
     <img width="750" src="https://user-images.githubusercontent.com/16196262/48306356-c8d67b80-e53f-11e8-94fb-6564224b73a3.gif">
 </p>
 
-## How
+## How?
 
-This used to be close to a user script but its become more of a fully fledged extension. At its core we make a request to the laconic page whenever a link is hovered over. This now even uses the native APIs of the browser so we don't need jQuery/Ajax. We can do this all with pure.js fetch and query selectors.
+This used to be a Userscript but its become more of a fully fledged extension. The core of this extension works by fetching "laconic pages" in the TV Tropes wiki. These are ["subpages ... for brief statements describing the core idea of the page they are attached to."](https://tvtropes.org/pmwiki/pmwiki.php/Main/LaconicWiki)  Thankfully many pages have them and they're very helpful for navigating if you don't know every Trope off by heart. This extension attempts to make a request to the laconic page of any Trope link you happen to be hovering on. If a Laconic page exists, the html is displayed, otherwise an error message is displayed.
 
-This also uses [tippy.js](https://atomiks.github.io/tippyjs/) which is super neat and replaces the old [qtip2](http://qtip2.com/) library, which was great while it lasted.
+This extension uses [tippy.js](https://atomiks.github.io/tippyjs/) for controlling and displaying hovering elements, which is super neat!
 
-## Hasn't this been done before
+## Hasn't this been done before?
 
 Yes, I think so:
 \[[1](http://userscripts-mirror.org/scripts/show/130346)]
@@ -51,38 +39,31 @@ cd laconic_hover
 npm install
 ```
 
-If you want to play around with the project around
+If you want to play around with the project do the following:
 
 `npm run build:dev`
 
 This will make webpack watch for any changes and output the unpacked extension to `/distribution/`.  
-Now you're ready to start editing the project. You can go straight into `/src/` and mess around if you want.  
+Now you're ready to start editing the project. You can go straight into `/source/` and mess around if you want.
+
 To see your changes I recommend using firefox because it automatically reloads your changes and can be launched from the project by running:
 
 `npm run start:firefox`
 
 To build for production just run `npm run build`
 
-Meta note: The structure of this project in large part comes from [github-refined](https://github.com/sindresorhus/refined-github/tree/65fd58a1f1505ff348e3a9111ccda1236c3b563f)  
-If you're looking for the right way to structure a webextension, then this is probably the best you're going to find at the moment. Thanks [sindresorhus](https://github.com/sindresorhus/refined) and everyone that contributed to github-refined!!
+For more information see [contributing.md](contributing.md).
 
-## Forward
+## Roadmap
 
--   ~~Fixing the title~~
-    -   ~~Currently using a weird camelCase method to get the title from the url. Not very accurate.~~
-
--   ~~Better CSS~~
-    -   ~~The CSS looks great in normal mode. But doesn't stand out much in night mode. Colors need tweaking.~~
-
--   ~~Better box placement~~
-    -   ~~The box sometimes doesn't read well with text. Sometimes blocking what the link is referencing. Could use dynamic placement.~~
-
-> you tell me 🌯
+I don't have any feature ideas at the moment, so please [click here](https://github.com/spookyUnknownUser/laconic_hover/issues/new) to submit any ideas you might have.
 
 ## Contributing
 
-I would welcome anything anyone has to offer if you have an idea for a pull request go right ahead and make it. Suggestions are great too! [Click here](https://github.com/spookyUnknownUser/laconic_hover/issues/new) to submit them.
+Please see [contributing.md](contributing.md). TL;DR: All are very welcome.
 
-## Third Party Licenses
+## Acknowledgements
 
--   [lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
+- [lamp by Sandra Mills from the Noun Project](https://thenounproject.com/search/?q=lamp+shade&i=121407)
+
+I would also like to especially thank [@sindresorhus](https://github.com/sindresorhus) and anyone else involved in [refined-github](https://github.com/sindresorhus/refined-github/) for figuring out how to structure a modern web extension and making it easy to copy that structure :)

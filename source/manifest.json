@@ -1,8 +1,8 @@
 {
-  "name": "Laconic Hover",
+  "name": "Laconic Hover for TV Tropes",
   "version": "0.0.0",
-  "description": "Shows laconic text when hovering on tvtropes links... That's it.",
-  "homepage_url": "https://github.com/spookyUnknownUser/Laconic_Hover",
+  "description": "Shows Laconic text when hovering on a TV Tropes link.",
+  "homepage_url": "https://github.com/spookyuser/Laconic_Hover",
   "manifest_version": 2,
   "author": "Spooky User",
   "minimum_chrome_version": "55",
