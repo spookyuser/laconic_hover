@@ -41,7 +41,7 @@ npm install
 
 If you want to play around with the project do the following:
 
-`npm run build:dev`
+`npm run watch`
 
 This will make webpack watch for any changes and output the unpacked extension to `/distribution/`.  
 Now you're ready to start editing the project. You can go straight into `/source/` and mess around if you want.
