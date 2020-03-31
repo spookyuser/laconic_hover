@@ -14,7 +14,7 @@ export default {
   },
 
   // Strings
-  INITIAL_CONTENT: "Loading...",
+  INITIAL_CONTENT: "Loading…",
   NO_LACONIC: "No laconic page :(",
   NO_LACONIC_ERROR: "Inexact title",
 

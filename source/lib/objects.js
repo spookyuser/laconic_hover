@@ -14,6 +14,7 @@ export class Trope {
     this._title = title;
     this._laconic = laconic;
   }
+
   /** Fetches the trope title from its url
    *
    * @returns {string} The original title of the trope from the url
@@ -21,6 +22,7 @@ export class Trope {
   get title() {
     return fetchElement(this.url, Constants.TITLE);
   }
+
   /** Fetches the laconic description of a trope from its laconicUrl
    *
    * @returns {string} The laconic description of the trope
@@ -28,6 +30,7 @@ export class Trope {
   get laconic() {
     return fetchElement(this.laconicUrl(), Constants.LACONIC);
   }
+
   /** Generates a url for the laconic page of a trope from the main page
    *
    * @returns {string} A url to the trope's expected laconic page
@@ -36,6 +39,7 @@ export class Trope {
     // Regex to replace normal link with link directly to laconic page
     return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
   }
+
   /** Combines the title and laconic of a trope into a single object
    *
    * This also initiates the calls to laconic() and title() which in turn
