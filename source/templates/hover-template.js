@@ -22,7 +22,7 @@ export function hoverTemplate(trope) {
       >
         ${trope.title}
       </p>
-      <hr style="opacity: 0.1; " />
+      <hr style="opacity: 0.1; margin-block-start: 0.5em; margin-block-end: 0.5em" />
       <p style="font-size: 1rem;">${trope.laconic}</p>
     </div>
   `;
