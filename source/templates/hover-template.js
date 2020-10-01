@@ -1,5 +1,6 @@
 import { html } from "common-tags";
 import { darkModeEnabled } from "../lib/utils";
+import "./hover-template.css";
 
 /** A small function that generates the custom HTML tippy will show when hovering on a trope
  *
@@ -12,18 +13,12 @@ import { darkModeEnabled } from "../lib/utils";
  */
 export function hoverTemplate(trope) {
   return html`
-    <div
-      style="max-width:300px; text-align: left; font-family: 'Nunito', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;"
-    >
-      <p
-        style="font-weight:bold; color: ${darkModeEnabled()
-          ? "#71e1bc"
-          : "#0849ab"}; font-size: 1.2rem"
-      >
+    <div class="laconic-hover">
+      <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">
         ${trope.title}
       </p>
-      <hr style="opacity: 0.1; margin-block-start: 0.5em; margin-block-end: 0.5em" />
-      <p style="font-size: 1rem;">${trope.laconic}</p>
+      <hr />
+      <p>${trope.laconic}</p>
     </div>
   `;
 }
