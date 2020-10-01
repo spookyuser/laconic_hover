@@ -43,6 +43,7 @@ tippy(Constants.HOVER_SELECTOR, {
         placement: "top",
       });
     }
+
     const trope = await new Trope(tip.reference.href).toString();
     try {
       if (tip.state.isVisible) {

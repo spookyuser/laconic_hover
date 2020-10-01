@@ -52,7 +52,7 @@ export class Trope {
     const { title, laconic } = { title: this.title, laconic: this.laconic };
     return {
       title: await title,
-      laconic: await laconic
+      laconic: await laconic,
     };
   }
 }

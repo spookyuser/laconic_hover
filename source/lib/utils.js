@@ -4,7 +4,7 @@ function darkModeEnabled() {
   if (
     document.cookie
       .split(";")
-      .filter(item => item.includes(Constants.DARK_MODE_COOKIE)).length > 0
+      .filter((item) => item.includes(Constants.DARK_MODE_COOKIE)).length > 0
   ) {
     return true;
   }
@@ -24,7 +24,7 @@ function getCharset(headers) {
   const charset = headers
     .get("Content-Type")
     .split(";")
-    .filter(header => header.includes("charset"))[0];
+    .find((header) => header.includes("charset"));
   return charset ? charset.split("=")[1] : Constants.DEFAULT_CHARACTER_ENCODING;
 }
 

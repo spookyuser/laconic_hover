@@ -1,4 +1,4 @@
-export default {
+const constants = {
   // Query Selectors
   HOVER_SELECTOR: ".twikilink",
   DARK_MODE_COOKIE: "night-vision=true",
@@ -6,11 +6,11 @@ export default {
   // Elements
   TITLE: {
     querySelector: ".entry-title",
-    property: "textContent"
+    property: "textContent",
   },
   LACONIC: {
     querySelector: "#main-article > p",
-    property: "textContent"
+    property: "textContent",
   },
 
   // Strings
@@ -22,5 +22,7 @@ export default {
   DARK_THEME: "dark",
   LIGHT_THEME: "light",
   CACHE_NAME: "laconic-hover-cache",
-  DEFAULT_CHARACTER_ENCODING: "iso-8859-1"
+  DEFAULT_CHARACTER_ENCODING: "iso-8859-1",
 };
+
+export default constants;

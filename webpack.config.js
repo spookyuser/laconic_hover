@@ -9,16 +9,16 @@ const RemovePlugin = require("remove-files-webpack-plugin");
 const config = {
   stats: "errors-only",
   entry: {
-    "content-script": "./source/content-script"
+    "content-script": "./source/content-script",
   },
   output: {
     path: path.join(__dirname, "distribution"),
-    filename: "[name].js"
+    filename: "[name].js",
   },
   module: {
     rules: [
-      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, "css-loader"] }
-    ]
+      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, "css-loader"] },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "content-script.css" }),
@@ -29,16 +29,16 @@ const config = {
        * entire `./dist` folder.
        */
       before: {
-        include: ["./distribution"]
-      }
+        include: ["./distribution"],
+      },
     }),
     new CopyWebpackPlugin([
       {
         from: "**/*",
         context: "source",
-        ignore: ["*.js", "*.css"]
-      }
-    ])
+        ignore: ["*.js", "*.css"],
+      },
+    ]),
   ],
   optimization: {
     minimizer: [
@@ -48,12 +48,12 @@ const config = {
           compress: false,
           output: {
             beautify: true,
-            indent_level: 2 // eslint-disable-line camelcase
-          }
-        }
-      })
-    ]
-  }
+            indent_level: 2, // eslint-disable-line camelcase
+          },
+        },
+      }),
+    ],
+  },
 };
 
 // Mode specific settings
