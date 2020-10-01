@@ -5,29 +5,30 @@
     "lint-fix": "xo --fix",
     "test": "run-s lint:js build",
     "build": "webpack --mode=production",
-    "start:firefox": "cd distribution && ..\\node_modules\\.bin\\web-ext run --browser-console --start-url https://www.goodreads.com/book/show/10569.On_Writing",
+    "start:firefox": "cd distribution && ..\\node_modules\\.bin\\web-ext run --browser-console --start-url https://tvtropes.org/",
     "watch": "webpack --mode=development --watch",
     "version": "dot-json distribution/manifest.json version $VER"
   },
   "dependencies": {
     "common-tags": "^1.8.0",
-    "tippy.js": "^5.2.1"
+    "tippy.js": "^6.2.6"
   },
   "devDependencies": {
-    "size-plugin": "^2.0.1",
-    "remove-files-webpack-plugin": "^1.4.0",
-    "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "mini-css-extract-plugin": "^0.9.0",
-    "terser-webpack-plugin": "^2.3.5",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "dot-json": "^1.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "npm-run-all": "^4.1.5",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "remove-files-webpack-plugin": "^1.4.0",
+    "size-plugin": "^2.0.1",
     "style-loader": "^1.1.3",
+    "terser-webpack-plugin": "^2.3.5",
+    "web-ext": "^5.1.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "xo": "^0.28.1"
+    "xo": "^0.33.1"
   },
   "xo": {
     "prettier": true,

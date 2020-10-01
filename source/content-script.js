@@ -30,6 +30,8 @@ tippy(Constants.HOVER_SELECTOR, {
   },
   placement: "top-start",
   ignoreAttributes: true,
+  allowHTML: true,
+  appendTo: "parent",
   animation: "perspective",
   delay: 100
 });
