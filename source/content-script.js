@@ -12,7 +12,7 @@ tippy(Constants.HOVER_SELECTOR, {
   async onShow(tip) {
     tip.reference.title = ""; // Disables built in browser tooltip floating on top of tippy
     tip.setProps({
-      theme: darkModeEnabled() ? Constants.DARK_THEME : Constants.LIGHT_THEME
+      theme: darkModeEnabled() ? Constants.DARK_THEME : Constants.LIGHT_THEME,
     });
 
     const trope = await new Trope(tip.reference.href).toString();
@@ -33,5 +33,17 @@ tippy(Constants.HOVER_SELECTOR, {
   allowHTML: true,
   appendTo: "parent",
   animation: "perspective",
-  delay: 100
+  delay: 100,
+  popperOptions: {
+
+    modifiers: [
+      {
+        name: "preventOverflow",
+        options: {
+          altAxis: true,
+          tether: false,
+        },
+      },
+    ],
+  },
 });
