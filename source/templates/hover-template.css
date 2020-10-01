@@ -1,8 +1,12 @@
 /** Previously inline CSS from hover-template.js */
 
+.laconic-hover {
+  text-align: left;
+  font-style: normal;
+}
+
 .laconic-hover > div {
   max-width: 300px;
-  text-align: left;
   font-family: "Nunito", "Roboto", "Helvetica Neue", "Helvetica", "Arial",
     "sans-serif";
 }
