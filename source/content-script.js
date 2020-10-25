@@ -6,6 +6,7 @@ import Constants from "./lib/constants";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import "tippy.js/animations/perspective.css";
+import "./content-script.css";
 
 tippy.setDefaultProps({
   placement: "top-start",

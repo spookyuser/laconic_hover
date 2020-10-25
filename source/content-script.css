@@ -1,0 +1,6 @@
+/* General CSS for script */
+
+/* Fixes an error in Chrome where Tippy causes linebreaks because of Chrome stylesheet */
+[data-tippy-root] {
+  display: inline;
+}
