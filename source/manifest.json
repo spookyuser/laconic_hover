@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Shows Laconic text when hovering on a TV Tropes link.",
   "homepage_url": "https://github.com/spookyuser/Laconic_Hover",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "author": "Spooky User",
   "minimum_chrome_version": "68",
   "applications": {
