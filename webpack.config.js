@@ -3,7 +3,7 @@ const SizePlugin = require("size-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const RemovePlugin = require("remove-files-webpack-plugin");
 
 const config = {
@@ -32,13 +32,17 @@ const config = {
         include: ["./distribution"],
       },
     }),
-    new CopyWebpackPlugin([
-      {
-        from: "**/*",
-        context: "source",
-        ignore: ["*.js", "*.css"],
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          context: "source",
+          from: "**/*",
+          globOptions: {
+            ignore: ["*.js", "*.css"],
+          },
+        },
+      ],
+    }),
   ],
   optimization: {
     minimizer: [
@@ -60,11 +64,11 @@ const config = {
 // From: https://webpack.js.org/configuration/mode/
 module.exports = (env, argv) => {
   if (argv.mode === "development") {
-    config.devtool = "source-map";
+    config.devtool = "#inline-source-map";
   }
 
   if (argv.mode === "production") {
-    config.plugins.push(new OptimizeCSSAssetsPlugin());
+    config.plugins.push(new CssMinimizerPlugin());
   }
 
   return config;
