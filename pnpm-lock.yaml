@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/common-tags': ^1.8.1
   clean-webpack-plugin: ^4.0.0
   common-tags: ^1.8.2
   copy-webpack-plugin: ^11.0.0
@@ -9,7 +10,6 @@ specifiers:
   dot-json: ^1.2.2
   mini-css-extract-plugin: ^2.7.1
   npm-run-all: ^4.1.5
-  optimize-css-assets-webpack-plugin: ^6.0.1
   remove-files-webpack-plugin: ^1.5.0
   size-plugin: ^2.0.0
   style-loader: ^3.3.1
@@ -25,6 +25,7 @@ dependencies:
   tippy.js: 6.3.7
 
 devDependencies:
+  '@types/common-tags': 1.8.1
   clean-webpack-plugin: 4.0.0_webpack@5.75.0
   copy-webpack-plugin: 11.0.0_webpack@5.75.0
   css-loader: 6.7.2_webpack@5.75.0
@@ -32,7 +33,6 @@ devDependencies:
   dot-json: 1.2.2
   mini-css-extract-plugin: 2.7.1_webpack@5.75.0
   npm-run-all: 4.1.5
-  optimize-css-assets-webpack-plugin: 6.0.1_webpack@5.75.0
   remove-files-webpack-plugin: 1.5.0_5mhpyft47fxnqdave7meqiud7i
   size-plugin: 2.0.2_webpack@5.75.0
   style-loader: 3.3.1_webpack@5.75.0
@@ -276,6 +276,10 @@ packages:
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
+    dev: true
+
+  /@types/common-tags/1.8.1:
+    resolution: {integrity: sha512-20R/mDpKSPWdJs5TOpz3e7zqbeCNuMCPhV7Yndk9KU2Rbij2r5W4RzwDPkzC+2lzUqXYu9rFzTktCBnDjHuNQg==}
     dev: true
 
   /@types/eslint-scope/3.7.4:
@@ -3734,13 +3738,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /last-call-webpack-plugin/3.0.0:
-    resolution: {integrity: sha512-7KI2l2GIZa9p2spzPIVZBYyNKkN+e/SQPpnjlTiPhdbDW3F86tdKKELxKpzJ5sgU19wQWsACULZmpTPYHeWO5w==}
-    dependencies:
-      lodash: 4.17.21
-      webpack-sources: 1.4.3
-    dev: true
-
   /latest-version/7.0.0:
     resolution: {integrity: sha512-KvNT4XqAMzdcL6ka6Tl3i2lYeFDgXNCuIX+xNx6ZMVR1dFq+idXd9FLKNMOIx0t9mJ9/HudyX4oZWXZQ0UJHeg==}
     engines: {node: '>=14.16'}
@@ -4384,17 +4381,6 @@ packages:
       define-lazy-prop: 2.0.0
       is-docker: 2.2.1
       is-wsl: 2.2.0
-    dev: true
-
-  /optimize-css-assets-webpack-plugin/6.0.1_webpack@5.75.0:
-    resolution: {integrity: sha512-BshV2UZPfggZLdUfN3zFBbG4sl/DynUI+YCB6fRRDWaqO2OiWN8GPcp4Y0/fEV6B3k9Hzyk3czve3V/8B/SzKQ==}
-    peerDependencies:
-      webpack: ^4.0.0
-    dependencies:
-      cssnano: 5.1.14_postcss@8.4.19
-      last-call-webpack-plugin: 3.0.0
-      postcss: 8.4.19
-      webpack: 5.75.0_webpack-cli@5.0.0
     dev: true
 
   /optionator/0.9.1:
@@ -5665,10 +5651,6 @@ packages:
       atomic-sleep: 1.0.0
     dev: true
 
-  /source-list-map/2.0.1:
-    resolution: {integrity: sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==}
-    dev: true
-
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -6420,13 +6402,6 @@ packages:
     dependencies:
       clone-deep: 4.0.1
       wildcard: 2.0.0
-    dev: true
-
-  /webpack-sources/1.4.3:
-    resolution: {integrity: sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==}
-    dependencies:
-      source-list-map: 2.0.1
-      source-map: 0.6.1
     dev: true
 
   /webpack-sources/3.2.3:

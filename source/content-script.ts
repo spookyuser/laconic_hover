@@ -1,12 +1,17 @@
 import tippy, { followCursor } from "tippy.js";
 import { hoverTemplate } from "./templates/hover-template";
-import { Trope } from "./lib/objects";
-import { darkModeEnabled } from "./lib/utils";
-import Constants from "./lib/constants";
+import { darkModeEnabled } from "./lib/darkmode";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import "tippy.js/animations/perspective.css";
 import "./content-script.css";
+import {
+  DARK_THEME,
+  HOVER_SELECTOR,
+  INITIAL_CONTENT,
+  LIGHT_THEME,
+} from "./config";
+import { Trope } from "./lib/Trope";
 
 tippy.setDefaultProps({
   placement: "top-start",
@@ -15,6 +20,7 @@ tippy.setDefaultProps({
   appendTo: "parent",
   animation: "perspective",
   delay: 100,
+  content: INITIAL_CONTENT,
   plugins: [followCursor],
   popperOptions: {
     modifiers: [
@@ -29,14 +35,13 @@ tippy.setDefaultProps({
   },
 });
 
-tippy(Constants.HOVER_SELECTOR, {
-  content: Constants.INITIAL_CONTENT,
-  async onShow(tip) {
+tippy(HOVER_SELECTOR, {
+  onShow(tip) {
     tip.setProps({
-      theme: darkModeEnabled() ? Constants.DARK_THEME : Constants.LIGHT_THEME,
+      theme: darkModeEnabled() ? DARK_THEME : LIGHT_THEME,
     });
-    tip.reference.title = ""; // Disables built in browser tooltip floating on top of tippy
-    if (tip.reference.firstChild.firstChild instanceof HTMLImageElement) {
+    tip.reference.setAttribute("title", ""); // Disables built in browser tooltip floating on top of tippy
+    if (tip.reference.firstChild!.firstChild instanceof HTMLImageElement) {
       // Only follow cursor on images
       tip.setProps({
         followCursor: true,
@@ -44,8 +49,7 @@ tippy(Constants.HOVER_SELECTOR, {
         placement: "top",
       });
     }
-
-    const trope = await new Trope(tip.reference.href).toString();
+    const trope = new Trope(tip.reference.getAttribute("href")!);
     try {
       if (tip.state.isVisible) {
         tip.setContent(hoverTemplate(trope));
@@ -55,6 +59,6 @@ tippy(Constants.HOVER_SELECTOR, {
     }
   },
   onHidden(tip) {
-    tip.setContent(Constants.INITIAL_CONTENT);
+    tip.setContent(INITIAL_CONTENT);
   },
 });
