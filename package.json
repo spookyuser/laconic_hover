@@ -1,9 +1,11 @@
 {
   "private": true,
+  "version": "1.5.0",
   "scripts": {
     "dev": "parcel watch source/manifest.json --host localhost --config @parcel/config-webextension",
-    "build": "parcel build source/manifest.json --config @parcel/config-webextension",
-    "version": "dot-json distribution/manifest.json version $VER"
+    "build": "parcel build source/manifest.json --config @parcel/config-webextension --no-source-maps",
+    "save:version": "dot-json dist/manifest.json version $npm_package_version",
+    "package": "npm run build && npm run save:version && zip -r dist/extension.zip dist/* -x dist/extension.zip"
   },
   "dependencies": {
     "common-tags": "^1.8.2",

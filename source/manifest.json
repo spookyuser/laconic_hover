@@ -5,7 +5,6 @@
   "homepage_url": "https://github.com/spookyuser/Laconic_Hover",
   "manifest_version": 3,
   "author": "Spooky User",
-  "minimum_chrome_version": "68",
   "applications": {
     "gecko": {
       "id": "{c7a8881a-5be2-4f11-871b-9d5ea43c692c}",
