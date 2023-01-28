@@ -25,6 +25,9 @@
   "host_permissions": [
     "*://tvtropes.org/*"
   ],
+  "permissions": [
+    "storage"
+  ],
   "icons": {
     "128": "assets/icon.png"
   }
