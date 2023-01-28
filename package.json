@@ -1,49 +1,22 @@
 {
   "private": true,
+  "version": "1.5.0",
   "scripts": {
-    "lint:js": "xo",
-    "lint-fix": "xo --fix",
-    "test": "run-s lint:js build",
-    "build": "webpack --mode=production",
-    "start:firefox": "cd distribution && ..\\node_modules\\.bin\\web-ext run --browser-console --start-url https://tvtropes.org/",
-    "watch": "webpack --mode=development --watch",
-    "version": "dot-json distribution/manifest.json version $VER"
+    "dev": "parcel watch source/manifest.json --host localhost --config @parcel/config-webextension",
+    "build": "parcel build source/manifest.json --config @parcel/config-webextension --no-source-maps",
+    "save:version": "dot-json dist/manifest.json version $npm_package_version",
+    "package": "npm run build && npm run save:version && zip -r dist/extension.zip dist/* -x dist/extension.zip"
   },
   "dependencies": {
-    "common-tags": "^1.8.0",
-    "tippy.js": "^6.2.6"
+    "common-tags": "^1.8.2",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.1.2",
-    "css-loader": "^3.6.0",
-    "dot-json": "^1.2.1",
-    "mini-css-extract-plugin": "^0.9.0",
-    "npm-run-all": "^4.1.5",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
-    "remove-files-webpack-plugin": "^1.4.4",
-    "size-plugin": "^2.0.1",
-    "style-loader": "^1.2.1",
-    "terser-webpack-plugin": "^2.3.8",
-    "web-ext": "^5.1.0",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
-    "xo": "^0.33.1"
-  },
-  "xo": {
-    "prettier": true,
-    "envs": [
-      "browser"
-    ],
-    "ignores": [
-      "distribution"
-    ],
-    "globals": [
-      "browser"
-    ],
-    "rules": {
-      "import/no-unassigned-import": 0
-    }
+    "@types/common-tags": "^1.8.1",
+    "@parcel/config-webextension": "^2.8.3",
+    "@parcel/core": "^2.8.3",
+    "dot-json": "^1.2.2",
+    "typescript": "^4.9.4"
   },
   "prettier": {
     "singleQuote": false,

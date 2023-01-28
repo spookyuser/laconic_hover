@@ -36,23 +36,12 @@ See the npm scripts for more information. To get started make sure [Node.js®](h
 ```shell
 git clone https://github.com/spookyUnknownUser/laconic_hover
 cd laconic_hover
-npm install
+pnpm install
 ```
 
 If you want to play around with the project do the following:
 
-`npm run watch`
-
-This will make webpack watch for any changes and output the unpacked extension to `/distribution/`.  
-Now you're ready to start editing the project. You can go straight into `/source/` and mess around if you want.
-
-To see your changes I recommend using firefox because it automatically reloads your changes and can be launched from the project by running:
-
-`npm run start:firefox`
-
-To build for production just run `npm run build`
-
-For more information see [contributing.md](contributing.md).
+`pnpm run dev`
 
 ## Roadmap
 

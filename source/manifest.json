@@ -3,9 +3,8 @@
   "version": "0.0.0",
   "description": "Shows Laconic text when hovering on a TV Tropes link.",
   "homepage_url": "https://github.com/spookyuser/Laconic_Hover",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "author": "Spooky User",
-  "minimum_chrome_version": "68",
   "applications": {
     "gecko": {
       "id": "{c7a8881a-5be2-4f11-871b-9d5ea43c692c}",
@@ -16,11 +15,18 @@
     {
       "run_at": "document_idle",
       "matches": ["*://tvtropes.org/*"],
-      "js": ["content-script.js"],
+      "js": [
+        "content-script.ts"
+      ],
       "css": ["content-script.css"]
     }
   ],
-  "permissions": ["*://tvtropes.org/*"],
+  "host_permissions": [
+    "*://tvtropes.org/*"
+  ],
+  "permissions": [
+    "storage"
+  ],
   "icons": {
     "128": "assets/icon.png"
   }

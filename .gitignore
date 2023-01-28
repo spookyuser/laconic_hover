@@ -53,3 +53,5 @@ jspm_packages
 /.vscode
 jsconfig.json
 size-plugin.json
+.parcel-cache
+dist
