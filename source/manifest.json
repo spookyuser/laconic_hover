@@ -16,11 +16,15 @@
     {
       "run_at": "document_idle",
       "matches": ["*://tvtropes.org/*"],
-      "js": ["content-script.js"],
+      "js": [
+        "content-script.ts"
+      ],
       "css": ["content-script.css"]
     }
   ],
-  "permissions": ["*://tvtropes.org/*"],
+  "host_permissions": [
+    "*://tvtropes.org/*"
+  ],
   "icons": {
     "128": "assets/icon.png"
   }

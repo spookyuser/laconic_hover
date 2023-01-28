@@ -11,26 +11,28 @@ const config = {
   entry: {
     "content-script": "./source/content-script.ts",
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"],
+    extensionAlias: {
+      ".js": [".js", ".ts"],
+      ".cjs": [".cjs", ".cts"],
+      ".mjs": [".mjs", ".mts"],
+    },
+  },
   module: {
     rules: [
       {
-        test: /\.ts?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        test: /\.([cm]?ts|tsx)$/,
+        loader: "ts-loader",
+        include: /node_modules/,
       },
+      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, "css-loader"] },
     ],
   },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
+
   output: {
     path: path.join(__dirname, "distribution"),
     filename: "[name].js",
-  },
-  module: {
-    rules: [
-      { test: /\.css$/i, use: [MiniCssExtractPlugin.loader, "css-loader"] },
-    ],
   },
   plugins: [
     new MiniCssExtractPlugin({ filename: "content-script.css" }),
@@ -76,7 +78,7 @@ const config = {
 // From: https://webpack.js.org/configuration/mode/
 module.exports = (env, argv) => {
   if (argv.mode === "development") {
-    config.devtool = "#inline-source-map";
+    config.devtool = "inline-source-map";
   }
 
   if (argv.mode === "production") {

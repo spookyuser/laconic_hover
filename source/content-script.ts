@@ -49,14 +49,19 @@ tippy(HOVER_SELECTOR, {
         placement: "top",
       });
     }
+    console.log("ON show");
     const trope = new Trope(tip.reference.getAttribute("href")!);
-    try {
-      if (tip.state.isVisible) {
-        tip.setContent(hoverTemplate(trope));
+    trope.getTrope().then((trope) => {
+      console.log(trope);
+      try {
+        if (tip.state.isVisible) {
+          tip.setContent(hoverTemplate(trope));
+        }
+      } catch (error) {
+        tip.setContent(`Fetch failed. ${error}`);
       }
-    } catch (error) {
-      tip.setContent(`Fetch failed. ${error}`);
-    }
+    });
+   
   },
   onHidden(tip) {
     tip.setContent(INITIAL_CONTENT);
