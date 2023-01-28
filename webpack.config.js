@@ -9,7 +9,19 @@ const RemovePlugin = require("remove-files-webpack-plugin");
 const config = {
   stats: "errors-only",
   entry: {
-    "content-script": "./source/content-script",
+    "content-script": "./source/content-script.ts",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
   },
   output: {
     path: path.join(__dirname, "distribution"),
@@ -38,7 +50,7 @@ const config = {
           context: "source",
           from: "**/*",
           globOptions: {
-            ignore: ["*.js", "*.css"],
+            ignore: ["*.ts", "*.css"],
           },
         },
       ],
