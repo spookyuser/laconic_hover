@@ -10,7 +10,7 @@ export class Trope {
     this.url = url;
   }
 
-  async getTrope(): Promise<Trope> {
+  async fetchLaconic(): Promise<Trope> {
     let document = await fetchPage(this.getLaconicUrl());
 
     const titleElement = document.querySelector(".entry-title");

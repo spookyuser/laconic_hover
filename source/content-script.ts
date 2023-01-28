@@ -49,19 +49,17 @@ tippy(HOVER_SELECTOR, {
         placement: "top",
       });
     }
-    console.log("ON show");
-    const trope = new Trope(tip.reference.getAttribute("href")!);
-    trope.getTrope().then((trope) => {
-      console.log(trope);
-      try {
-        if (tip.state.isVisible) {
-          tip.setContent(hoverTemplate(trope));
+    new Trope(tip.reference.getAttribute("href")!)
+      .fetchLaconic()
+      .then((laconic) => {
+        try {
+          if (tip.state.isVisible) {
+            tip.setContent(hoverTemplate(laconic));
+          }
+        } catch (error) {
+          tip.setContent(`Fetch failed. ${error}`);
         }
-      } catch (error) {
-        tip.setContent(`Fetch failed. ${error}`);
-      }
-    });
-   
+      });
   },
   onHidden(tip) {
     tip.setContent(INITIAL_CONTENT);
