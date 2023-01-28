@@ -30,3 +30,4 @@ jobs:
         with:
           keys: ${{ secrets.BPP_KEYS }}
           artifact: dist/extension.zip
+          verbose: true
