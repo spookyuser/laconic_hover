@@ -28,5 +28,5 @@ jobs:
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
         with:
-          keys: ${{ secrets.SUBMIT_KEYS }}
+          keys: ${{ secrets.BPP_KEYS }}
           artifact: dist/extension.zip
