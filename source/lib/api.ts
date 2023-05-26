@@ -50,6 +50,13 @@ function decodeBuffer(
   buffer: BufferSource | undefined,
   charset: string | undefined
 ): string {
-  const decoder = new TextDecoder(charset);
+  const tryDecode = () => {
+    try {
+      return new TextDecoder(charset);
+    } catch (error) {
+      return new TextDecoder('UTF-8');
+    }
+  }
+  const decoder = tryDecode();
   return decoder.decode(buffer);
 }
