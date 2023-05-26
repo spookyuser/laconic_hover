@@ -1,6 +1,6 @@
 {
   "name": "Laconic Hover for TV Tropes",
-  "version": "0.0.0",
+  "version": "1.5.0",
   "description": "Shows Laconic text when hovering on a TV Tropes link.",
   "homepage_url": "https://github.com/spookyuser/Laconic_Hover",
   "manifest_version": 3,
@@ -14,11 +14,15 @@
   "content_scripts": [
     {
       "run_at": "document_idle",
-      "matches": ["*://tvtropes.org/*"],
+      "matches": [
+        "*://tvtropes.org/*"
+      ],
       "js": [
         "content-script.ts"
       ],
-      "css": ["content-script.css"]
+      "css": [
+        "content-script.css"
+      ]
     }
   ],
   "host_permissions": [
