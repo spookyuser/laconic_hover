@@ -9,19 +9,33 @@ import { DEFAULT_CHARACTER_ENCODING } from "../config";
  * @see decodeBuffer
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Cache
  */
-export async function fetchPage(url: string): Promise<Document> {
-  // Fetch the page AND follow redirects
-  const response = await fetch(url, { redirect: "follow" });
-  if (response.ok) {
-    const decoded = decodeBuffer(
-      await response.arrayBuffer(),
-      getCharset(response.headers)
-    );
-    const parser = new DOMParser();
-    return parser.parseFromString(decoded, "text/html");
-  } else {
+export async function fetchPage(url: string, fromHandle404: boolean = false) {
+  const response = await fetch(getLaconicUrl(url), { redirect: "follow" });
+
+  if (response.status === 404 && !fromHandle404) {
+    return handle404(url);
+  }
+
+  if (!response.ok) {
     throw new Error("No laconic page found");
   }
+
+  const decoded = decodeBuffer(
+    await response.arrayBuffer(),
+    getCharset(response.headers)
+  );
+  const parser = new DOMParser();
+  return parser.parseFromString(decoded, "text/html");
+}
+
+export async function handle404(url: string): Promise<Document> {
+  const mainPageResponse = await fetch(url, { redirect: "follow" });
+  const newUrl = mainPageResponse.url;
+  if (mainPageResponse.url === url) {
+    throw new Error("No laconic page found");
+  }
+  const fetchedPage = await fetchPage(getLaconicUrl(newUrl), true);
+  return fetchedPage;
 }
 
 /** Given a response.headers object find the charset contained in its content type
@@ -54,9 +68,14 @@ function decodeBuffer(
     try {
       return new TextDecoder(charset);
     } catch (error) {
-      return new TextDecoder('UTF-8');
+      return new TextDecoder("UTF-8");
     }
-  }
+  };
   const decoder = tryDecode();
   return decoder.decode(buffer);
+}
+
+// Regex to replace normal link with link directly to laconic page
+function getLaconicUrl(url: string) {
+  return url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
 }

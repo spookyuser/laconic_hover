@@ -1,4 +1,9 @@
 import { fetchPage } from "./api";
+import { Storage } from "@plasmohq/storage";
+
+const storage = new Storage({
+  area: "local",
+});
 
 /** Class representing a Trope on tvtropes */
 export class Trope {
@@ -12,14 +17,15 @@ export class Trope {
 
   async fetchLaconic(): Promise<Trope> {
     // Check if the trope is already in local storage
-    const stored = localStorage.getItem(this.url);
+    const stored = await storage.get<Trope>(this.url);
     if (stored) {
-      const parsed = JSON.parse(stored);
-      this.title = parsed.title;
-      this.laconic = parsed.laconic;
+      this.title = stored.title;
+      this.laconic = stored.laconic;
       return this;
     }
-    let document = await fetchPage(this.getLaconicUrl());
+
+    let document = await fetchPage(this.url);
+
     const titleElement = document.querySelector(".entry-title");
     if (titleElement?.textContent) {
       this.title = titleElement.textContent.trim();
@@ -32,17 +38,7 @@ export class Trope {
     } else {
       throw new Error("No laconic description found");
     }
-    this.save();
+    storage.set(this.url, this);
     return this;
-  }
-
-  // Store the object as a JSON string in local storage
-  save(): void {
-    localStorage.setItem(this.url, JSON.stringify(this));
-  }
-
-  // Regex to replace normal link with link directly to laconic page
-  getLaconicUrl(): string {
-    return this.url.replace(/(pmwiki\.php)\/.*\//g, "pmwiki.php/Laconic/");
   }
 }
