@@ -11,7 +11,7 @@ import {
   INITIAL_CONTENT,
   LIGHT_THEME,
 } from "./config";
-import { Trope } from "./lib/Trope";
+import { Trope } from "./lib/trope";
 
 tippy.setDefaultProps({
   placement: "top-start",
@@ -37,29 +37,33 @@ tippy.setDefaultProps({
 
 tippy(HOVER_SELECTOR, {
   onShow(tip) {
-    tip.setProps({
-      theme: darkModeEnabled() ? DARK_THEME : LIGHT_THEME,
-    });
-    tip.reference.setAttribute("title", ""); // Disables built in browser tooltip floating on top of tippy
-    if (tip.reference.firstChild!.firstChild instanceof HTMLImageElement) {
-      // Only follow cursor on images
+    (async () => {
       tip.setProps({
-        followCursor: true,
-        animation: "",
-        placement: "top",
+        theme: darkModeEnabled() ? DARK_THEME : LIGHT_THEME,
       });
-    }
-    new Trope(tip.reference.getAttribute("href")!)
-      .fetchLaconic()
-      .then((laconic) => {
-        try {
-          if (tip.state.isVisible) {
-            tip.setContent(hoverTemplate(laconic));
-          }
-        } catch (error) {
-          tip.setContent(`Fetch failed. ${error}`);
+
+      tip.reference.setAttribute("title", ""); // Disables built in browser tooltip floating on top of tippy
+
+      if (tip.reference.firstChild!.firstChild instanceof HTMLImageElement) {
+        // Only follow cursor on images
+        tip.setProps({
+          followCursor: true,
+          animation: "",
+          placement: "top",
+        });
+      }
+      try {
+        let laconic = await new Trope(
+          tip.reference.getAttribute("href")!
+        ).fetchLaconic();
+
+        if (tip.state.isVisible) {
+          tip.setContent(hoverTemplate(laconic));
         }
-      });
+      } catch (error) {
+        tip.setContent(`Fetch failed. ${error}`);
+      }
+    })();
   },
   onHidden(tip) {
     tip.setContent(INITIAL_CONTENT);

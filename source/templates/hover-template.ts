@@ -1,5 +1,5 @@
 import { html } from "common-tags";
-import { Trope } from "../lib/Trope";
+import { Trope } from "../lib/trope";
 import { darkModeEnabled } from "../lib/darkmode";
 import "./hover-template.css";
 
