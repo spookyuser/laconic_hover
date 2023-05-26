@@ -61,7 +61,7 @@ tippy(HOVER_SELECTOR, {
           tip.setContent(hoverTemplate(laconic));
         }
       } catch (error) {
-        tip.setContent(`Fetch failed. ${error}`);
+        tip.setContent(error.message);
       }
     })();
   },

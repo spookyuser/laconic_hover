@@ -19,16 +19,13 @@ export class Trope {
       this.laconic = parsed.laconic;
       return this;
     }
-
     let document = await fetchPage(this.getLaconicUrl());
-
     const titleElement = document.querySelector(".entry-title");
     if (titleElement?.textContent) {
       this.title = titleElement.textContent.trim();
     } else {
       throw new Error("No laconic title found");
     }
-
     const laconicElement = document.querySelector("#main-article > p");
     if (laconicElement?.textContent) {
       this.laconic = laconicElement.textContent.trim();
@@ -36,7 +33,6 @@ export class Trope {
       throw new Error("No laconic description found");
     }
     this.save();
-
     return this;
   }
 
