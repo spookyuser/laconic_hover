@@ -22,7 +22,7 @@ export async function fetchPage(url: string, fromHandle404: boolean = false) {
 
   const decoded = decodeBuffer(
     await response.arrayBuffer(),
-    getCharset(response.headers)
+    getCharset(response.headers),
   );
   const parser = new DOMParser();
   return parser.parseFromString(decoded, "text/html");
@@ -62,7 +62,7 @@ function getCharset(headers: Headers) {
  */
 function decodeBuffer(
   buffer: BufferSource | undefined,
-  charset: string | undefined
+  charset: string | undefined,
 ): string {
   const tryDecode = () => {
     try {

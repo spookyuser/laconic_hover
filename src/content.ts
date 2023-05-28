@@ -1,10 +1,15 @@
 import tippy, { followCursor } from "tippy.js";
-import { hoverTemplate } from "./templates/hover-template";
+
 import { darkModeEnabled } from "./lib/darkmode";
+import { hoverTemplate } from "./templates/hover-template";
+
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import "tippy.js/animations/perspective.css";
 import "./content-script.css";
+
+import type { PlasmoCSConfig, PlasmoGetStyle } from "plasmo";
+
 import {
   DARK_THEME,
   HOVER_SELECTOR,
@@ -12,6 +17,12 @@ import {
   LIGHT_THEME,
 } from "./config";
 import { Trope } from "./lib/trope";
+
+export const config: PlasmoCSConfig = {
+  matches: ["*://tvtropes.org/*"],
+  run_at: "document_idle",
+  all_frames: true,
+};
 
 tippy.setDefaultProps({
   placement: "top-start",
@@ -54,7 +65,7 @@ tippy(HOVER_SELECTOR, {
       }
       try {
         let laconic = await new Trope(
-          tip.reference.getAttribute("href")!
+          tip.reference.getAttribute("href")!,
         ).fetchLaconic();
 
         if (tip.state.isVisible) {

@@ -1,7 +1,9 @@
 import { html } from "common-tags";
-import { Trope } from "../lib/trope";
-import { darkModeEnabled } from "../lib/darkmode";
+
 import "./hover-template.css";
+
+import { darkModeEnabled } from "../lib/darkmode";
+import { Trope } from "../lib/trope";
 
 /** A small function that generates the custom HTML tippy will show when hovering on a trope
  *

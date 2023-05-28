@@ -55,3 +55,18 @@ jsconfig.json
 size-plugin.json
 .parcel-cache
 dist
+# local env files
+.env*
+
+out/
+build/
+dist/
+
+# plasmo - https://www.plasmo.com
+.plasmo
+
+# bpp - http://bpp.browser.market/
+keys.json
+
+# typescript
+.tsbuildinfo
