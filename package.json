@@ -1,15 +1,16 @@
 {
   "name": "laconic_hover",
   "displayName": "Laconic Hover for TV Tropes",
-  "description": "Shows Laconic text when hovering on a TV Tropes link.",
+  "description": "Did you know that most tropes have thoughtfully written summaries? This extension lets you read them without leaving the page.",
   "private": true,
   "author": "Spooky User",
-  "packageManager": "pnpm@8.5.1",
-  "version": "1.6.0",
+  "packageManager": "pnpm@8.8.0",
+  "version": "1.7.0",
   "scripts": {
     "dev": "plasmo dev",
     "dev:ff": "plasmo dev --source-maps --no-minify --bundle-buddy --target=firefox-mv2 ",
-    "package": "plasmo package"
+    "build": "plasmo build",
+    "package": "plasmo package && plasmo package --target=firefox-mv2 --no-minify"
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
