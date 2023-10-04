@@ -9,24 +9,22 @@
   "scripts": {
     "dev": "plasmo dev",
     "dev:ff": "plasmo dev --source-maps --no-minify --bundle-buddy --target=firefox-mv2 ",
-    "build:ff": "plsmo build --target=firefox-mv2",
-    "build": "plasmo build",
     "package": "plasmo package"
   },
   "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.0.0",
-    "@plasmohq/storage": "^1.6.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
+    "@plasmohq/storage": "^1.8.0",
     "common-tags": "^1.8.2",
-    "plasmo": "0.73.6",
+    "plasmo": "0.83.0",
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "@plasmohq/prettier-plugin-sort-imports": "3.6.4",
-    "@types/chrome": "0.0.227",
-    "@types/common-tags": "^1.8.1",
-    "@types/node": "18.15.11",
-    "prettier": "2.8.7",
-    "typescript": "5.0.3"
+    "@plasmohq/prettier-plugin-sort-imports": "4.0.1",
+    "@types/chrome": "0.0.246",
+    "@types/common-tags": "^1.8.2",
+    "@types/node": "20.8.2",
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
   },
   "manifest": {
     "host_permissions": [
