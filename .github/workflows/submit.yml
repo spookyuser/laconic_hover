@@ -6,13 +6,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: zerosecrets/github-actions/token-to-secrets@main
-        id: zero
-        with:
-          zero-token: ${{ secrets.ZERO_TOKEN }}
-          apis: Store keys
-          caller-name: CI/CD
-
       - uses: actions/checkout@v3
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -37,8 +30,7 @@ jobs:
       - name: Browser Platform Publish
         uses: PlasmoHQ/bpp@v3
         with:
-          keys: ${{ SUBMIT_KEYS }}
-          artifact: 
-            - build/chrome-mv3-prod.zip
-            - build/firefox-mv2-prod.zip
-          
+          keys: ${{ secrets.SUBMIT_KEYS }}
+          chrome-file: build/chrome-mv3-prod.zip
+          firefox-file: build/firefox-mv2-prod.zip
+          verbose: true
