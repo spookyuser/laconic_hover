@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "plasmo dev",
     "dev:ff": "plasmo dev --source-maps --no-minify --bundle-buddy --target=firefox-mv2 ",
-    "build": "plasmo build",
+    "build": "plasmo build && plasmo build --target=firefox-mv2 --no-minify",
     "package": "plasmo package && plasmo package --target=firefox-mv2 --no-minify"
   },
   "dependencies": {
