@@ -1,22 +1,14 @@
-import tippy, { followCursor } from "tippy.js";
-
-import { darkModeEnabled } from "./lib/darkmode";
-import { hoverTemplate } from "./templates/hover-template";
-
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import "tippy.js/animations/perspective.css";
-import "./content-script.css";
-
-import type { PlasmoCSConfig, PlasmoGetStyle } from "plasmo";
-
+import { LaconicError, Trope, darkModeEnabled } from "./api";
 import {
   DARK_THEME,
   HOVER_SELECTOR,
   INITIAL_CONTENT,
   LIGHT_THEME,
 } from "./config";
-import { Trope } from "./lib/trope";
+import { errorHoverTemplate, hoverTemplate } from "./hover-template";
+import "./content-script.css";
+import type { PlasmoCSConfig, PlasmoGetStyle } from "plasmo";
+import tippy, { followCursor } from "tippy.js";
 
 export const config: PlasmoCSConfig = {
   matches: ["*://tvtropes.org/*"],
@@ -63,16 +55,15 @@ tippy(HOVER_SELECTOR, {
           placement: "top",
         });
       }
-      try {
-        let laconic = await new Trope(
-          tip.reference.getAttribute("href")!,
-        ).fetchLaconic();
+      let trope = new Trope(tip.reference.getAttribute("href")!);
 
+      try {
+        await trope.fetchLaconic();
         if (tip.state.isVisible) {
-          tip.setContent(hoverTemplate(laconic));
+          tip.setContent(hoverTemplate(trope));
         }
       } catch (error) {
-        tip.setContent(error.message);
+        tip.setContent(errorHoverTemplate(error, trope));
       }
     })();
   },

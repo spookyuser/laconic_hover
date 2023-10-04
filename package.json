@@ -8,6 +8,8 @@
   "version": "1.6.0",
   "scripts": {
     "dev": "plasmo dev",
+    "dev:ff": "plasmo dev --source-maps --no-minify --bundle-buddy --target=firefox-mv2 ",
+    "build:ff": "plsmo build --target=firefox-mv2",
     "build": "plasmo build",
     "package": "plasmo package"
   },
