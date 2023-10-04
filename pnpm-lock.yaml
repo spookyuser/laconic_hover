@@ -17,6 +17,9 @@ dependencies:
   plasmo:
     specifier: 0.83.0
     version: 0.83.0
+  prettier:
+    specifier: ^3.0.3
+    version: 3.0.3
   tippy.js:
     specifier: ^6.3.7
     version: 6.3.7
@@ -34,9 +37,6 @@ devDependencies:
   '@types/node':
     specifier: 20.8.2
     version: 20.8.2
-  prettier:
-    specifier: 3.0.3
-    version: 3.0.3
   typescript:
     specifier: 5.2.2
     version: 5.2.2

@@ -17,6 +17,7 @@
     "@plasmohq/storage": "^1.8.0",
     "common-tags": "^1.8.2",
     "plasmo": "0.83.0",
+    "prettier": "^3.0.3",
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
@@ -24,7 +25,6 @@
     "@types/chrome": "0.0.246",
     "@types/common-tags": "^1.8.2",
     "@types/node": "20.8.2",
-    "prettier": "3.0.3",
     "typescript": "5.2.2"
   },
   "manifest": {
