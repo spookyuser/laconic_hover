@@ -49,7 +49,6 @@ jspm_packages
 # Intellij Idea and Custom
 /.idea
 /distribution
-/assets/
 /.vscode
 jsconfig.json
 size-plugin.json
