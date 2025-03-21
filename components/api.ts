@@ -94,7 +94,10 @@ export class Trope {
     redirectAttempt = 0
   ): Promise<Document> {
     if (redirectAttempt > 2) {
-      throw new LaconicError("FETCHING_FAILED", "Too many redirects");
+      const tropeResponse = await fetch(this.tropeUrl, { redirect: "follow" });
+      const doc = await decodeResponse(tropeResponse);
+      this.title = this.extractTitle(doc);
+      throw new LaconicError("NO_LACONIC", "Too many redirects");
     }
 
     const response = await fetch(url, { redirect: "follow" });
