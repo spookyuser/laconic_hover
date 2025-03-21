@@ -9,6 +9,7 @@ import { errorHoverTemplate, hoverTemplate } from "@/components/hover-template";
 import "@/components/content-script.css";
 import tippy, { followCursor } from "tippy.js";
 import invariant from "tiny-invariant";
+import { defineContentScript } from "wxt/sandbox";
 export default defineContentScript({
   matches: ["*://tvtropes.org/*"],
   main() {

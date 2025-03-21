@@ -13,8 +13,11 @@ export function hoverTemplate(trope: Trope) {
       <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">
         ${trope.title}
       </p>
-      <hr />
+      <hr class="laconic-hr" />
       <p>${trope.laconic}</p>
+      <hr class="tvtropes-hr" />
+      ${trope.returnTo}
+      <hr class="tvtropes-hr" />
     </div>
   `;
 }
@@ -26,7 +29,7 @@ export function errorHoverTemplate(error: Error, trope?: Trope) {
         <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">
           ${trope?.title}
         </p>
-        <hr />
+        <hr class="laconic-hr" />
         <p class="error-message">${LaconicError.messages.NO_LACONIC}</p>
       </div>
     `;
@@ -38,7 +41,7 @@ export function errorHoverTemplate(error: Error, trope?: Trope) {
       </p>
       ${error.message &&
       html`
-        <hr />
+        <hr class="laconic-hr" />
         <p class="error-message">${error.message}</p>
       `}
     </div>

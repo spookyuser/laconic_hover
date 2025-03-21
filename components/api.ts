@@ -24,6 +24,7 @@ export class Trope {
   expectedLaconicUrl: URL;
   title: string | undefined;
   laconic: string | undefined;
+  returnTo: string | undefined;
   storageKey: string;
 
   constructor(tipHref: string) {
@@ -59,6 +60,8 @@ export class Trope {
 
     this.title = this.extractTitle(document);
     this.laconic = this.extractLaconic(document);
+    this.returnTo = this.extractReturnTo(document);
+
     await this.setToCache();
   }
 
@@ -68,6 +71,13 @@ export class Trope {
       return laconicElement.textContent.trim();
     }
     throw new LaconicError("NO_LACONIC");
+  }
+
+  private extractReturnTo(document: Document) {
+    const returnToElement = document.querySelector("#main-article > dl");
+    if (returnToElement?.innerHTML) {
+      return returnToElement.innerHTML;
+    }
   }
 
   private extractTitle(document: Document) {

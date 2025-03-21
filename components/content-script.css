@@ -2,14 +2,11 @@
 @import "tippy.js/themes/light.css";
 @import "tippy.js/animations/perspective.css";
 
-/* General CSS for script */
-
 /* Fixes an error in Chrome where Tippy causes linebreaks because of Chrome stylesheet */
 [data-tippy-root] {
   display: inline;
 }
 
-/** Previously inline CSS from hover-template.js */
 .laconic-hover {
   text-align: left;
   font-style: normal;
@@ -17,7 +14,12 @@
 
 .laconic-hover > div {
   max-width: 300px;
-  font-family: "Nunito", "Roboto", "Helvetica Neue", "Helvetica", "Arial",
+  font-family:
+    "Nunito",
+    "Roboto",
+    "Helvetica Neue",
+    "Helvetica",
+    "Arial",
     /* biome-ignore lint/a11y/useGenericFontNames: I think this is just what tvtropes does */
       "sans-serif";
 }
@@ -27,10 +29,16 @@
   font-size: 1.2rem;
 }
 
-.laconic-hover > hr {
+.laconic-hr {
   opacity: 0.1;
   margin: 0 !important;
   padding: 1px;
+}
+
+.tvtropes-hr {
+  border: none;
+  border-bottom: 1px solid #aeb3ba;
+  margin: 3px 0 !important;
 }
 
 .laconic-hover > p:nth-child(3) {
