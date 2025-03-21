@@ -21,11 +21,11 @@ jobs:
 
       - name: Zip extensions
         run: |
-          dotenvx run -- pnpm zip
+          pnpm exec dotenvx run -- pnpm zip
 
       - name: Submit to stores
         run: |
-          dotenvx run -- pnpm wxt submit \
+          pnpm exec dotenvx run -- pnpm wxt submit \
             --chrome-zip .output/*-chrome.zip \
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
