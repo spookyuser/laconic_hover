@@ -1,3 +1,1 @@
-# Contributing
-
-Suggestions and pull requests are highly encouraged! Have a look at the [open issues](https://github.com/spookyuser/laconic_hover/issues?q=is%3Aopen+is%3Aissue).
+If you have any ideas or pull requsts or just feel like getting $CURRENT_GPT to do something, please feel free to start a discussion or make a pull request <3
