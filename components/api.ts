@@ -1,5 +1,5 @@
 import { DARK_MODE_COOKIE, DEFAULT_CHARACTER_ENCODING } from "./config";
-import { Storage } from "@plasmohq/storage";
+import { storage } from "wxt/storage";
 
 type LaconicErrors = "NO_TITLE" | "NO_LACONIC" | "FETCHING_FAILED" | "404";
 
@@ -18,16 +18,12 @@ export class LaconicError extends Error {
   };
 }
 
-const storage = new Storage({
-  area: "local",
-});
-
 export class Trope {
   tropePath: string;
   tropeUrl: URL;
   expectedLaconicUrl: URL;
-  title: string;
-  laconic: string;
+  title: string | undefined;
+  laconic: string | undefined;
   storageKey: string;
 
   constructor(tipHref: string) {
@@ -38,11 +34,15 @@ export class Trope {
   }
 
   private async getFromCache() {
-    return storage.get<Trope>(this.storageKey);
+    if (import.meta.env.MODE === "production") {
+      return storage.getItem<Trope>(`local:${this.storageKey}`);
+    }
   }
 
   private async setToCache() {
-    storage.set(this.storageKey, this);
+    if (import.meta.env.MODE === "production") {
+      storage.setItem(`local:${this.storageKey}`, this);
+    }
   }
 
   /* Fetches a statically calculated url of there the laconic should be */
@@ -66,101 +66,99 @@ export class Trope {
     const laconicElement = document.querySelector("#main-article > p");
     if (laconicElement?.textContent) {
       return laconicElement.textContent.trim();
-    } else {
-      throw new LaconicError("NO_LACONIC");
     }
+    throw new LaconicError("NO_LACONIC");
   }
 
   private extractTitle(document: Document) {
     const titleElement = document.querySelector(".entry-title");
     if (titleElement?.textContent) {
       return titleElement.textContent.trim();
-    } else {
-      throw new LaconicError("NO_TITLE");
     }
+    throw new LaconicError("NO_TITLE");
   }
 
   static getLaconicUrl(url: URL) {
-    let laconicUrl = new URL(url.toString());
+    const laconicUrl = new URL(url.toString());
     laconicUrl.pathname = url.pathname.replace(
       /(pmwiki\.php)\/.*\//g,
-      "pmwiki.php/Laconic/",
+      "pmwiki.php/Laconic/"
     );
+    console.log(laconicUrl.toString());
     return laconicUrl;
   }
 
-  private async getLaconicDocument() {
-    try {
-      return await fetchAndDecode(this.expectedLaconicUrl);
-    } catch (error) {
-      if (error instanceof LaconicError && error.category === "404") {
-        return await this.handle404();
-      } else {
-        console.error(error);
-        throw error;
-      }
+  private async fetchAndProcessUrl(
+    url: URL,
+    isLaconic: boolean,
+    redirectAttempt = 0
+  ): Promise<Document> {
+    if (redirectAttempt > 2) {
+      const tropeResponse = await fetch(this.tropeUrl, { redirect: "follow" });
+      const doc = await decodeResponse(tropeResponse);
+      this.title = this.extractTitle(doc);
+      throw new LaconicError("NO_LACONIC", "Too many redirects");
     }
-  }
 
-  /** We're using a static url in getLaconicUrl(), if it fails we need to check if the url was just guessed wrong, (99% of the time it isn't) but there are edge cases where it is, idk why.
-   @see https://github.com/spookyuser/laconic_hover/issues/34
-   @see getLaconicUrl()
-   */
-  private async handle404() {
-    const response = await fetchURL(this.tropeUrl); // 1. Get response of base Trope page
+    const response = await fetch(url, { redirect: "follow" });
 
-    // 2. If the trope url is the same as the one we guessed, we know for sure the laconic doesn't exist
-    if (response.url === this.tropeUrl.href) {
-      let document = await decodeResponse(response);
-      this.title = this.extractTitle(document);
-      throw new LaconicError(
-        "NO_LACONIC",
-        `Fetching failed: ${response.status} ${response.statusText}`,
+    if (response.status === 200) {
+      return await decodeResponse(response);
+    }
+
+    // If 404 and this is a laconic URL, try the original URL
+    if (response.status === 404 && isLaconic) {
+      const originalUrl = isLaconic ? this.tropeUrl : url;
+      const tropeResponse = await fetch(originalUrl, { redirect: "follow" });
+
+      // If URL didn't change, it's a true 404
+      if (tropeResponse.url === originalUrl.href) {
+        const doc = await decodeResponse(tropeResponse);
+        this.title = this.extractTitle(doc);
+        throw new LaconicError(
+          "NO_LACONIC",
+          `Laconic page not found: ${response.status} ${response.statusText}`
+        );
+      }
+
+      // URL changed (redirected), try the laconic of the redirected URL
+      const redirectedLaconicUrl = Trope.getLaconicUrl(
+        new URL(tropeResponse.url)
+      );
+      return this.fetchAndProcessUrl(
+        redirectedLaconicUrl,
+        true,
+        redirectAttempt + 1
       );
     }
 
-    // 3. But if the url is different, we know that the laconic page exists, but we just guessed the wrong url So we fetch the laconic page from the redirected url
-    return await fetchAndDecode(new URL(response.url));
+    // Handle other error cases
+    throw new LaconicError(
+      "FETCHING_FAILED",
+      `Fetching failed: ${response.status} ${response.statusText}`
+    );
+  }
+
+  private async getLaconicDocument(): Promise<Document> {
+    return this.fetchAndProcessUrl(this.expectedLaconicUrl, true);
   }
 }
 
-/** Fetches a page from a URL and returns a DOMParser object  */
-async function fetchURL(url: URL) {
-  const response = await fetch(url.toString(), { redirect: "follow" });
-
-  if (response.status === 404) {
-    throw new LaconicError("404");
-  }
-
-  if (!response.ok) {
-    throw new LaconicError("FETCHING_FAILED");
-  }
-
-  return response;
-}
-
-/* Explicityly decode according to the charset of the response, why do we need this? IDK but it doesn't work without it */
-async function fetchAndDecode(url: URL) {
-  const response = await fetchURL(url);
-  const document = await decodeResponse(response);
-  return document;
-}
+/*********************** weird utils **********************/
 
 async function decodeResponse(response: Response) {
   const decoded = decodeBuffer(
     await response.arrayBuffer(),
-    getCharset(response.headers),
+    getCharset(response.headers)
   );
   const parser = new DOMParser();
   return parser.parseFromString(decoded, "text/html");
 }
 
-/*********************** weird utils ***************/
-
 function getCharset(headers: Headers) {
   const charset = headers
-    .get("Content-Type")!
-    .split(";")
+    .get("Content-Type")
+    ?.split(";")
     .find((header: string | string[]) => header.includes("charset"));
   return charset ? charset.split("=")[1] : DEFAULT_CHARACTER_ENCODING;
 }
@@ -176,7 +174,7 @@ function getCharset(headers: Headers) {
  */
 function decodeBuffer(
   buffer: BufferSource | undefined,
-  charset: string | undefined,
+  charset: string | undefined
 ) {
   const tryDecode = () => {
     try {

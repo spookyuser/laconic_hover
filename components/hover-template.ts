@@ -1,4 +1,3 @@
-// import "data-text:./hover-template.css";
 import { LaconicError, type Trope, darkModeEnabled } from "./api";
 import { html } from "common-tags";
 
@@ -21,7 +20,7 @@ export function hoverTemplate(trope: Trope) {
 }
 
 export function errorHoverTemplate(error: Error, trope?: Trope) {
-  if (error instanceof LaconicError && error.category == "NO_LACONIC") {
+  if (error instanceof LaconicError && error.category === "NO_LACONIC") {
     return html`
       <div class="laconic-hover">
         <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">
@@ -31,15 +30,17 @@ export function errorHoverTemplate(error: Error, trope?: Trope) {
         <p class="error-message">${LaconicError.messages.NO_LACONIC}</p>
       </div>
     `;
-  } else
-    return html`
-      <div class="laconic-hover">
-        <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">
-          ${trope?.title}
-        </p>
-        ${error.message &&
-        html`<hr />
-          <p class="error-message">${error.message}</p> `}
-      </div>
-    `;
+  }
+  return html`
+    <div class="laconic-hover">
+      <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">
+        ${trope?.title}
+      </p>
+      ${error.message &&
+      html`
+        <hr />
+        <p class="error-message">${error.message}</p>
+      `}
+    </div>
+  `;
 }
