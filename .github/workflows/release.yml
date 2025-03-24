@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  submit:
+  submit-chrome:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,13 +19,34 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Zip extensions
-        run: |
-          pnpm exec dotenvx run -- pnpm zip
+      - name: Zip Chrome extension
+        run: pnpm zip
 
-      - name: Submit to stores
+      - name: Submit to Chrome Web Store
+        run: pnpm exec dotenvx run -- pnpm wxt submit --chrome-zip .output/*-chrome.zip
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+
+  submit-firefox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 23
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Zip Firefox extension
+        run: pnpm zip:firefox
+
+      - name: Submit to Firefox Add-ons
         run: |
-          pnpm exec dotenvx run -- pnpm wxt submit \
-            --chrome-zip .output/*-chrome.zip \
+          pnpm exec dotenvx run -- pnpm wxt submit --firefox-zip .output/*-firefox.zip --firefox-sources-zip .output/*-sources.zip
         env:
           DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
