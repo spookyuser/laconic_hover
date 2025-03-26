@@ -5,7 +5,7 @@ import {
   INITIAL_CONTENT,
   LIGHT_THEME,
 } from "@/components/config";
-import { errorHoverTemplate, hoverTemplate } from "@/components/hover-template";
+import { createHoverTemplate } from "@/components/hover-template";
 import "@/components/content-script.css";
 import tippy, { followCursor } from "tippy.js";
 import invariant from "tiny-invariant";
@@ -61,10 +61,12 @@ export default defineContentScript({
           try {
             await trope.fetchLaconic();
             if (tip.state.isVisible) {
-              tip.setContent(hoverTemplate(trope));
+              tip.setContent(createHoverTemplate({ trope }));
             }
           } catch (error) {
-            tip.setContent(errorHoverTemplate(error as Error, trope));
+            tip.setContent(
+              createHoverTemplate({ error: error as Error, trope })
+            );
           }
         })();
       },

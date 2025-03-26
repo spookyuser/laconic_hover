@@ -1,52 +1,46 @@
 import { LaconicError, type Trope, darkModeEnabled } from "./api";
 import { html } from "common-tags";
 
-function renderHeader(title?: string) {
-  return html`
-    <p style="color: ${darkModeEnabled() ? "#71e1bc" : "#0849ab"}">${title}</p>
-    <hr class="laconic-hr" />
-  `;
-}
+export function createHoverTemplate({
+  trope,
+  error,
+}: {
+  trope?: Trope;
+  error?: Error;
+}) {
+  const headerColor = darkModeEnabled() ? "#71e1bc" : "#0849ab";
 
-function renderReturnTo(htmlReturnTo?: string) {
-  if (!htmlReturnTo) {
-    return null;
-  }
+  const isNoLaconicError =
+    error instanceof LaconicError && error.category === "NO_LACONIC";
 
-  return html`
-    <hr class="tvtropes-hr" />
-    ${htmlReturnTo}
-    <hr class="tvtropes-hr" />
-  `;
-}
-
-export function hoverTemplate(trope: Trope) {
   return html`
     <div class="laconic-hover">
-      ${renderHeader(trope.title)}
-      <p>${trope.laconic}</p>
-      ${renderReturnTo(trope.returnTo)}
-    </div>
-  `;
-}
-
-export function errorHoverTemplate(error: Error, trope?: Trope) {
-  if (error instanceof LaconicError && error.category === "NO_LACONIC") {
-    return html`
-      <div class="laconic-hover">
-        ${renderHeader(trope?.title)}
-        <p class="error-message">${LaconicError.messages.NO_LACONIC}</p>
-      </div>
-    `;
-  }
-  return html`
-    <div class="laconic-hover">
-      ${renderHeader(trope?.title)}
-      ${error.message &&
-      html`
-        <hr class="laconic-hr" />
-        <p class="error-message">${error.message}</p>
-      `}
+      ${trope?.title
+        ? html`
+            <p style="color: ${headerColor}">${trope.title}</p>
+            <hr class="laconic-hr" />
+          `
+        : ""}
+      ${isNoLaconicError
+        ? html`
+            <p class="error-message">${LaconicError.messages.NO_LACONIC}</p>
+          `
+        : error?.message
+        ? html`
+            <p class="error-message">${error.message}</p>
+          `
+        : trope?.laconic
+        ? html`
+            <p>${trope.laconic}</p>
+          `
+        : ""}
+      ${trope?.returnTo
+        ? html`
+            <hr class="tvtropes-hr" />
+            ${trope.returnTo}
+            <hr class="tvtropes-hr" />
+          `
+        : ""}
     </div>
   `;
 }

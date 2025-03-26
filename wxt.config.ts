@@ -14,4 +14,21 @@ export default defineConfig({
     },
     permissions: ["storage"],
   },
+  vite: () => ({
+    esbuild: {
+      drop: ["console", "debugger"],
+    },
+    build: {
+      minify: "esbuild",
+      chunkSizeWarningLimit: 10000,
+      rollupOptions: {
+        onwarn(warning, defaultHandler) {
+          if (warning.code === "SOURCEMAP_ERROR") {
+            return;
+          }
+          defaultHandler(warning);
+        },
+      },
+    },
+  }),
 });

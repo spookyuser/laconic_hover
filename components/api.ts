@@ -51,8 +51,7 @@ export class Trope {
     // Check if the trope is already in local storage
     const stored = await this.getFromCache();
     if (stored) {
-      this.title = stored.title;
-      this.laconic = stored.laconic;
+      Object.assign(this, stored);
       return this;
     }
 
