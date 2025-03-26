@@ -1,3 +1,7 @@
+v2.1.1:
+
+- Make stinger optional
+
 v2.1.0:
 
 - Fixes #39 redirect issues -- (thanks @imadeagithubaccountforthis)!
