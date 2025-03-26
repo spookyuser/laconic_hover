@@ -3,7 +3,7 @@ import { defineConfig } from "wxt";
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   extensionApi: "chrome",
-  modules: ["@wxt-dev/auto-icons"],
+  modules: ["@wxt-dev/auto-icons", "@wxt-dev/module-react"],
   manifest: {
     name: "Laconic Hover for TV Tropes",
     browser_specific_settings: {

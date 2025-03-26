@@ -48,10 +48,14 @@ export class Trope {
 
   /* Fetches a statically calculated url of there the laconic should be */
   async fetchLaconic() {
-    // Check if the trope is already in local storage
     const stored = await this.getFromCache();
     if (stored) {
       Object.assign(this, stored);
+      const showStinger = await storage.getItem<boolean>("local:showStinger");
+      if (showStinger === false) {
+        this.returnTo = undefined;
+      }
+
       return this;
     }
 
@@ -59,7 +63,7 @@ export class Trope {
 
     this.title = this.extractTitle(document);
     this.laconic = this.extractLaconic(document);
-    this.returnTo = this.extractReturnTo(document);
+    this.returnTo = await this.extractReturnTo(document);
 
     await this.setToCache();
   }
@@ -72,7 +76,10 @@ export class Trope {
     throw new LaconicError("NO_LACONIC");
   }
 
-  private extractReturnTo(document: Document) {
+  private async extractReturnTo(document: Document) {
+    const showStinger = await storage.getItem<boolean>("local:showStinger");
+    if (showStinger === false) return undefined;
+
     const returnToElement = document.querySelector("#main-article > dl");
     if (returnToElement?.innerHTML) {
       return returnToElement.innerHTML;
