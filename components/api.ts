@@ -35,11 +35,11 @@ export class Trope {
   }
 
   private async getFromCache() {
-    return storage.getItem<Trope>(`local:${this.storageKey}`);
+    return storage.getItem<Trope>(`local:${this.storageKey}-v1`);
   }
 
   private async setToCache() {
-    storage.setItem(`local:${this.storageKey}`, this);
+    storage.setItem(`local:${this.storageKey}-v1`, this);
   }
 
   /* Fetches a statically calculated url of there the laconic should be */
