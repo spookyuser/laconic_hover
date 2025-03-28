@@ -1,3 +1,7 @@
+v2.1.2:
+
+- Fix caching error
+
 v2.1.1:
 
 - Make stinger optional

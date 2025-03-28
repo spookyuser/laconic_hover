@@ -2,51 +2,212 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      version_bump_type:
+        description: "Version bump type (patch, minor, major)"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write # To push version bump commit/tag, create release, upload assets
+  pull-requests: read # Potentially needed for future release note generation
 
 jobs:
-  submit-chrome:
+  # 1. Prepare Release: Bump version, commit, tag, push
+  prepare_release:
     runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.version_bump.outputs.new_version }}
+      tag_name: ${{ steps.version_bump.outputs.tag_name }}
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
+      - name: Checkout full history
+        uses: actions/checkout@v4
         with:
-          node-version: 23
+          fetch-depth: 0
+          # token: ${{ secrets.YOUR_PAT_IF_NEEDED }} # Use PAT if needed to trigger other workflows
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js (Use LTS version)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Recommend using LTS version
           cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Zip Chrome extension
-        run: pnpm zip
+      - name: Configure Git User
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Configure npm tag prefix (optional, ensures tags like v1.0.0)
+        run: npm config set tag-version-prefix v
+
+      - name: Bump version, Create Tag, and Commit
+        id: version_bump
+        run: |
+          # Bump version using pnpm
+          pnpm version ${{ inputs.version_bump_type }} --no-git-tag-version # Commit/tag manually
+
+          # Extract the new version and create tag name
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          TAG_NAME="v${NEW_VERSION}"
+
+          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_OUTPUT
+          echo "TAG_NAME=${TAG_NAME}" >> $GITHUB_OUTPUT
+
+          # Stage changes, commit, and tag
+          git add package.json pnpm-lock.yaml # Add files changed by pnpm version
+          git commit -m "chore: release ${TAG_NAME}"
+          git tag ${TAG_NAME}
+
+      - name: Push Changes and Tag
+        run: |
+          git push origin HEAD # Push the commit
+          git push origin ${{ steps.version_bump.outputs.tag_name }} # Push the tag
+
+  # 2. Build and Submit Chrome Extension
+  build_submit_chrome:
+    needs: prepare_release
+    runs-on: ubuntu-latest
+    outputs:
+      chrome_zip_name: ${{ steps.get_paths.outputs.chrome_zip_name }}
+      chrome_zip_path: ${{ steps.get_paths.outputs.chrome_zip_path }}
+    steps:
+      - name: Checkout specific tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare_release.outputs.tag_name }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build and Zip Chrome extension
+        run: pnpm zip # Assumes this creates the zip in .output/
+
+      - name: Determine Chrome Zip Path
+        id: get_paths
+        run: |
+          CHROME_ZIP=$(ls .output/*-chrome.zip | head -n 1)
+          echo "chrome_zip_name=$(basename $CHROME_ZIP)" >> $GITHUB_OUTPUT
+          echo "chrome_zip_path=$CHROME_ZIP" >> $GITHUB_OUTPUT
+          echo "Found Chrome Zip: $CHROME_ZIP"
 
       - name: Submit to Chrome Web Store
-        run: pnpm exec dotenvx run -- pnpm wxt submit --chrome-zip .output/*-chrome.zip
+        run: pnpm exec dotenvx run -- pnpm wxt submit --chrome-zip ${{ steps.get_paths.outputs.chrome_zip_path }}
         env:
-          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }} # Ensure this secret is configured
 
-  submit-firefox:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-
-      - uses: actions/setup-node@v4
+      - name: Upload Chrome Zip Artifact
+        uses: actions/upload-artifact@v4
         with:
-          node-version: 23
+          name: chrome-extension
+          path: ${{ steps.get_paths.outputs.chrome_zip_path }}
+          if-no-files-found: error
+
+  # 3. Build and Submit Firefox Extension
+  build_submit_firefox:
+    needs: prepare_release
+    runs-on: ubuntu-latest
+    outputs:
+      firefox_zip_name: ${{ steps.get_paths.outputs.firefox_zip_name }}
+      firefox_zip_path: ${{ steps.get_paths.outputs.firefox_zip_path }}
+    steps:
+      - name: Checkout specific tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare_release.outputs.tag_name }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
           cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
 
-      - name: Zip Firefox extension
+      - name: Build and Zip Firefox extension
         run: pnpm zip:firefox
+
+      - name: Determine Firefox Zip Path
+        id: get_paths
+        run: |
+          # Find only the main firefox zip file
+          FIREFOX_ZIP=$(ls .output/*-firefox.zip | head -n 1)
+          echo "firefox_zip_name=$(basename $FIREFOX_ZIP)" >> $GITHUB_OUTPUT
+          echo "firefox_zip_path=$FIREFOX_ZIP" >> $GITHUB_OUTPUT
+          echo "Found Firefox Zip: $FIREFOX_ZIP"
 
       - name: Submit to Firefox Add-ons
         run: |
-          pnpm exec dotenvx run -- pnpm wxt submit --firefox-zip .output/*-firefox.zip --firefox-sources-zip .output/*-sources.zip
+          # Submit only the main zip; wxt handles sources if needed
+          pnpm exec dotenvx run -- pnpm wxt submit --firefox-zip ${{ steps.get_paths.outputs.firefox_zip_path }}
         env:
-          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY }} # Ensure this secret is configured
+
+      - name: Upload Firefox Zip Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-extension
+          path: ${{ steps.get_paths.outputs.firefox_zip_path }}
+          if-no-files-found: error
+
+  # 4. Create GitHub Release and Upload Assets
+  create_github_release:
+    needs: [prepare_release, build_submit_chrome, build_submit_firefox]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # To create release and upload assets
+    steps:
+      - name: Download Chrome artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chrome-extension
+          path: ./release-assets/chrome
+
+      - name: Download Firefox artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: firefox-extension
+          path: ./release-assets/firefox
+
+      - name: List downloaded files (for debugging)
+        run: ls -R ./release-assets
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.prepare_release.outputs.tag_name }}
+          name: Release ${{ needs.prepare_release.outputs.tag_name }}
+          body: |
+            Release version ${{ needs.prepare_release.outputs.new_version }}
+
+            **Assets:**
+            - Chrome Extension (`${{ needs.build_submit_chrome.outputs.chrome_zip_name }}`)
+            - Firefox Extension (`${{ needs.build_submit_firefox.outputs.firefox_zip_name }}`)
+          files: |
+            ./release-assets/chrome/*
+            ./release-assets/firefox/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
