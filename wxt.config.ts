@@ -14,12 +14,14 @@ export default defineConfig({
     },
     permissions: ["storage"],
   },
-  vite: () => ({
-    esbuild: {
-      drop: ["console", "debugger"],
-    },
+  vite: ({ mode }) => ({
+    ...(mode === "production" && {
+      esbuild: {
+        drop: ["console", "debugger"],
+      },
+    }),
+
     build: {
-      minify: "esbuild",
       chunkSizeWarningLimit: 10000,
       rollupOptions: {
         onwarn(warning, defaultHandler) {

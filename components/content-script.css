@@ -14,12 +14,7 @@
 
 .laconic-hover > div {
   max-width: 300px;
-  font-family:
-    "Nunito",
-    "Roboto",
-    "Helvetica Neue",
-    "Helvetica",
-    "Arial",
+  font-family: "Nunito", "Roboto", "Helvetica Neue", "Helvetica", "Arial",
     /* biome-ignore lint/a11y/useGenericFontNames: I think this is just what tvtropes does */
       "sans-serif";
 }

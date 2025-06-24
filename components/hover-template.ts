@@ -14,7 +14,7 @@ export function createHoverTemplate({
     error instanceof LaconicError && error.category === "NO_LACONIC";
 
   return html`
-    <div class="laconic-hover">
+    <div class="laconic-hover article-content">
       ${trope?.title
         ? html`
             <p style="color: ${headerColor}">${trope.title}</p>
