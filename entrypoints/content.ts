@@ -17,7 +17,6 @@ export default defineContentScript({
       placement: "top-start",
       ignoreAttributes: true,
       allowHTML: true,
-      appendTo: "parent",
       animation: "perspective",
       delay: 100,
       content: INITIAL_CONTENT,
