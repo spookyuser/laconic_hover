@@ -2,6 +2,19 @@
 @import "tippy.js/themes/light.css";
 @import "tippy.js/animations/perspective.css";
 
+:root {
+  --tvt-primary: #333;
+  --tvt-secondary: #aeb3ba;
+  --tvt-link: #006bb1;
+}
+
+[data-theme="dark"] {
+  --tvt-primary: #dedede;
+  --tvt-secondary: #aeb3ba;
+  --tvt-link: #008fec;
+  --tvt-border-color: #444;
+}
+
 /* Fixes an error in Chrome where Tippy causes linebreaks because of Chrome stylesheet */
 [data-tippy-root] {
   display: inline;
@@ -10,6 +23,21 @@
 .laconic-hover {
   text-align: left;
   font-style: normal;
+  color: var(--tvt-primary);
+  display: block;
+  line-height: 24px;
+}
+
+.laconic-hover .indent {
+  vertical-align: baseline;
+  font-size: 0.84em;
+  margin-left: 18px;
+  line-height: normal;
+}
+
+.laconic-hover .twikilink {
+  color: var(--tvt-link);
+  text-decoration: none;
 }
 
 .laconic-hover > div {
@@ -19,20 +47,15 @@
       "sans-serif";
 }
 
-.laconic-hover > p:first-child {
+.laconic-hover h1 {
   font-weight: bold;
   font-size: 1.2rem;
 }
 
-.laconic-hr {
-  opacity: 0.1;
-  margin: 0 !important;
-  padding: 1px;
-}
-
-.tvtropes-hr {
+.laconic-hover hr {
   border: none;
-  border-bottom: 1px solid #aeb3ba;
+  border-bottom: 1px solid var(--tvt-secondary);
+  border-color: var(--tvt-border-color, var(--tvt-secondary));
   margin: 3px 0 !important;
 }
 
@@ -41,7 +64,6 @@
   padding: 2px;
 }
 
-.error-message {
-  color: #6c757d;
-  font-size: 0.8rem;
+.laconic-hover .error {
+  color: var(--tvt-secondary);
 }

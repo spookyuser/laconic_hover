@@ -1,15 +1,15 @@
-import { Trope, darkModeEnabled } from "@/components/api";
-import {
-  DARK_THEME,
-  HOVER_SELECTOR,
-  INITIAL_CONTENT,
-  LIGHT_THEME,
-} from "@/components/config";
+import { Trope } from "@/components/api";
+
 import { createHoverTemplate } from "@/components/hover-template";
 import "@/components/content-script.css";
-import tippy, { followCursor } from "tippy.js";
 import invariant from "tiny-invariant";
+import tippy, { followCursor } from "tippy.js";
 import { defineContentScript } from "wxt/sandbox";
+
+const INITIAL_CONTENT = "Loading...";
+const HOVER_SELECTOR =
+  ".twikilink, .subpage-link[title='The Laconic page']:not(.curr-subpage)";
+
 export default defineContentScript({
   matches: ["*://tvtropes.org/*"],
   main() {
@@ -37,11 +37,13 @@ export default defineContentScript({
     tippy(HOVER_SELECTOR, {
       onShow(tip) {
         (async () => {
-          tip.setProps({
-            theme: darkModeEnabled() ? DARK_THEME : LIGHT_THEME,
-          });
-
           tip.reference.setAttribute("title", ""); // Disables built in browser tooltip floating on top of tippy
+
+          tip.setProps({
+            theme: document.querySelectorAll("#user-prefs.night-vision").length
+              ? "dark"
+              : "light",
+          });
 
           if (
             tip.reference.firstChild?.firstChild instanceof HTMLImageElement

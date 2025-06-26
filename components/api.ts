@@ -1,4 +1,3 @@
-import { DARK_MODE_COOKIE, DEFAULT_CHARACTER_ENCODING } from "./config";
 import { storage } from "wxt/storage";
 
 type LaconicErrors = "NO_TITLE" | "NO_LACONIC" | "FETCHING_FAILED" | "404";
@@ -8,6 +7,7 @@ export class LaconicError extends Error {
   constructor(error: LaconicErrors, message?: string) {
     super(error);
     this.category = error;
+    // @ts-expect-error
     this.message = message;
   }
   // Default messages
@@ -42,7 +42,7 @@ export class Trope {
     storage.setItem(`local:${this.storageKey}-v1`, this);
   }
 
-  /* Fetches a statically calculated url of there the laconic should be */
+  /* Fetches a statically calculated url of where the laconic should be */
   async fetchLaconic() {
     const stored = await this.getFromCache();
     if (stored) {
@@ -172,17 +172,17 @@ function getCharset(headers: Headers) {
     .get("Content-Type")
     ?.split(";")
     .find((header: string | string[]) => header.includes("charset"));
-  return charset ? charset.split("=")[1] : DEFAULT_CHARACTER_ENCODING;
+  return charset ? charset.split("=")[1] : "iso-8859-1";
 }
 
 /** Manually decode an ArrayBuffer with a specific charset
  *
  * This is instead of using response.text() which only returns
  * utf-8. Since tvtropes isn't utf-8 we manually decode the
- * response.ArrayBuffer() here
+ * response.ArrayBuffer()
  *
  * From schneide.blog
- * @see https://schneide.blog/2018/08/08/decoding-non-utf8-server-responses-using-the-fetch-api/
+ @see https://schneide.blog/2018/08/08/decoding-non-utf8-server-responses-using-the-fetch-api/
  */
 function decodeBuffer(
   buffer: BufferSource | undefined,
@@ -197,11 +197,4 @@ function decodeBuffer(
   };
   const decoder = tryDecode();
   return decoder.decode(buffer);
-}
-
-export function darkModeEnabled(): boolean {
-  return (
-    document.cookie.split(";").filter((item) => item.includes(DARK_MODE_COOKIE))
-      .length > 0
-  );
 }
