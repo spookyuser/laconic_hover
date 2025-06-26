@@ -2,7 +2,7 @@
   "name": "laconic_hover",
   "description": "Did you know that most tropes have thoughtfully written summaries? This extension lets you read them without leaving the page.",
   "private": true,
-  "version": "2.2.0",
+  "version": "2.2.1",
   "author": {
     "name": "spookyuser"
   },
