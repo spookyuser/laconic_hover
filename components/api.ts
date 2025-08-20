@@ -83,7 +83,7 @@ export class Trope {
   }
 
   private extractTitle(document: Document) {
-    const titleElement = document.querySelector(".entry-title");
+    const titleElement = document.querySelector(".entry-title a");
     if (titleElement?.textContent) {
       return titleElement.textContent.trim();
     }
