@@ -8,7 +8,7 @@ import { defineContentScript } from "wxt/sandbox";
 
 const INITIAL_CONTENT = "Loading...";
 const HOVER_SELECTOR =
-  ".twikilink, .subpage-link[title='The Laconic page']:not(.curr-subpage)";
+  ".twikilink, .subpage-link[title='The Laconic page']:not(.curr-subpage), .section-links a";
 
 export default defineContentScript({
   matches: ["*://tvtropes.org/*"],
