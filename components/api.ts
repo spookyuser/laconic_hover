@@ -86,13 +86,15 @@ export class Trope {
     const titleElement = document.querySelector(
       ".wrap-entry-breadcrumb strong"
     );
-    const text = Array.prototype.filter
-      .call(
-        titleElement?.childNodes,
-        (child) => child.nodeType === Node.TEXT_NODE
-      )
-      .map((child) => child.textContent)
-      .join("");
+    const text = titleElement
+      ? Array.prototype.filter
+          .call(
+            titleElement?.childNodes,
+            (child) => child.nodeType === Node.TEXT_NODE
+          )
+          .map((child) => child.textContent)
+          .join("")
+      : null;
     if (text) {
       return text.trim();
     }
