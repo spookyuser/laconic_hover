@@ -83,9 +83,20 @@ export class Trope {
   }
 
   private extractTitle(document: Document) {
-    const titleElement = document.querySelector(".entry-title a");
-    if (titleElement?.textContent) {
-      return titleElement.textContent.trim();
+    const titleElement = document.querySelector(
+      ".wrap-entry-breadcrumb strong"
+    );
+    const text = titleElement
+      ? Array.prototype.filter
+          .call(
+            titleElement?.childNodes,
+            (child) => child.nodeType === Node.TEXT_NODE
+          )
+          .map((child) => child.textContent)
+          .join("")
+      : null;
+    if (text) {
+      return text.trim();
     }
     throw new LaconicError("NO_TITLE");
   }
