@@ -60,7 +60,6 @@ export class Trope {
     this.title = this.extractTitle(document);
     this.laconic = this.extractLaconic(document);
     this.returnTo = await this.extractReturnTo(document);
-
     await this.setToCache();
   }
 
@@ -83,20 +82,16 @@ export class Trope {
   }
 
   private extractTitle(document: Document) {
-    const titleElement = document.querySelector(
-      ".wrap-entry-breadcrumb strong"
-    );
-    const text = titleElement
-      ? Array.prototype.filter
-          .call(
-            titleElement?.childNodes,
-            (child) => child.nodeType === Node.TEXT_NODE
-          )
-          .map((child) => child.textContent)
-          .join("")
-      : null;
-    if (text) {
-      return text.trim();
+    const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+    for (const script of scripts) {
+      try {
+        const data = JSON.parse(script.textContent ?? "");
+        if (data["@type"] === "Article" && data.headline) {
+          return data.headline.trim()
+        }
+      } catch {
+        // Malformed block, so try the next one
+      }
     }
     throw new LaconicError("NO_TITLE");
   }
