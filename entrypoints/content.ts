@@ -4,7 +4,7 @@ import { createHoverTemplate } from "@/components/hover-template";
 import "@/components/content-script.css";
 import invariant from "tiny-invariant";
 import tippy, { followCursor } from "tippy.js";
-import { defineContentScript } from "wxt/sandbox";
+import { defineContentScript } from "wxt/utils/define-content-script";
 
 const INITIAL_CONTENT = "Loading...";
 const HOVER_SELECTOR =

@@ -1,4 +1,4 @@
-import { storage } from "wxt/storage";
+import { storage } from "wxt/utils/storage";
 import { useEffect, useState } from "react";
 import { Flex, Checkbox, Text, Container, Switch } from "@radix-ui/themes";
 

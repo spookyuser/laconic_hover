@@ -1,4 +1,4 @@
-import { storage } from "wxt/storage";
+import { storage } from "wxt/utils/storage";
 
 type LaconicErrors = "NO_TITLE" | "NO_LACONIC" | "FETCHING_FAILED" | "404";
 

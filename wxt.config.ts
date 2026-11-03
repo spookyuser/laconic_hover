@@ -2,7 +2,6 @@ import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: "chrome",
   modules: ["@wxt-dev/auto-icons", "@wxt-dev/module-react"],
   manifest: {
     name: "Laconic Hover for TV Tropes",
@@ -15,15 +14,16 @@ export default defineConfig({
     permissions: ["storage"],
   },
   vite: ({ mode }) => ({
-    ...(mode === "production" && {
-      esbuild: {
-        drop: ["console", "debugger"],
-      },
-    }),
-
     build: {
       chunkSizeWarningLimit: 10000,
-      rollupOptions: {
+      rolldownOptions: {
+        ...(mode === "production" && {
+          output: {
+            minify: {
+              compress: { dropConsole: true, dropDebugger: true },
+            },
+          },
+        }),
         onwarn(warning, defaultHandler) {
           if (warning.code === "SOURCEMAP_ERROR") {
             return;
